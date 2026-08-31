@@ -1,0 +1,8 @@
+# wrangler writes account cache here on every deploy
+.wrangler/
+
+# deploy output, rebuilt from index.html each time
+dist/
+
+# local scratch
+*.log

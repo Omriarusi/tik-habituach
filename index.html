@@ -93,8 +93,17 @@ header{
   background:var(--alarm); color:#fff; border-radius:99px; padding:.1rem .5rem;
 }
 
-.tabs{display:flex; gap:.1rem; overflow-x:auto; scrollbar-width:none}
+/* the strip scrolls sideways on narrow screens, so fade the edge
+   to show there is more than what fits */
+.tabwrap{position:relative}
+.tabwrap::after{
+  content:""; position:absolute; inset-block:0; left:0; width:2.2rem;
+  background:linear-gradient(to left, rgba(255,255,255,0), var(--surface) 78%);
+  pointer-events:none;
+}
+.tabs{display:flex; gap:.1rem; overflow-x:auto; scrollbar-width:none; scroll-behavior:smooth}
 .tabs::-webkit-scrollbar{display:none}
+@media (min-width:861px){ .tabwrap::after{display:none} }
 .tabs button{
   flex:0 0 auto; background:none; border:0;
   padding:.8rem .95rem; min-height:48px;
@@ -446,14 +455,16 @@ footer ul{padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:
         <span class="l">בחודש</span><span class="v" id="runVal">₪0</span><span class="n" id="runFlags" hidden>0</span>
       </div>
     </div>
+    <div class="tabwrap">
     <div class="tabs" role="tablist" aria-label="ניווט באתר">
       <button role="tab" id="t-start"  aria-controls="p-start"  aria-selected="true">התחלה</button>
       <button role="tab" id="t-check"  aria-controls="p-check"  aria-selected="false" tabindex="-1">הבדיקה</button>
       <button role="tab" id="t-result" aria-controls="p-result" aria-selected="false" tabindex="-1">הממצאים</button>
       <button role="tab" id="t-agent"  aria-controls="p-agent"  aria-selected="false" tabindex="-1">שאלות לסוכן</button>
-      <button role="tab" id="t-appeal" aria-controls="p-appeal" aria-selected="false" tabindex="-1">ערעור על דחייה</button>
+      <button role="tab" id="t-appeal" aria-controls="p-appeal" aria-selected="false" tabindex="-1" aria-label="ערעור על דחיית תביעה">ערעור</button>
       <button role="tab" id="t-gloss"  aria-controls="p-gloss"  aria-selected="false" tabindex="-1">מילון</button>
       <button role="tab" id="t-legal"  aria-controls="p-legal"  aria-selected="false" tabindex="-1">משפטי</button>
+    </div>
     </div>
   </div>
 </header>
@@ -906,6 +917,10 @@ function showTab(key, push){
     p.hidden=!on;
   });
   if(push && location.hash!=="#"+key){ history.replaceState(null,"","#"+key); }
+  /* keep the active tab visible when the strip scrolls sideways on a phone */
+  try{
+    document.getElementById("t-"+key).scrollIntoView({inline:"center", block:"nearest"});
+  }catch(e){}
   window.scrollTo({top:0, behavior:"auto"});
 }
 TABS.forEach(function(k){

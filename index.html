@@ -203,6 +203,47 @@ details.acc > summary:hover .chev{background:var(--surface-3)}
 }
 .caution b{color:var(--alarm)}
 
+/* ================= import ================= */
+.import{
+  background:var(--accent-wash); border:1px solid #C4DDCF;
+  border-radius:var(--r-box); padding:1.4rem 1.5rem; margin-bottom:1.7rem;
+}
+.import h3{font-size:1.15rem; font-weight:600}
+.import > p{color:var(--ink-2); margin-top:.45rem; max-width:60ch}
+.drop{
+  margin-top:1.05rem; border:2px dashed #A9C9B8; border-radius:var(--r-box);
+  background:var(--surface); padding:1.5rem 1.2rem; text-align:center;
+  transition:border-color .15s ease, background .15s ease;
+}
+.drop.over{border-color:var(--accent); background:var(--accent-wash)}
+.drop input[type=file]{position:absolute; width:1px; height:1px; opacity:0}
+.drop .pick{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:52px; padding:.7rem 1.5rem; border-radius:var(--r-ctl);
+  background:var(--accent); color:#fff; font-family:var(--f-head);
+  font-weight:600; cursor:pointer;
+}
+.drop .pick:hover{background:var(--accent-dark)}
+.drop input[type=file]:focus-visible + .pick{outline:3px solid var(--accent); outline-offset:2px}
+.drop .or{display:block; margin-top:.75rem; font-size:.92rem; color:var(--ink-3)}
+.impreport{margin-top:1.05rem; display:flex; flex-direction:column; gap:.5rem}
+.impline{
+  background:var(--surface); border:1px solid var(--line);
+  border-inline-start:4px solid var(--accent); border-radius:var(--r-ctl);
+  padding:.8rem .95rem; font-size:.95rem;
+}
+.impline[data-t="warn"]{border-inline-start-color:var(--warn); background:var(--warn-wash)}
+.impline[data-t="err"]{border-inline-start-color:var(--alarm); background:var(--alarm-wash)}
+.impline b{display:block; margin-bottom:.2rem}
+.impline ul{padding-inline-start:1.1rem; margin-top:.35rem; color:var(--ink-2)}
+.imptable{width:100%; border-collapse:collapse; margin-top:.45rem; font-size:.93rem}
+.imptable td{padding:.32rem .2rem; border-bottom:1px solid var(--line)}
+.imptable tr:last-child td{border-bottom:0}
+.imptable td:last-child{
+  text-align:end; font-family:var(--f-num);
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+
 /* ================= form ================= */
 .fields{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.1rem; margin-bottom:1.9rem}
 .field{display:flex; flex-direction:column; gap:.4rem}
@@ -622,6 +663,20 @@ footer ul{padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:
   <div class="lede">
     <h2>מה יש לכם, וכמה זה עולה</h2>
     <p>אם כבר הוצאתם את הרשימה מהאתר הממשלתי, העתיקו אותה לכאן. אם לא, מלאו לפי מה שאתם יודעים. מותר לסמן "לא יודע", וזה לא ייחשב נגדכם. בכל שורה יש הסבר שנפתח בלחיצה על סימן השאלה, והנתונים נשמרים בדפדפן שלכם בלבד.</p>
+  </div>
+
+  <div class="import">
+    <h3>ייבוא הקובץ מהאתר הממשלתי</h3>
+    <p>באתר "ביטוחי הבריאות שלי" יש כפתור להורדת קובץ אקסל עם התיק שלכם. גררו אותו לכאן, והטבלה למטה תתמלא לבד, כולל הסכומים.</p>
+    <div class="drop" id="drop">
+      <label>
+        <input type="file" id="xlsxFile" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        <span class="pick">בחירת קובץ</span>
+      </label>
+      <span class="or">או גררו את הקובץ לכאן</span>
+    </div>
+    <div class="impreport" id="impReport"></div>
+    <p class="caution"><b>הקובץ לא יוצא מהמחשב שלכם.</b> הוא נקרא בתוך הדפדפן בלבד ואינו נשלח לשום שרת. תעודת הזהות שמופיעה בקובץ אינה נקראת ואינה נשמרת.</p>
   </div>
 
   <div class="fields">
@@ -1440,6 +1495,290 @@ function buildLetter(){
   var pp=document.getElementById("letterPrint");
   if(pp) pp.textContent=body;
 }
+
+/* ---------- importing the government xlsx ----------
+   an xlsx is a zip of xml files. we read it with the browser's own
+   DecompressionStream instead of pulling in a library, so nothing the
+   user uploads ever leaves the page and no third party is involved. */
+
+function unzipEntries(buf){
+  var dv=new DataView(buf), u8=new Uint8Array(buf), eocd=-1;
+  for(var i=u8.length-22; i>=0 && i>u8.length-66000; i--){
+    if(dv.getUint32(i,true)===0x06054b50){ eocd=i; break; }
+  }
+  if(eocd<0) throw new Error("הקובץ אינו קובץ אקסל תקין");
+  var count=dv.getUint16(eocd+10,true), p=dv.getUint32(eocd+16,true), out={}, dec=new TextDecoder();
+  for(var n=0;n<count;n++){
+    if(dv.getUint32(p,true)!==0x02014b50) break;
+    var method=dv.getUint16(p+10,true),
+        csize =dv.getUint32(p+20,true),
+        nlen  =dv.getUint16(p+28,true),
+        elen  =dv.getUint16(p+30,true),
+        clen  =dv.getUint16(p+32,true),
+        lho   =dv.getUint32(p+42,true),
+        name  =dec.decode(u8.subarray(p+46,p+46+nlen));
+    var lnlen=dv.getUint16(lho+26,true), lelen=dv.getUint16(lho+28,true),
+        start=lho+30+lnlen+lelen;
+    out[name]={method:method, data:u8.subarray(start,start+csize)};
+    p+=46+nlen+elen+clen;
+  }
+  return out;
+}
+async function inflateEntry(e){
+  if(!e) return null;
+  if(e.method===0) return e.data;
+  if(typeof DecompressionStream!=="function")
+    throw new Error("הדפדפן הזה לא תומך בקריאת הקובץ. נסו דפדפן עדכני, או מלאו ידנית.");
+  var s=new Blob([e.data]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+  return new Uint8Array(await new Response(s).arrayBuffer());
+}
+function xmlOf(bytes){
+  return new DOMParser().parseFromString(new TextDecoder().decode(bytes),"application/xml");
+}
+function colOf(ref){
+  var m=/^([A-Z]+)/.exec(ref||""); if(!m) return 0;
+  var n=0; for(var i=0;i<m[1].length;i++) n=n*26+(m[1].charCodeAt(i)-64);
+  return n-1;
+}
+async function readWorkbook(file){
+  var files=unzipEntries(await file.arrayBuffer());
+  var shared=[];
+  /* the government file writes prefixed tags (x:row, x:c), while excel
+     writes bare ones. matching on local name covers both. */
+  function tags(node,name){ return node.getElementsByTagNameNS("*",name); }
+
+  var ssBytes=await inflateEntry(files["xl/sharedStrings.xml"]);
+  if(ssBytes){
+    var sd=xmlOf(ssBytes), si=tags(sd,"si");
+    for(var i=0;i<si.length;i++){
+      var ts=tags(si[i],"t"), s="";
+      for(var j=0;j<ts.length;j++) s+=ts[j].textContent;
+      shared.push(s);
+    }
+  }
+  var sheetName=Object.keys(files).filter(function(n){
+    return /^xl\/worksheets\/sheet\d+\.xml$/.test(n);
+  }).sort()[0];
+  if(!sheetName) throw new Error("לא נמצא גיליון בקובץ");
+  var doc=xmlOf(await inflateEntry(files[sheetName]));
+  var rows=tags(doc,"row"), grid=[];
+  for(var r=0;r<rows.length;r++){
+    var cells=tags(rows[r],"c"), line=[];
+    for(var c=0;c<cells.length;c++){
+      var cell=cells[c], t=cell.getAttribute("t"), v="";
+      if(t==="inlineStr"){
+        var is=tags(cell,"t");
+        for(var k=0;k<is.length;k++) v+=is[k].textContent;
+      } else {
+        var vn=tags(cell,"v")[0];
+        v=vn?vn.textContent:"";
+        if(t==="s") v=shared[parseInt(v,10)]||"";
+      }
+      line[colOf(cell.getAttribute("r"))]=String(v).trim();
+    }
+    for(var q=0;q<line.length;q++) if(line[q]===undefined) line[q]="";
+    grid.push(line);
+  }
+  return grid;
+}
+
+/* branch name -> our cover. order matters: "ניתוחים בחו״ל" must be
+   read as an abroad cover before the generic surgery rule sees it. */
+var IMPORT_RULES=[
+  {re:/מחלות\s*קשות/,                         id:"critical"},
+  {re:/תאונות\s*אישיות/,                       id:"accident"},
+  {re:/סיעוד/,                                 id:"ltc"},
+  {re:/אובדן\s*כושר/,                          id:"disability"},
+  {re:/ריסק|מקרה\s*מוות|ביטוח\s*חיים/,         id:"life"},
+  {re:/השתל|בחו["״']?ל|חו["״']?\s*ל\b/,        id:"abroad"},
+  {re:/תרופ/,                                  id:"drugs"},
+  {re:/ניתוח/,                                 id:"surgery"},
+  {re:/שיניים/,                                id:"dental"},
+  {re:/הריון|לידה/,                            id:"preg"},
+  {re:/ייעוץ|ייעוצים|התייעצ|בדיקות|אמבולטור|אבחון/, id:"ambul"}
+];
+/* present in the health export, so absence there means you do not have it */
+var HEALTH_SCOPE=["drugs","abroad","surgery","ambul","dental","preg"];
+/* may sit in a different policy or in the pension fund, so absence proves nothing */
+var OUT_OF_SCOPE=["critical","accident","life","disability","ltc"];
+
+function interpretGrid(grid){
+  var r={kupa:"", shban:0, shbanRows:0, sums:{}, lines:{}, surgeryMode:"",
+         unmapped:[], monthly:0, ok:false};
+  var col=null;
+  function findCol(row,re){ for(var i=0;i<row.length;i++) if(re.test(row[i]||"")) return i; return -1; }
+
+  grid.forEach(function(row){
+    var joined=row.join(" ");
+    if(/פרמיה/.test(joined) && /ענף/.test(joined)){
+      var b=findCol(row,/משני/); if(b<0) b=findCol(row,/ענף/);
+      col={branch:b, product:findCol(row,/סוג\s*מוצר/), company:findCol(row,/חברה/),
+           prem:findCol(row,/פרמיה/), ptype:findCol(row,/סוג\s*פרמיה/)};
+      return;
+    }
+    if(!col || col.branch<0 || col.prem<0) return;
+    var branch=(row[col.branch]||"").trim();
+    if(!branch) return;
+    /* the sheet holds two tables, and the second one opens with a title
+       line that lands in these columns. a real branch name is short, and
+       a real monthly premium is not in the millions. */
+    if(branch.length>60) return;
+    var amt=parseFloat(String(row[col.prem]||"").replace(/[^\d.\-]/g,""));
+    if(!isFinite(amt)) amt=0;
+    if(amt>20000) return;
+    if(col.ptype>=0 && /שנתי/.test(row[col.ptype]||"")) amt=amt/12;
+
+    var company=col.company>=0?(row[col.company]||""):"";
+    var product=col.product>=0?(row[col.product]||""):"";
+
+    /* the kupa's own supplementary plan is one bundle, not separate covers */
+    if(/ש[יר]{1,2}ותי\s*בריאות\s*נוספים/.test(product) || /ש[יר]{1,2}ותי\s*בריאות\s*נוספים/.test(branch)){
+      r.shban+=amt; r.shbanRows++; r.ok=true;
+      if(!r.kupa){
+        if(/מכבי/.test(company)) r.kupa="מכבי";
+        else if(/כללית/.test(company)) r.kupa="כללית";
+        else if(/מאוחדת/.test(company)) r.kupa="מאוחדת";
+        else if(/לאומית/.test(company)) r.kupa="לאומית";
+      }
+      return;
+    }
+
+    var hit=null;
+    for(var i=0;i<IMPORT_RULES.length;i++){
+      if(IMPORT_RULES[i].re.test(branch)){ hit=IMPORT_RULES[i].id; break; }
+    }
+    if(!hit){ if(amt>0) r.unmapped.push(branch+" ("+money(amt)+")"); return; }
+
+    r.ok=true;
+    r.sums[hit]=(r.sums[hit]||0)+amt;
+    (r.lines[hit]=r.lines[hit]||[]).push({name:branch, amt:amt});
+    if(hit==="surgery"){
+      if(/משלים\s*שב/.test(branch)) r.surgeryMode="suppl";
+      else if(/שקל\s*ראשון|מהשקל/.test(branch)) r.surgeryMode="first";
+    }
+  });
+
+  r.monthly=r.shban+Object.keys(r.sums).reduce(function(a,k){return a+r.sums[k];},0);
+  return r;
+}
+
+function applyImport(r){
+  if(r.kupa) state.kupa=r.kupa;
+  if(r.shbanRows>0){ state.shban="yes"; state.shbanCost=r.shban?r.shban.toFixed(2):""; }
+
+  HEALTH_SCOPE.concat(OUT_OF_SCOPE).forEach(function(id){
+    var st=state.covers[id]; if(!st) return;
+    if(r.sums[id]>0){
+      st.have="yes"; st.amount=r.sums[id].toFixed(2);
+      if(id==="surgery") st.mode=r.surgeryMode||"suppl";
+    } else if(HEALTH_SCOPE.indexOf(id)>=0){
+      st.have="no"; st.amount=""; if(id==="surgery") st.mode="none";
+    } else {
+      st.have="unknown"; st.amount="";
+    }
+  });
+  save(); buildLedger(); render();
+}
+
+function reportImport(r){
+  var host=document.getElementById("impReport");
+  host.innerHTML="";
+  function line(type,title,inner){
+    var d=el("div","impline"); if(type) d.dataset.t=type;
+    d.appendChild(el("b",null,title));
+    if(inner) d.appendChild(inner);
+    host.appendChild(d);
+  }
+
+  var tbl=document.createElement("table"); tbl.className="imptable";
+  function tr(a,b){
+    var t=document.createElement("tr");
+    t.appendChild(el("td",null,a)); t.appendChild(el("td",null,b));
+    tbl.appendChild(t);
+  }
+  if(r.shbanRows>0) tr("ביטוח משלים בקופה"+(r.kupa?" ("+r.kupa+")":""), money(r.shban));
+  Object.keys(r.lines).forEach(function(id){
+    var nm=null;
+    COVERS.forEach(function(g){g.items.forEach(function(c){ if(c.id===id) nm=c.name; });});
+    tr(nm||id, money(r.sums[id]));
+  });
+  tr("סה\"כ לחודש", money(r.monthly));
+  line("", "יובאו " + (r.shbanRows + Object.keys(r.lines).length) + " שורות", tbl);
+
+  var oos=OUT_OF_SCOPE.filter(function(id){ return !(r.sums[id]>0); });
+  if(oos.length){
+    var names=[];
+    COVERS.forEach(function(g){g.items.forEach(function(c){
+      if(oos.indexOf(c.id)>=0) names.push(c.name);
+    });});
+    var ul=document.createElement("ul");
+    names.forEach(function(n){ ul.appendChild(el("li",null,n)); });
+    var w=el("div");
+    w.appendChild(el("p",null,"הקובץ הזה מכסה ביטוחי בריאות בלבד. הכיסויים הבאים לא מופיעים בו, וזה לא אומר שאין לכם אותם. הם עשויים לשבת בפוליסה אחרת או בקרן הפנסיה, וסומנו כ\"לא יודע\":"));
+    w.appendChild(ul);
+    line("warn","מה שהקובץ לא מכסה", w);
+  }
+
+  if(r.unmapped.length){
+    var ul2=document.createElement("ul");
+    r.unmapped.forEach(function(n){ ul2.appendChild(el("li",null,n)); });
+    var w2=el("div");
+    w2.appendChild(el("p",null,"לא הצלחנו לשייך את השורות האלה לקטגוריה. הוסיפו אותן ידנית בטבלה למטה:"));
+    w2.appendChild(ul2);
+    line("warn","שורות שלא זוהו", w2);
+  }
+}
+
+async function handleFile(file){
+  var host=document.getElementById("impReport");
+  if(!file) return;
+  if(!/\.xlsx$/i.test(file.name)){
+    host.innerHTML="";
+    var d=el("div","impline"); d.dataset.t="err";
+    d.appendChild(el("b",null,"קובץ לא מתאים"));
+    d.appendChild(el("p",null,"צריך קובץ בסיומת xlsx, כפי שהוא יורד מהאתר הממשלתי."));
+    host.appendChild(d);
+    return;
+  }
+  host.innerHTML="<div class='impline'><b>קורא את הקובץ...</b></div>";
+  try{
+    var grid=await readWorkbook(file);
+    var r=interpretGrid(grid);
+    if(!r.ok){
+      host.innerHTML="";
+      var e2=el("div","impline"); e2.dataset.t="err";
+      e2.appendChild(el("b",null,"לא זוהו שורות ביטוח בקובץ"));
+      e2.appendChild(el("p",null,"ייתכן שזה קובץ אחר, או שהפורמט באתר הממשלתי השתנה. אפשר למלא ידנית בטבלה למטה."));
+      host.appendChild(e2);
+      return;
+    }
+    applyImport(r);
+    reportImport(r);
+    toast("הקובץ יובא");
+  }catch(err){
+    host.innerHTML="";
+    var e3=el("div","impline"); e3.dataset.t="err";
+    e3.appendChild(el("b",null,"לא הצלחנו לקרוא את הקובץ"));
+    e3.appendChild(el("p",null,(err&&err.message)?err.message:"נסו שוב, או מלאו ידנית בטבלה למטה."));
+    host.appendChild(e3);
+  }
+}
+
+(function wireImport(){
+  var input=document.getElementById("xlsxFile"), drop=document.getElementById("drop");
+  if(!input||!drop) return;
+  input.addEventListener("change",function(){ handleFile(input.files&&input.files[0]); });
+  ["dragenter","dragover"].forEach(function(ev){
+    drop.addEventListener(ev,function(e){ e.preventDefault(); drop.classList.add("over"); });
+  });
+  ["dragleave","drop"].forEach(function(ev){
+    drop.addEventListener(ev,function(e){ e.preventDefault(); drop.classList.remove("over"); });
+  });
+  drop.addEventListener("drop",function(e){
+    var f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0];
+    if(f) handleFile(f);
+  });
+})();
 
 /* ---------- printing ----------
    two things break on paper unless we intervene:

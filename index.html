@@ -389,6 +389,31 @@ details.find[data-sev="info"] .sev{color:var(--ink-3)}
 }
 .empty p{color:var(--ink-2); margin-bottom:1.3rem}
 
+/* ================= compare ================= */
+.cmpwrap{
+  overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-box);
+  background:var(--surface); box-shadow:var(--shadow); margin-bottom:1.5rem;
+}
+.cmp{width:100%; border-collapse:collapse; font-size:.96rem; min-width:min(100%, 30rem)}
+.cmp th,.cmp td{padding:.7rem .85rem; text-align:start; border-bottom:1px solid var(--line)}
+.cmp thead th{
+  font-family:var(--f-head); font-weight:600; font-size:.98rem;
+  background:var(--surface-2); white-space:nowrap; position:sticky; top:0;
+}
+.cmp tbody th{font-weight:600; color:var(--ink-2); white-space:nowrap}
+.cmp td{font-family:var(--f-num); font-variant-numeric:tabular-nums; white-space:nowrap}
+.cmp tr:last-child td,.cmp tr:last-child th{border-bottom:0}
+.cmp .total{background:var(--surface-2); font-weight:700}
+.cmp .total td,.cmp .total th{border-top:2px solid var(--line-2)}
+.cmp .yes{color:var(--accent-dark); font-weight:700}
+.cmp .no{color:var(--alarm); font-weight:700}
+.cmp .na{color:var(--ink-3)}
+.cmp td.word{font-family:var(--f-body); white-space:normal}
+.cmpsec{
+  font-family:var(--f-head); font-size:1.05rem; font-weight:600;
+  margin:0 0 .6rem;
+}
+
 /* ================= checklist ================= */
 .chk{display:flex; align-items:center; gap:.85rem; width:100%; min-width:0}
 .chk input{
@@ -579,6 +604,7 @@ footer ul{padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:
       <button role="tab" id="t-start"  aria-controls="p-start"  aria-selected="true">התחלה</button>
       <button role="tab" id="t-check"  aria-controls="p-check"  aria-selected="false" tabindex="-1">הבדיקה</button>
       <button role="tab" id="t-result" aria-controls="p-result" aria-selected="false" tabindex="-1">הממצאים</button>
+      <button role="tab" id="t-compare" aria-controls="p-compare" aria-selected="false" tabindex="-1" hidden>השוואה</button>
       <button role="tab" id="t-agent"  aria-controls="p-agent"  aria-selected="false" tabindex="-1">שאלות לסוכן</button>
       <button role="tab" id="t-appeal" aria-controls="p-appeal" aria-selected="false" tabindex="-1" aria-label="ערעור על דחיית תביעה">ערעור</button>
       <button role="tab" id="t-gloss"  aria-controls="p-gloss"  aria-selected="false" tabindex="-1">מילון</button>
@@ -753,6 +779,15 @@ footer ul{padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:
     <p>כל ממצא נפתח בלחיצה ומסביר מה עושים איתו בפועל.</p>
   </div>
   <div id="results"></div>
+</div>
+
+<!-- ================= COMPARE ================= -->
+<div role="tabpanel" id="p-compare" aria-labelledby="t-compare" tabindex="0" hidden>
+  <div class="lede">
+    <h2>השוואה בין התיקים</h2>
+    <p>כל התיקים ששמרתם, זה מול זה. השורה החשובה היא ההגנה מפני קטסטרופה: שם נראה מי מכוסה ומי לא.</p>
+  </div>
+  <div id="compareOut"></div>
 </div>
 
 <!-- ================= AGENT ================= -->
@@ -1116,7 +1151,7 @@ function activeProfile(){
 var state=activeProfile().data;
 
 /* ---------- tabs ---------- */
-var TABS=["start","check","result","agent","appeal","gloss","legal"];
+var TABS=["start","check","result","compare","agent","appeal","gloss","legal"];
 function showTab(key, push){
   if(TABS.indexOf(key)<0) key="start";
   TABS.forEach(function(k){
@@ -1288,6 +1323,13 @@ function buildProfiles(){
     who.hidden=only;
     if(!only) who.textContent=activeProfile().name;
   }
+  /* the comparison tab only means something once there are two portfolios */
+  var ct=document.getElementById("t-compare");
+  if(ct){
+    ct.hidden=only;
+    if(only && ct.getAttribute("aria-selected")==="true") showTab("result",true);
+  }
+  renderCompare();
 }
 /* redraw every surface after the active portfolio changes */
 function refreshAll(){
@@ -1305,27 +1347,28 @@ function refreshAll(){
 /* ---------- analysis ---------- */
 function num(v){ var n=parseFloat(v); return isFinite(n)&&n>0?n:0; }
 
-function analyse(){
+function analyse(data){
+  var S = data || state;
   var byKind={cat:0,conv:0,comp:0,routine:0};
   var held={}, unknown=[], total=0;
 
   COVERS.forEach(function(g){g.items.forEach(function(c){
-    var st=state.covers[c.id];
+    var st=S.covers[c.id];
     if(st.have==="yes"){ held[c.id]=true; var a=num(st.amount); total+=a; byKind[c.kind]+=a; }
     else if(st.have==="unknown"){ unknown.push({id:c.id, name:c.name}); }
   });});
 
   var answered=0;
-  COVERS.forEach(function(g){g.items.forEach(function(c){ if(state.covers[c.id].have) answered++; });});
-  var engaged = total>0 || answered>=2 || (state.shban!==""&&state.shban!=="unknown");
+  COVERS.forEach(function(g){g.items.forEach(function(c){ if(S.covers[c.id].have) answered++; });});
+  var engaged = total>0 || answered>=2 || (S.shban!==""&&S.shban!=="unknown");
 
-  var shbanCost=num(state.shbanCost);
-  if(state.shban==="yes"){ total+=shbanCost; byKind.conv+=shbanCost; }
-  if(state.shban==="unknown") unknown.push({id:"shban", name:"הביטוח המשלים של הקופה"});
+  var shbanCost=num(S.shbanCost);
+  if(S.shban==="yes"){ total+=shbanCost; byKind.conv+=shbanCost; }
+  if(S.shban==="unknown") unknown.push({id:"shban", name:"הביטוח המשלים של הקופה"});
 
-  var f=[], mode=state.covers.surgery.mode;
+  var f=[], mode=S.covers.surgery.mode;
 
-  if(state.shban==="yes" && mode==="first"){
+  if(S.shban==="yes" && mode==="first"){
     f.push({sev:"critical",tag:"כפל ביטוח",h:"אתם כנראה משלמים פעמיים על אותו ניתוח",
       p:"יש לכם גם ביטוח משלים בקופה וגם פוליסת ניתוחים פרטית במסלול \"מהשקל הראשון\". שניהם מכסים את אותו ניתוח, אבל הניתוח נעשה פעם אחת ותקבלו רק פעם אחת. לפי הפרק, כשלושה מכל ארבעה מנתחים ברשימות חברות הביטוח מופיעים גם ברשימות הקופות.",
       todo:["פנו לחברת הביטוח ובקשו לעבור למסלול \"משלים שב\"ן\". הוא מכסה את אותם ניתוחים ועולה פחות.",
@@ -1333,17 +1376,17 @@ function analyse(){
             "אם אתם שוקלים לוותר דווקא על הביטוח המשלים, בדקו קודם מה עוד הוא נותן מעבר לניתוחים. לרוב זה לא כדאי.",
             "אל תבטלו כיסוי לפני שהמעבר אושר בכתב."]});
   }
-  if(state.shban==="yes" && mode==="suppl"){
+  if(S.shban==="yes" && mode==="suppl"){
     f.push({sev:"good",tag:"מבנה תקין",h:"מבנה הניתוחים שלכם בנוי נכון",
       p:"הקופה משלמת ראשונה והפוליסה הפרטית משלימה את היתרה. זה בדיוק המבנה שנועד למנוע כפל, ואין כאן תשלום כפול.",
       todo:["אין פעולה נדרשת. שווה לוודא אחת לשנה שהמסלול לא שונה."]});
   }
-  if(state.shban==="no" && mode==="first"){
+  if(S.shban==="no" && mode==="first"){
     f.push({sev:"info",tag:"עקבי",h:"המסלול מתאים למי שאין לו ביטוח משלים",
       p:"אין לכם ביטוח משלים, ולכן \"מהשקל הראשון\" הגיוני. אין למי להשלים. בדקו בכל זאת: לעיתים ביטוח משלים יחד עם פוליסת \"משלים שב\"ן\" יוצא זול יותר ומעניק גם התייעצויות ובדיקות.",
       todo:["בקשו הצעת מחיר לביטוח המשלים בקופה שלכם והשוו לעלות הנוכחית."]});
   }
-  if(mode==="unknown" || (state.shban==="unknown" && mode)){
+  if(mode==="unknown" || (S.shban==="unknown" && mode)){
     f.push({sev:"warn",tag:"חסר מידע",h:"לא ידוע באיזה מסלול ניתוחים אתם",
       p:"זה הפרט היחיד שקובע אם יש כפל ביטוח, והוא מופיע בפוליסה. בלעדיו אי אפשר לדעת אם אתם משלמים פעמיים.",
       todo:["חפשו באתר \"ביטוחי הבריאות שלי\" בשורת הניתוחים את שם המסלול.",
@@ -1351,7 +1394,7 @@ function analyse(){
             "בקשו את התשובה גם במייל."]});
   }
 
-  if(engaged && state.covers.drugs.have!=="yes" && state.covers.drugs.have!=="unknown"){
+  if(engaged && S.covers.drugs.have!=="yes" && S.covers.drugs.have!=="unknown"){
     f.push({sev:"critical",tag:"כיסוי חסר",h:"אין כיסוי לתרופות מחוץ לסל",
       p:"הכיסוי שהפרק מציג כחשוב ביותר, והוא גם מהזולים. תרופה שאינה בסל יכולה לעלות עשרות ומאות אלפי שקלים בשנה, והמימון חל עליכם.",
       todo:["בקשו הצעה לכיסוי תרופות מחוץ לסל בלבד, כמוצר עצמאי ולא כחלק מחבילה.",
@@ -1359,7 +1402,7 @@ function analyse(){
             "בדקו את התקרה ומדי כמה זמן היא מתחדשת.",
             "השוו בין שתי חברות לפחות."]});
   }
-  if(engaged && state.covers.abroad.have!=="yes" && state.covers.abroad.have!=="unknown"){
+  if(engaged && S.covers.abroad.have!=="yes" && S.covers.abroad.have!=="unknown"){
     f.push({sev:"critical",tag:"כיסוי חסר",h:"אין כיסוי להשתלות וטיפולים בחו\"ל",
       p:"השתלה או טיפול מורכב בחו\"ל נמדדים במיליוני שקלים. הסיכוי להזדקק נמוך מאוד ולכן זה זול. המקרה הקלאסי של ביטוח נכון.",
       todo:["בקשו הצעה לכיסוי השתלות וטיפולים מיוחדים בחו\"ל בלבד.",
@@ -1382,7 +1425,7 @@ function analyse(){
   }
 
   if(held.critical){
-    var s=num(state.covers.critical.sum);
+    var s=num(S.covers.critical.sum);
     f.push({sev:"info",tag:"לבדוק",h:"מחלות קשות, שימו לו תאריך תפוגה",
       p:"משלם סכום חד פעמי ביום האבחון והפוליסה נגמרת. לא מממן את הטיפול עצמו."+(s>0?" הסכום שרשמתם: "+money(s)+".":"")+" הבעיה היא שהפרמיה מטפסת חדות עם הגיל, ורבים מבטלים בדיוק כשהיא נעשית יקרה, אחרי ששילמו שנים.",
       todo:["בקשו את טבלת הפרמיות עד גיל 70, בכתב.",
@@ -1390,27 +1433,27 @@ function analyse(){
             "החליטו מראש עד איזה גיל משלמים."]});
   }
   if(held.accident){
-    var ac=num(state.covers.accident.amount);
+    var ac=num(S.covers.accident.amount);
     f.push({sev:"warn",tag:"לבחון",h:"תאונות אישיות, בדקו כמה זה באמת מוסיף",
       p:"משלם רק כשהאירוע נגרם מתאונה."+(held.life?" יש לכם גם ביטוח חיים שמכסה מוות מכל סיבה, ולכן רכיב המוות כאן מוסיף מעט מאוד.":"")+" בשיחת המכירה שהפרק מתעד זה היה הרכיב שקפץ הכי גבוה"+(ac?", ואתם משלמים עליו "+money(ac)+" בחודש":"")+".",
       todo:["בקשו פירוט רכיבים ומחיר לכל רכיב בנפרד.",
             "שאלו: מה זה מוסיף מעבר לביטוח החיים ולאובדן כושר העבודה שכבר יש לי?",
             "אם התשובה היא בעיקר פיצוי על שברים, שקלו אם זה שווה את המחיר."]});
   }
-  if(state.deps==="yes" && state.covers.life.have!=="yes" && state.covers.life.have!=="unknown"){
+  if(S.deps==="yes" && S.covers.life.have!=="yes" && S.covers.life.have!=="unknown"){
     f.push({sev:"warn",tag:"כיסוי חסר",h:"יש מי שתלוי בכם, ואין ביטוח חיים",
       p:"ביטוח ריסק הוא מהמוצרים הזולים בגיל צעיר, והוא מה שמונע מהמשפחה קריסה כלכלית.",
       todo:["בדקו קודם מה כבר קיים בקרן הפנסיה. לרוב יש שם כיסוי מוות ואובדן כושר עבודה.",
             "רק אם יש פער, בקשו הצעה לריסק טהור בלי חיסכון.",
             "סכום מקובל: יתרת המשכנתה בתוספת כמה שנות הכנסה."]});
   }
-  if(state.deps==="no" && held.life){
+  if(S.deps==="no" && held.life){
     f.push({sev:"info",tag:"לבחון",h:"ביטוח חיים בלי תלויים",
       p:"סימנתם שאין מי שתלוי בהכנסה שלכם. שווה לבדוק אם הכיסוי בהיקפו הנוכחי עדיין נחוץ.",
       todo:["בדקו אם הפוליסה משועבדת למשכנתה. במקרה כזה היא נדרשת ואי אפשר לבטלה.",
             "אם לא, שקלו להקטין את הסכום במקום לבטל."]});
   }
-  if(engaged && state.covers.disability.have!=="yes" && state.covers.disability.have!=="unknown"){
+  if(engaged && S.covers.disability.have!=="yes" && S.covers.disability.have!=="unknown"){
     f.push({sev:"info",tag:"לבדוק",h:"בדקו מה יש לכם באובדן כושר עבודה",
       p:"לשכירים רבים קיים כיסוי כזה בתוך קרן הפנסיה בלי שהם יודעים. ההכנסה היא הנכס הגדול ביותר, ולכן חשוב לוודא שהכיסוי קיים במקום כלשהו.",
       todo:["בדקו במסלקה הפנסיונית או בדוח השנתי אם יש כיסוי אובדן כושר עבודה וכמה הוא משלם.",
@@ -1430,15 +1473,15 @@ function analyse(){
   var ownUnknown=unknown.filter(function(u){ return OUT_OF_SCOPE.indexOf(u.id)<0; });
   function names(list){ return list.map(function(u){ return u.name; }).join(", "); }
 
-  if(state.imported && oosUnknown.length){
+  if(S.imported && oosUnknown.length){
     f.push({sev:"info",tag:"מחוץ לקובץ",h:"אלה לא מופיעים בקובץ שייבאתם, וזה תקין",
       p:"הקובץ מהאתר הממשלתי מכסה ביטוחי בריאות בלבד, ולכן "+names(oosUnknown)+" לא מופיעים בו. זה לא אומר שאין לכם אותם. אצל רוב השכירים הם יושבים בקרן הפנסיה או בפוליסה נפרדת, ואין טעם לחפש אותם שוב באותו קובץ.",
       todo:["בדקו במסלקה הפנסיונית מה קיים לכם. השירות הממשלתי נמצא בכתובת gov.il/he/service/pension_savings_search",
             "לחלופין, פתחו את הדוח השנתי מקרן הפנסיה. כיסויי מוות ואובדן כושר עבודה מופיעים בו.",
             "מצאתם משהו? חזרו לטבלה וסמנו \"יש לי\" עם הסכום."]});
   }
-  if(ownUnknown.length>=2 || (!state.imported && unknown.length>=2)){
-    var list = state.imported ? ownUnknown : unknown;
+  if(ownUnknown.length>=2 || (!S.imported && unknown.length>=2)){
+    var list = S.imported ? ownUnknown : unknown;
     f.push({sev:"warn",tag:"חסר מידע",h:"יש "+list.length+" סעיפים שאינכם יודעים",
       p:"סימנתם \"לא יודע\" ב: "+names(list)+". זה המצב הנפוץ ביותר ולא צריך להתבייש בו, אבל בלי המידע אי אפשר לדעת אם יש כפל או חוסר.",
       todo:["היכנסו לאתר הממשלתי \"ביטוחי הבריאות שלי\" בכתובת hit.cma.gov.il. הוא מציג את הפוליסות שלכם מנתוני אמת, בלי הקלדה.",
@@ -1457,6 +1500,7 @@ function analyse(){
 
 /* ---------- render ---------- */
 function render(){
+  renderCompare();                 /* keep the side by side view live too */
   var a=analyse(), year=a.total*12;
   var hot=a.flags.filter(function(x){return x.sev==="critical";}).length;
 
@@ -1540,6 +1584,140 @@ function render(){
   pr.addEventListener("click",function(){ doPrint(); });
   acts.appendChild(cp); acts.appendChild(pr);
   host.appendChild(acts);
+}
+
+/* ---------- comparing portfolios ---------- */
+function renderCompare(){
+  var host=document.getElementById("compareOut");
+  if(!host) return;
+  host.innerHTML="";
+
+  if(store.profiles.length<2){
+    var e=el("div","empty","<p>יש לכם תיק אחד בלבד.<br>הוסיפו תיק שני, למשל של בן או בת זוג או של הורה, וההשוואה תופיע כאן.</p>");
+    var b=el("button","btn","למעבר לבדיקה"); b.type="button";
+    b.addEventListener("click",function(){ showTab("check",true); });
+    e.appendChild(b);
+    host.appendChild(e);
+    return;
+  }
+
+  var rows=store.profiles.map(function(p){ return {p:p, a:analyse(p.data)}; });
+  var famMonth=rows.reduce(function(t,r){ return t+r.a.total; },0);
+  var famCat  =rows.reduce(function(t,r){ return t+r.a.byKind.cat; },0);
+
+  function table(){
+    var w=el("div","cmpwrap"), t=document.createElement("table");
+    t.className="cmp"; w.appendChild(t); return {w:w,t:t};
+  }
+  function head(t,label,extra){
+    var thead=document.createElement("thead"), tr=document.createElement("tr");
+    var th0=document.createElement("th"); th0.textContent=label; tr.appendChild(th0);
+    rows.forEach(function(r){
+      var th=document.createElement("th"); th.textContent=r.p.name; tr.appendChild(th);
+    });
+    if(extra){ var th2=document.createElement("th"); th2.textContent=extra; tr.appendChild(th2); }
+    thead.appendChild(tr); t.appendChild(thead);
+  }
+
+  /* --- money side by side --- */
+  host.appendChild(el("h3","cmpsec","כמה כל אחד משלם"));
+  var m=table(); head(m.t,"",'סה"כ');
+  var tb=document.createElement("tbody");
+  function moneyRow(label, pick, famVal, cls){
+    var tr=document.createElement("tr"); if(cls) tr.className=cls;
+    var th=document.createElement("th"); th.textContent=label; tr.appendChild(th);
+    rows.forEach(function(r){
+      var td=document.createElement("td"); td.textContent=pick(r); tr.appendChild(td);
+    });
+    var tdf=document.createElement("td"); tdf.textContent=famVal; tr.appendChild(tdf);
+    tb.appendChild(tr);
+  }
+  moneyRow("לחודש", function(r){ return money(r.a.total); }, money(famMonth));
+  moneyRow("לשנה",  function(r){ return money(r.a.total*12); }, money(famMonth*12), "total");
+  moneyRow("מזה להגנה מקטסטרופה",
+    function(r){
+      return money(r.a.byKind.cat) + (r.a.total>0 ? "  ("+Math.round(r.a.byKind.cat/r.a.total*100)+"%)" : "");
+    }, money(famCat));
+  moneyRow("ממצאים דחופים",
+    function(r){ return String(r.a.flags.filter(function(f){return f.sev==="critical";}).length); }, "");
+  m.t.appendChild(tb);
+  host.appendChild(m.w);
+
+  /* --- who is covered for what --- */
+  host.appendChild(el("h3","cmpsec","מי מכוסה במה"));
+  var c=table(); head(c.t,"כיסוי");
+  var cb=document.createElement("tbody");
+
+  var shTr=document.createElement("tr");
+  var shTh=document.createElement("th"); shTh.textContent="ביטוח משלים בקופה"; shTr.appendChild(shTh);
+  rows.forEach(function(r){
+    var td=document.createElement("td");
+    var v=r.p.data.shban;
+    td.textContent = v==="yes" ? "יש" : v==="no" ? "אין" : "לא ידוע";
+    td.className = v==="yes" ? "yes" : "na";
+    shTr.appendChild(td);
+  });
+  cb.appendChild(shTr);
+
+  COVERS.forEach(function(g){ g.items.forEach(function(cv){
+    var tr=document.createElement("tr");
+    var th=document.createElement("th"); th.textContent=cv.name; tr.appendChild(th);
+    rows.forEach(function(r){
+      var st=r.p.data.covers[cv.id]||{}, td=document.createElement("td");
+      if(cv.special==="surgery"){
+        td.className="word";
+        td.textContent = st.mode==="suppl" ? "משלים שב\"ן"
+                       : st.mode==="first" ? "מהשקל הראשון"
+                       : st.mode==="unknown" ? "לא ידוע" : "אין";
+        if(st.mode==="first" && r.p.data.shban==="yes") td.className="word no";
+        else if(st.mode==="suppl") td.className="word yes";
+        else td.className="word na";
+      } else if(st.have==="yes"){
+        td.className="yes"; td.textContent=num(st.amount)?money(num(st.amount)):"יש";
+      } else if(st.have==="unknown" || !st.have){
+        td.className="na"; td.textContent="לא ידוע";
+      } else {
+        td.className = cv.kind==="cat" ? "no" : "na";
+        td.textContent="אין";
+      }
+      tr.appendChild(td);
+    });
+    cb.appendChild(tr);
+  });});
+  c.t.appendChild(cb);
+  host.appendChild(c.w);
+
+  /* --- what the comparison actually shows --- */
+  var notes=[];
+  ["drugs","abroad"].forEach(function(id){
+    var nm=null;
+    COVERS.forEach(function(g){g.items.forEach(function(cv){ if(cv.id===id) nm=cv.name; });});
+    var missing=rows.filter(function(r){
+      var st=r.p.data.covers[id]||{}; return st.have==="no";
+    }).map(function(r){ return r.p.name; });
+    if(missing.length) notes.push({sev:"warn",
+      h:nm+" חסר ב"+(missing.length>1?"תיקים":"תיק")+": "+missing.join(", "),
+      p:"זה אחד משני הכיסויים שמגנים מפני קטסטרופה כלכלית, והוא מהזולים שיש. שווה לבדוק הצעה עבורם."});
+  });
+  rows.forEach(function(r){
+    if(r.p.data.shban==="yes" && (r.p.data.covers.surgery||{}).mode==="first")
+      notes.push({sev:"warn", h:"כפל ביטוח בתיק של "+r.p.name,
+        p:"יש שם גם ביטוח משלים בקופה וגם פוליסת ניתוחים במסלול \"מהשקל הראשון\". הניתוח ייעשה פעם אחת, והתשלום כפול."});
+  });
+  var top=rows.slice().sort(function(x,y){ return y.a.total-x.a.total; })[0];
+  if(top && top.a.total>0) notes.push({sev:"good",
+    h:"סך הכל במשפחה: "+money(famMonth)+" בחודש, "+money(famMonth*12)+" בשנה",
+    p:"התיק היקר ביותר הוא של "+top.p.name+", "+money(top.a.total)+" בחודש."});
+
+  if(notes.length){
+    host.appendChild(el("h3","cmpsec","מה עולה מההשוואה"));
+    notes.forEach(function(n){
+      var d=el("div","flag"); d.dataset.sev=n.sev;
+      d.appendChild(el("h4",null,n.h));
+      d.appendChild(el("p",null,n.p));
+      host.appendChild(d);
+    });
+  }
 }
 
 function summaryText(a){

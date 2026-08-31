@@ -203,6 +203,32 @@ details.acc > summary:hover .chev{background:var(--surface-3)}
 }
 .caution b{color:var(--alarm)}
 
+/* ================= profiles ================= */
+.profiles{
+  display:flex; flex-wrap:wrap; align-items:center; gap:.5rem;
+  padding-bottom:1.1rem; margin-bottom:1.4rem; border-bottom:1px solid var(--line);
+}
+.profiles .lbl{font-size:.92rem; color:var(--ink-3); margin-inline-end:.2rem}
+.chipbtn{
+  display:inline-flex; align-items:center; gap:.4rem;
+  min-height:44px; padding:.45rem .95rem; border-radius:99px;
+  border:2px solid var(--line-2); background:var(--surface);
+  color:var(--ink-2); font-weight:600; font-size:.96rem;
+  transition:background .15s ease, border-color .15s ease, color .15s ease;
+}
+.chipbtn:hover{background:var(--surface-2); color:var(--ink)}
+.chipbtn[aria-pressed="true"]{
+  background:var(--accent); border-color:var(--accent); color:#fff;
+}
+.chipbtn[aria-pressed="true"]:hover{background:var(--accent-dark); border-color:var(--accent-dark)}
+.chipbtn.ghost{border-style:dashed; font-weight:600}
+.profiles .sep{width:1px; align-self:stretch; background:var(--line); margin-inline:.3rem}
+.chipbtn.mini{padding:.4rem .8rem; font-size:.9rem; min-height:40px; border-width:1px}
+.who{
+  font-size:.82rem; color:var(--ink-3); white-space:nowrap;
+  max-width:9rem; overflow:hidden; text-overflow:ellipsis;
+}
+
 /* ================= import ================= */
 .import{
   background:var(--accent-wash); border:1px solid #C4DDCF;
@@ -544,6 +570,7 @@ footer ul{padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:
       </a>
       <span class="grow"></span>
       <div class="runtot" id="runTot">
+        <span class="who" id="runWho" hidden></span>
         <span class="l">בחודש</span><span class="v" id="runVal">₪0</span><span class="n" id="runFlags" hidden>0</span>
       </div>
     </div>
@@ -663,6 +690,15 @@ footer ul{padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:
   <div class="lede">
     <h2>מה יש לכם, וכמה זה עולה</h2>
     <p>אם כבר הוצאתם את הרשימה מהאתר הממשלתי, העתיקו אותה לכאן. אם לא, מלאו לפי מה שאתם יודעים. מותר לסמן "לא יודע", וזה לא ייחשב נגדכם. בכל שורה יש הסבר שנפתח בלחיצה על סימן השאלה, והנתונים נשמרים בדפדפן שלכם בלבד.</p>
+  </div>
+
+  <div class="profiles" id="profiles">
+    <span class="lbl">התיק:</span>
+    <div id="profList" style="display:contents"></div>
+    <button class="chipbtn ghost" type="button" id="profAdd">+ תיק חדש</button>
+    <span class="sep" aria-hidden="true"></span>
+    <button class="chipbtn mini" type="button" id="profRename">שינוי שם</button>
+    <button class="chipbtn mini" type="button" id="profDelete">מחיקה</button>
   </div>
 
   <div class="import">
@@ -931,10 +967,13 @@ var nf = new Intl.NumberFormat("he-IL", {maximumFractionDigits:0});
 function money(n){ return "₪" + nf.format(Math.round(n||0)); }
 function el(t,c,h){ var n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n; }
 
-/* ---------- storage ---------- */
-var KEY="tik-habituach-v1";
-function load(){ try{ var r=localStorage.getItem(KEY); return r?JSON.parse(r):null; }catch(e){ return null; } }
-function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+/* ---------- storage ----------
+   several portfolios sit side by side, so one person can check their own
+   cover and then a parent's or a partner's without logging in anywhere.
+   everything still stays in this browser. */
+var KEY="tik-habituach-v2", OLDKEY="tik-habituach-v1";
+var store=null;
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
 
 /* ---------- model ---------- */
 var KINDS={cat:{chip:"הגנה מקטסטרופה",cls:"cat"},conv:{chip:"נוחות ומהירות",cls:"conv"},comp:{chip:"פיצוי כספי",cls:"comp"},routine:{chip:"צריכה שוטפת",cls:"routine"}};
@@ -1028,12 +1067,53 @@ var GLOSSARY=[
 ];
 
 /* ---------- state ---------- */
-var defaults={kupa:"",shban:"",shbanCost:"",deps:"",imported:false,covers:{},checked:{},letter:{}};
-COVERS.forEach(function(g){g.items.forEach(function(c){defaults.covers[c.id]={have:"",amount:"",sum:"",mode:""};});});
-var state=load()||JSON.parse(JSON.stringify(defaults));
-COVERS.forEach(function(g){g.items.forEach(function(c){ if(!state.covers[c.id]) state.covers[c.id]={have:"",amount:"",sum:"",mode:""}; });});
-if(!state.checked) state.checked={};
-if(!state.letter)  state.letter={};
+function blankData(){
+  var d={kupa:"",shban:"",shbanCost:"",deps:"",imported:false,covers:{},checked:{},letter:{}};
+  COVERS.forEach(function(g){g.items.forEach(function(c){
+    d.covers[c.id]={have:"",amount:"",sum:"",mode:""};
+  });});
+  return d;
+}
+/* fills in anything a saved portfolio predates, so an old save keeps working */
+function normalize(d){
+  if(!d || typeof d!=="object") d=blankData();
+  if(!d.covers) d.covers={};
+  COVERS.forEach(function(g){g.items.forEach(function(c){
+    if(!d.covers[c.id]) d.covers[c.id]={have:"",amount:"",sum:"",mode:""};
+  });});
+  if(!d.checked) d.checked={};
+  if(!d.letter)  d.letter={};
+  return d;
+}
+function loadStore(){
+  try{
+    var raw=localStorage.getItem(KEY);
+    if(raw){
+      var s=JSON.parse(raw);
+      if(s && s.profiles && s.profiles.length){
+        s.profiles.forEach(function(p){ p.data=normalize(p.data); });
+        if(!s.seq) s.seq=s.profiles.length+1;
+        return s;
+      }
+    }
+    /* carry over a portfolio saved before profiles existed */
+    var old=localStorage.getItem(OLDKEY);
+    if(old){
+      return {seq:2, active:"p1",
+              profiles:[{id:"p1", name:"התיק שלי", data:normalize(JSON.parse(old))}]};
+    }
+  }catch(e){}
+  return {seq:2, active:"p1", profiles:[{id:"p1", name:"התיק שלי", data:blankData()}]};
+}
+store=loadStore();
+function activeProfile(){
+  for(var i=0;i<store.profiles.length;i++){
+    if(store.profiles[i].id===store.active) return store.profiles[i];
+  }
+  store.active=store.profiles[0].id;
+  return store.profiles[0];
+}
+var state=activeProfile().data;
 
 /* ---------- tabs ---------- */
 var TABS=["start","check","result","agent","appeal","gloss","legal"];
@@ -1182,6 +1262,44 @@ function buildGlossary(){
     d.appendChild(b);
     host.appendChild(d);
   });
+}
+
+/* ---------- profiles ---------- */
+function buildProfiles(){
+  var host=document.getElementById("profList");
+  if(!host) return;
+  host.innerHTML="";
+  store.profiles.forEach(function(p){
+    var b=el("button","chipbtn",p.name);
+    b.type="button";
+    b.setAttribute("aria-pressed", p.id===store.active?"true":"false");
+    b.addEventListener("click",function(){
+      if(p.id===store.active) return;
+      store.active=p.id; state=activeProfile().data;
+      save(); refreshAll(); toast("עברת ל" + p.name);
+    });
+    host.appendChild(b);
+  });
+  var only=store.profiles.length<2;
+  var del=document.getElementById("profDelete");
+  if(del){ del.disabled=only; del.style.opacity=only?".45":"1"; }
+  var who=document.getElementById("runWho");
+  if(who){
+    who.hidden=only;
+    if(!only) who.textContent=activeProfile().name;
+  }
+}
+/* redraw every surface after the active portfolio changes */
+function refreshAll(){
+  ["kupa","shban","shbanCost","deps"].forEach(function(id){
+    var n=document.getElementById(id); if(n) n.value=state[id]||"";
+  });
+  ["name","id","co","pol","start","event","deny","reason"].forEach(function(k){
+    var n=document.getElementById("l-"+k); if(n) n.value=(state.letter&&state.letter[k])||"";
+  });
+  var ir=document.getElementById("impReport"); if(ir) ir.innerHTML="";
+  var fi=document.getElementById("xlsxFile"); if(fi) fi.value="";
+  buildLedger(); buildQuestions(); buildLetter(); render(); buildProfiles();
 }
 
 /* ---------- analysis ---------- */
@@ -1863,16 +1981,39 @@ document.getElementById("btnCopyLetter").addEventListener("click",function(){
 });
 document.getElementById("btnPrintQ").addEventListener("click",function(){ doPrint(); });
 document.getElementById("btnReset").addEventListener("click",function(){
-  if(!confirm("לאפס את כל הנתונים? הפעולה אינה הפיכה.")) return;
-  state=JSON.parse(JSON.stringify(defaults)); save();
-  ["kupa","shban","shbanCost","deps"].forEach(function(id){ document.getElementById(id).value=""; });
-  ["name","id","co","pol","start","event","deny","reason"].forEach(function(k){ document.getElementById("l-"+k).value=""; });
-  var ir=document.getElementById("impReport"); if(ir) ir.innerHTML="";
-  var fi=document.getElementById("xlsxFile"); if(fi) fi.value="";
-  buildLedger(); buildQuestions(); buildLetter(); render(); toast("הטופס אופס");
+  var p=activeProfile();
+  if(!confirm("לרוקן את התיק \""+p.name+"\"? הפעולה אינה הפיכה. תיקים אחרים לא ייפגעו.")) return;
+  p.data=blankData(); state=p.data;
+  save(); refreshAll(); toast("התיק רוקן");
 });
 
-buildLedger(); buildQuestions(); buildGlossary(); buildLetter(); render();
+document.getElementById("profAdd").addEventListener("click",function(){
+  var n=prompt("שם התיק החדש, למשל: אמא, בן/בת זוג, ילדים","");
+  if(n===null) return;
+  n=(n||"").trim() || ("תיק "+(store.profiles.length+1));
+  var id="p"+(store.seq++);
+  store.profiles.push({id:id, name:n, data:blankData()});
+  store.active=id; state=activeProfile().data;
+  save(); refreshAll(); toast("נוצר תיק חדש");
+});
+document.getElementById("profRename").addEventListener("click",function(){
+  var p=activeProfile();
+  var n=prompt("שם חדש לתיק:", p.name);
+  if(n===null) return;
+  n=(n||"").trim();
+  if(!n) return;
+  p.name=n; save(); buildProfiles(); toast("השם עודכן");
+});
+document.getElementById("profDelete").addEventListener("click",function(){
+  if(store.profiles.length<2) return;
+  var p=activeProfile();
+  if(!confirm("למחוק את התיק \""+p.name+"\" על כל הנתונים שבו? הפעולה אינה הפיכה.")) return;
+  store.profiles=store.profiles.filter(function(x){ return x.id!==p.id; });
+  store.active=store.profiles[0].id; state=activeProfile().data;
+  save(); refreshAll(); toast("התיק נמחק");
+});
+
+buildLedger(); buildQuestions(); buildGlossary(); buildLetter(); render(); buildProfiles();
 showTab((location.hash||"#start").replace("#",""), false);
 })();
 </script>

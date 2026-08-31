@@ -6,3 +6,6 @@ dist/
 
 # local scratch
 *.log
+
+# marketing drafts, kept out of the repo because the site is served from the repo root
+promo/

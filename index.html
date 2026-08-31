@@ -735,18 +735,21 @@ footer ul{padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:
 
   <div class="stack">
     <details class="acc">
-      <summary><span class="tt">איך מוציאים את הרשימה מהאתר הממשלתי<span class="s">מה צריך להביא, ומה עושים עם התוצאה</span></span><span class="chev"></span></summary>
+      <summary><span class="tt">איך מורידים את הקובץ מהאתר הממשלתי<span class="s">שישה צעדים, בערך שתי דקות</span></span><span class="chev"></span></summary>
       <div class="acc-body">
         <ol>
-          <li><strong>מה צריך:</strong> תעודת זהות ואמצעי הזדהות ממשלתי. כרטיס חכם, אפליקציית ההזדהות הממשלתית, או הזדהות בפרטים אישיים.</li>
-          <li><strong>מה תראו:</strong> אילו ביטוחי בריאות יש לכם ובאילו חברות, מה התשלום החודשי על כל אחד, מה הכיסוי מעניק, והאם יש כפילויות.</li>
-          <li><strong>מה לרשום:</strong> לכל שורה, את שם הכיסוי ואת הסכום החודשי.</li>
-          <li><strong>אחר כך:</strong> חזרו לכאן ועברו לטאב "הבדיקה", כדי לראות מה זה אומר.</li>
-          <li><strong>אם משהו לא ברור:</strong> מותר לכם לבקש מכל חברת ביטוח עותק של הפוליסה המלאה ודף פירוט כיסויים, בחינם.</li>
-          <li><strong>אם אתם לא יכולים או לא רוצים להזדהות:</strong> אפשר למלא כאן ידנית לפי החיובים בכרטיס האשראי ובקופה. פחות מדויק, אבל עובד.</li>
+          <li><strong>היכנסו ל־hit.cma.gov.il.</strong> זה האתר "ביטוחי הבריאות שלי" של רשות שוק ההון. שימו לב שזה לא "הר הביטוח", שהוא אתר אחר לכל סוגי הביטוח.</li>
+          <li><strong>הזדהו.</strong> צריך תעודת זהות ואמצעי הזדהות ממשלתי: אפליקציית ההזדהות הממשלתית, כרטיס חכם, או הזדהות בפרטים אישיים. אין צורך בסיסמה חדשה ואין הרשמה.</li>
+          <li><strong>תגיעו למסך הבית.</strong> יופיעו שם השם שלכם, העלות החודשית והשנתית, ועיגול שמפצל בין הביטוח המשלים של הקופה לבין הפוליסות הפרטיות.</li>
+          <li><strong>לחצו על "סיכום המידע שלך".</strong> הקישור נמצא מתחת לפסקת הפתיחה, עם חץ קטן כלפי מטה. <strong>זה כפתור ההורדה.</strong></li>
+          <li><strong>הקובץ יירד למחשב.</strong> שמו יהיה בסגנון <code>HitResults-31.8.2026.xlsx</code>, והוא יישמר בתיקיית ההורדות. <strong>אין צורך לפתוח אותו.</strong></li>
+          <li><strong>גררו אותו לתיבה בטאב "הבדיקה".</strong> הטבלה תתמלא לבד, והממצאים יופיעו מיד.</li>
         </ol>
+        <p><strong>אם אתם בטלפון:</strong> ההורדה תעבוד, אבל הקובץ נשמר בתיקיית ההורדות של הטלפון. במקום לגרור, לחצו על "בחירת קובץ" ובחרו אותו משם.</p>
+        <p><strong>אם ההזדהות לא עוברת או שאין לכם אפשרות להזדהות:</strong> אפשר למלא כאן ידנית לפי החיובים בכרטיס האשראי ובקופת החולים. פחות מדויק, אבל עובד. מותר לכם גם לבקש מכל חברת ביטוח עותק של הפוליסה המלאה ודף פירוט כיסויים, בחינם.</p>
+        <p><strong>למה הסכום כאן עשוי להיות גבוה מזה שבאתר הממשלתי:</strong> האתר הממשלתי לא סופר "כתבי שירות" בסכום הביטוח, כי מבחינה משפטית הם חוזה שירות ולא פוליסה. כאן הם כן נספרים, כי זה כסף שיוצא לכם בכל חודש. ההפרש בין שני המספרים הוא בדיוק העלות של כתבי השירות שלכם.</p>
       </div>
-    </details>
+      </details>
 
     <details class="acc">
       <summary><span class="tt">כלל 1: ביטוח עושים מפני קטסטרופה<span class="s">השאלה הנכונה היא לא "כמה זה עולה"</span></span><span class="chev"></span></summary>
@@ -2108,7 +2111,7 @@ var OUT_OF_SCOPE=["critical","accident","life","disability","ltc"];
 
 function interpretGrid(grid){
   var r={kupa:"", shban:0, shbanRows:0, sums:{}, lines:{}, surgeryMode:"",
-         unmapped:[], monthly:0, ok:false};
+         unmapped:[], monthly:0, ok:false, svcRows:0, svcCost:0};
   var col=null;
   function findCol(row,re){ for(var i=0;i<row.length;i++) if(re.test(row[i]||"")) return i; return -1; }
 
@@ -2117,7 +2120,8 @@ function interpretGrid(grid){
     if(/פרמיה/.test(joined) && /ענף/.test(joined)){
       var b=findCol(row,/משני/); if(b<0) b=findCol(row,/ענף/);
       col={branch:b, product:findCol(row,/סוג\s*מוצר/), company:findCol(row,/חברה/),
-           prem:findCol(row,/פרמיה/), ptype:findCol(row,/סוג\s*פרמיה/)};
+           prem:findCol(row,/פרמיה/), ptype:findCol(row,/סוג\s*פרמיה/),
+           main:findCol(row,/ענף\s*ראשי/)};
       return;
     }
     if(!col || col.branch<0 || col.prem<0) return;
@@ -2146,6 +2150,10 @@ function interpretGrid(grid){
       }
       return;
     }
+
+    /* the government site leaves service contracts out of its insurance
+       total, so our sum comes out higher. worth explaining, not hiding. */
+    if(col.main>=0 && /כתב\s*שירות/.test(row[col.main]||"")){ r.svcRows++; r.svcCost+=amt; }
 
     var hit=null;
     for(var i=0;i<IMPORT_RULES.length;i++){
@@ -2222,6 +2230,12 @@ function reportImport(r){
     w.appendChild(el("p",null,"הקובץ הזה מכסה ביטוחי בריאות בלבד. הכיסויים הבאים לא מופיעים בו, וזה לא אומר שאין לכם אותם. הם עשויים לשבת בפוליסה אחרת או בקרן הפנסיה, וסומנו כ\"לא יודע\":"));
     w.appendChild(ul);
     line("warn","מה שהקובץ לא מכסה", w);
+  }
+
+  if(r.svcRows>0){
+    var w3=el("div");
+    w3.appendChild(el("p",null,"מתוך הסכום שלמעלה, "+money(r.svcCost)+" בחודש הם כתבי שירות ולא פוליסות ביטוח. באתר הממשלתי הם לא נספרים בסכום הביטוח, ולכן המספר שם נמוך יותר בדיוק בסכום הזה. כאן הם כן נספרים, כי זה כסף שיוצא לכם בכל חודש."));
+    line("", "למה המספר כאן שונה מהאתר הממשלתי", w3);
   }
 
   if(r.unmapped.length){

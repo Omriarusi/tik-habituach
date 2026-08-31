@@ -1028,7 +1028,7 @@ var GLOSSARY=[
 ];
 
 /* ---------- state ---------- */
-var defaults={kupa:"",shban:"",shbanCost:"",deps:"",covers:{},checked:{},letter:{}};
+var defaults={kupa:"",shban:"",shbanCost:"",deps:"",imported:false,covers:{},checked:{},letter:{}};
 COVERS.forEach(function(g){g.items.forEach(function(c){defaults.covers[c.id]={have:"",amount:"",sum:"",mode:""};});});
 var state=load()||JSON.parse(JSON.stringify(defaults));
 COVERS.forEach(function(g){g.items.forEach(function(c){ if(!state.covers[c.id]) state.covers[c.id]={have:"",amount:"",sum:"",mode:""}; });});
@@ -1194,7 +1194,7 @@ function analyse(){
   COVERS.forEach(function(g){g.items.forEach(function(c){
     var st=state.covers[c.id];
     if(st.have==="yes"){ held[c.id]=true; var a=num(st.amount); total+=a; byKind[c.kind]+=a; }
-    else if(st.have==="unknown"){ unknown.push(c.name); }
+    else if(st.have==="unknown"){ unknown.push({id:c.id, name:c.name}); }
   });});
 
   var answered=0;
@@ -1203,7 +1203,7 @@ function analyse(){
 
   var shbanCost=num(state.shbanCost);
   if(state.shban==="yes"){ total+=shbanCost; byKind.conv+=shbanCost; }
-  if(state.shban==="unknown") unknown.push("הביטוח המשלים של הקופה");
+  if(state.shban==="unknown") unknown.push({id:"shban", name:"הביטוח המשלים של הקופה"});
 
   var f=[], mode=state.covers.surgery.mode;
 
@@ -1304,12 +1304,28 @@ function analyse(){
       todo:["חשבו כמה החזרים באמת קיבלתם בשנה האחרונה מכל אחד.",
             "אם שילמתם יותר משקיבלתם לאורך כמה שנים, זו הוצאה ולא רשת ביטחון."]});
   }
-  if(unknown.length>=2){
-    f.push({sev:"warn",tag:"חסר מידע",h:"יש "+unknown.length+" סעיפים שאינכם יודעים",
-      p:"סימנתם \"לא יודע\" ב: "+unknown.join(", ")+". זה המצב הנפוץ ביותר ולא צריך להתבייש בו, אבל בלי המידע אי אפשר לדעת אם יש כפל או חוסר.",
+  /* an unknown means two different things depending on how it got there.
+     after an import, the health file simply does not cover life, disability
+     or long term care, so sending the reader back to that same file would
+     be a loop. those belong to the pension clearing house instead. */
+  var oosUnknown=unknown.filter(function(u){ return OUT_OF_SCOPE.indexOf(u.id)>=0; });
+  var ownUnknown=unknown.filter(function(u){ return OUT_OF_SCOPE.indexOf(u.id)<0; });
+  function names(list){ return list.map(function(u){ return u.name; }).join(", "); }
+
+  if(state.imported && oosUnknown.length){
+    f.push({sev:"info",tag:"מחוץ לקובץ",h:"אלה לא מופיעים בקובץ שייבאתם, וזה תקין",
+      p:"הקובץ מהאתר הממשלתי מכסה ביטוחי בריאות בלבד, ולכן "+names(oosUnknown)+" לא מופיעים בו. זה לא אומר שאין לכם אותם. אצל רוב השכירים הם יושבים בקרן הפנסיה או בפוליסה נפרדת, ואין טעם לחפש אותם שוב באותו קובץ.",
+      todo:["בדקו במסלקה הפנסיונית מה קיים לכם. השירות הממשלתי נמצא בכתובת gov.il/he/service/pension_savings_search",
+            "לחלופין, פתחו את הדוח השנתי מקרן הפנסיה. כיסויי מוות ואובדן כושר עבודה מופיעים בו.",
+            "מצאתם משהו? חזרו לטבלה וסמנו \"יש לי\" עם הסכום."]});
+  }
+  if(ownUnknown.length>=2 || (!state.imported && unknown.length>=2)){
+    var list = state.imported ? ownUnknown : unknown;
+    f.push({sev:"warn",tag:"חסר מידע",h:"יש "+list.length+" סעיפים שאינכם יודעים",
+      p:"סימנתם \"לא יודע\" ב: "+names(list)+". זה המצב הנפוץ ביותר ולא צריך להתבייש בו, אבל בלי המידע אי אפשר לדעת אם יש כפל או חוסר.",
       todo:["היכנסו לאתר הממשלתי \"ביטוחי הבריאות שלי\" בכתובת hit.cma.gov.il. הוא מציג את הפוליסות שלכם מנתוני אמת, בלי הקלדה.",
-            "רשמו לכל שורה את שם הכיסוי והתשלום החודשי.",
-            "חזרו לטאב \"הבדיקה\" והשלימו. הממצאים יתעדכנו מיד."]});
+            "הורידו משם את קובץ האקסל, וגררו אותו לתיבת הייבוא בראש טאב \"הבדיקה\". הטבלה תתמלא לבד.",
+            "מה שעדיין לא ברור, השלימו ידנית. הממצאים יתעדכנו מיד."]});
   }
   if(total>700){
     f.push({sev:"info",tag:"השוואה",h:"אתם מעל הממוצע שמוצג בפרק",
@@ -1677,6 +1693,7 @@ function applyImport(r){
       st.have="unknown"; st.amount="";
     }
   });
+  state.imported=true;
   save(); buildLedger(); render();
 }
 
@@ -1850,6 +1867,8 @@ document.getElementById("btnReset").addEventListener("click",function(){
   state=JSON.parse(JSON.stringify(defaults)); save();
   ["kupa","shban","shbanCost","deps"].forEach(function(id){ document.getElementById(id).value=""; });
   ["name","id","co","pol","start","event","deny","reason"].forEach(function(k){ document.getElementById("l-"+k).value=""; });
+  var ir=document.getElementById("impReport"); if(ir) ir.innerHTML="";
+  var fi=document.getElementById("xlsxFile"); if(fi) fi.value="";
   buildLedger(); buildQuestions(); buildLetter(); render(); toast("הטופס אופס");
 });
 

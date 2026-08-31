@@ -355,10 +355,19 @@ select:focus,.txt:focus{border-color:var(--accent)}
   background:var(--surface); border:1px solid var(--line);
   border-radius:var(--r-box); padding:1.1rem 1.15rem; box-shadow:var(--shadow);
 }
-.tcell .l{font-size:.9rem; color:var(--ink-3)}
+.tcell{position:relative; overflow:hidden}
+.tcell::before{
+  content:""; position:absolute; inset-block-start:0; inset-inline:0;
+  height:3px; background:var(--accent); opacity:.16;
+}
+.tcell .l{
+  font-size:.82rem; color:var(--ink-3); font-weight:600;
+  letter-spacing:.01em;
+}
 .tcell .v{
-  font-family:var(--f-num); font-size:1.8rem; font-weight:700;
-  font-variant-numeric:tabular-nums; letter-spacing:-.02em; margin-top:.15rem;
+  font-family:var(--f-num); font-size:1.9rem; font-weight:700;
+  font-variant-numeric:tabular-nums; letter-spacing:-.025em;
+  margin-top:.2rem; line-height:1.1; color:var(--ink);
 }
 .tcell .s{font-size:.86rem; color:var(--ink-3); margin-top:.2rem; line-height:1.45}
 
@@ -367,8 +376,16 @@ select:focus,.txt:focus{border-color:var(--accent)}
   padding:1.15rem 1.25rem; margin-bottom:1.6rem; box-shadow:var(--shadow);
 }
 .mix h3{font-size:1.05rem; font-weight:600; margin-bottom:.75rem}
-.mixbar{display:flex; height:1rem; border-radius:99px; overflow:hidden; background:var(--surface-3)}
-.mixbar i{display:block}
+.mixbar{
+  display:flex; height:2.1rem; border-radius:10px; overflow:hidden;
+  background:var(--surface-3); border:1px solid var(--line);
+}
+.mixbar i{
+  display:grid; place-items:center; min-width:0;
+  font-family:var(--f-num); font-size:.82rem; font-weight:700;
+  color:#fff; font-style:normal; overflow:hidden; white-space:nowrap;
+}
+.mixbar i.dim{color:var(--ink-2)}
 .mixleg{display:flex; flex-wrap:wrap; gap:.5rem 1.3rem; margin-top:.8rem; font-size:.94rem; color:var(--ink-2)}
 .mixleg span{display:inline-flex; align-items:center; gap:.45rem}
 .sw{width:.75rem; height:.75rem; border-radius:3px; flex:0 0 auto}
@@ -392,6 +409,34 @@ details.find[data-sev="info"] .sev{color:var(--ink-3)}
   border-radius:var(--r-box); padding:2.6rem 1.5rem; text-align:center;
 }
 .empty p{color:var(--ink-2); margin-bottom:1.3rem}
+
+/* ================= hero ================= */
+.hero{
+  position:relative; margin-bottom:1.9rem;
+  padding:2rem 2.1rem 1.9rem;
+  border:1px solid #C8DFD4; border-radius:calc(var(--r-box) + 4px);
+  background:
+    radial-gradient(120% 140% at 92% 0%, #E4F1EA 0%, rgba(228,241,234,0) 58%),
+    linear-gradient(180deg, var(--accent-wash) 0%, var(--surface) 100%);
+  overflow:hidden;
+}
+.hero-mark{
+  position:absolute; inset-block-start:-1.4rem; inset-inline-start:-1.2rem;
+  width:11rem; height:11rem; color:var(--accent);
+  opacity:.09; pointer-events:none;
+}
+.hero h1{
+  position:relative; font-size:clamp(1.8rem,5.2vw,2.55rem);
+  font-weight:700; letter-spacing:-.02em; line-height:1.24;
+}
+.hero p{
+  position:relative; margin-top:.85rem; max-width:56ch;
+  font-size:clamp(1.02rem,2.3vw,1.1rem); color:var(--ink-2);
+}
+@media (max-width:640px){
+  .hero{padding:1.5rem 1.35rem 1.4rem}
+  .hero-mark{width:8rem; height:8rem; inset-block-start:-1rem; inset-inline-start:-1rem}
+}
 
 /* ================= start here ================= */
 .startpoint{
@@ -645,7 +690,8 @@ footer ul{padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:
 
 <!-- ================= START ================= -->
 <div role="tabpanel" id="p-start" aria-labelledby="t-start" tabindex="0">
-  <div class="lede">
+  <div class="hero">
+    <svg class="hero-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 13l15 6.5v12.5c0 10.5-6.4 17.7-15 20-8.6-2.3-15-9.5-15-20V19.5L32 13z" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/><path d="M24.5 32.5l5.5 5.5 10-11" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <h1>המדינה תראה לכם מה יש לכם.<br>כאן תבינו מה זה אומר.</h1>
     <p>לרשות שוק ההון יש אתר שמציג את ביטוחי הבריאות שלכם מנתוני אמת, כולל כפילויות. הוא מצוין, והוא הצעד הראשון. הכלי הזה הוא מה שבא אחריו: האם מה שיש לכם הגיוני, ומה עושים עם זה מחר בבוקר.</p>
   </div>
@@ -1672,7 +1718,11 @@ function render(){
     var mb=el("div","mixbar");
     ["cat","conv","comp","routine"].forEach(function(k){
       var pct=a.byKind[k]/a.total*100; if(pct<=0) return;
-      var i=document.createElement("i"); i.style.width=pct+"%"; i.style.background=colors[k];
+      var i=document.createElement("i");
+      i.style.width=pct+"%"; i.style.background=colors[k];
+      if(k==="routine") i.className="dim";
+      /* only label a slice wide enough to hold the text */
+      if(pct>=9) i.textContent=Math.round(pct)+"%";
       i.title=KINDS[k].chip+", "+Math.round(pct)+"%";
       mb.appendChild(i);
     });

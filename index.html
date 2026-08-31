@@ -431,13 +431,64 @@ footer ul{padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:
   details.acc > summary{min-height:56px}
   .rexp summary{min-height:44px}
 }
+/* the letter lives in a textarea, which clips when printed.
+   this block mirrors its full text and is shown only on paper. */
+.letter-print{display:none}
+.printhead{display:none}
+
+@page{margin:14mm 12mm}
+
 @media print{
-  header,.tabs,.actions,.btn,.toast{display:none!important}
-  [role="tabpanel"][hidden]{display:block!important}
-  details > summary .chev{display:none}
-  .acc-body,.rexp .b{display:block!important}
-  body{font-size:11pt; background:#fff}
-  .row,.tcell,details.acc,.stp{break-inside:avoid; box-shadow:none}
+  /* print the tab the reader is actually on, not all seven */
+  [role="tabpanel"][hidden]{display:none!important}
+
+  header,.toast,.actions,.tabwrap,footer .cols{display:none!important}
+  .printhead{
+    display:block; font-size:9pt; color:#444;
+    border-bottom:1px solid #bbb; padding-bottom:4mm; margin-bottom:6mm;
+  }
+
+  html,body{background:#fff; color:#000}
+  body{font-size:10.5pt; line-height:1.55}
+  main{padding-block:0}
+  .wrap{width:100%}
+
+  .lede{margin-bottom:6mm}
+  .lede h1,.lede h2{font-size:16pt}
+  .lede p{font-size:10.5pt}
+
+  /* keep blocks whole across page breaks */
+  details.acc,.row,.tcell,.stp,.flag,.callout,.mix{
+    break-inside:avoid; box-shadow:none; border-color:#c4c4c4;
+  }
+  details.acc > summary{background:none; padding-bottom:.4rem}
+  .chev{display:none}
+  .acc-body{border-top-color:#d5d5d5}
+
+  /* severity stripes and the split bar carry meaning, so keep their colour */
+  details.find,.flag,.mixbar,.mixbar i,.sw,.stp .n{
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  details.find[data-sev]{background:#fff!important}
+
+  .tot{grid-template-columns:repeat(4,1fr)}
+  .tcell .v{font-size:14pt}
+
+  /* a printed page cannot be clicked, so spell the links out */
+  a[href^="http"]::after{
+    content:" (" attr(href) ")"; font-size:8pt; color:#555; word-break:break-all;
+  }
+
+  /* the appeal letter: swap the clipping textarea for its full text */
+  textarea{display:none!important}
+  .letter-print{
+    display:block; white-space:pre-wrap;
+    font-size:10.5pt; line-height:1.6; border:1px solid #c4c4c4;
+    border-radius:0; padding:6mm;
+  }
+
+  footer{border-top:1px solid #bbb; background:#fff; margin-top:8mm; padding-block:4mm}
+  .legal{margin-top:0; padding-top:0; border-top:0; font-size:8pt; color:#444}
 }
 </style>
 </head>
@@ -470,6 +521,8 @@ footer ul{padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:
 </header>
 
 <main class="wrap">
+
+<div class="printhead">תיק הביטוח שלי · כלי לבדיקה עצמית של ביטוחי בריאות · אינו ייעוץ ביטוחי</div>
 
 <!-- ================= START ================= -->
 <div role="tabpanel" id="p-start" aria-labelledby="t-start" tabindex="0">
@@ -631,6 +684,7 @@ footer ul{padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:
 
   <div id="letterNote"></div>
   <textarea id="letter" readonly aria-label="נוסח מכתב הערעור"></textarea>
+  <pre id="letterPrint" class="letter-print" aria-hidden="true"></pre>
   <div class="actions">
     <button class="btn" type="button" id="btnCopyLetter">העתקת המכתב</button>
     <a class="btn ghost" href="https://pe.cma.gov.il/sp/sp" target="_blank" rel="noopener noreferrer">הגשת תלונה לרשות שוק ההון</a>
@@ -1273,7 +1327,7 @@ function render(){
   var cp=el("button","btn","העתקת סיכום"); cp.type="button";
   cp.addEventListener("click",function(){ copyText(summaryText(a),"הסיכום הועתק"); });
   var pr=el("button","btn ghost","הדפסה"); pr.type="button";
-  pr.addEventListener("click",function(){ window.print(); });
+  pr.addEventListener("click",function(){ doPrint(); });
   acts.appendChild(cp); acts.appendChild(pr);
   host.appendChild(acts);
 }
@@ -1357,7 +1411,41 @@ function buildLetter(){
   t.push(v.name||"____________");
   t.push("ת.ז. "+(v.id||"____________"));
 
-  document.getElementById("letter").value=t.join("\n");
+  var body=t.join("\n");
+  document.getElementById("letter").value=body;
+  /* a textarea clips to its box when printed, so keep a plain copy that
+     is hidden on screen and printed instead. kept in sync here rather
+     than at print time, so it works even without a beforeprint event. */
+  var pp=document.getElementById("letterPrint");
+  if(pp) pp.textContent=body;
+}
+
+/* ---------- printing ----------
+   two things break on paper unless we intervene:
+   a closed <details> prints nothing, and a <textarea> clips to its box.
+   so before printing we open everything in the visible tab and mirror
+   the letter into a plain block, then put it all back afterwards. */
+var reopened = null;
+function beforePrint(){
+  if(reopened) return;                       /* already prepared */
+  var panel = document.querySelector('[role="tabpanel"]:not([hidden])');
+  if(!panel) return;
+  reopened = [];
+  panel.querySelectorAll("details").forEach(function(d){
+    if(!d.open){ d.open = true; reopened.push(d); }
+  });
+}
+function afterPrint(){
+  if(!reopened) return;
+  reopened.forEach(function(d){ d.open = false; });
+  reopened = null;
+}
+window.addEventListener("beforeprint", beforePrint);
+window.addEventListener("afterprint", afterPrint);
+function doPrint(){
+  beforePrint();                             /* for browsers that skip the event */
+  window.print();
+  setTimeout(afterPrint, 800);
 }
 
 /* ---------- misc ---------- */
@@ -1396,7 +1484,7 @@ function copyText(txt,msg){
 document.getElementById("btnCopyLetter").addEventListener("click",function(){
   copyText(document.getElementById("letter").value,"המכתב הועתק");
 });
-document.getElementById("btnPrintQ").addEventListener("click",function(){ window.print(); });
+document.getElementById("btnPrintQ").addEventListener("click",function(){ doPrint(); });
 document.getElementById("btnReset").addEventListener("click",function(){
   if(!confirm("לאפס את כל הנתונים? הפעולה אינה הפיכה.")) return;
   state=JSON.parse(JSON.stringify(defaults)); save();

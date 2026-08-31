@@ -3,693 +3,682 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>תיק הביטוח שלי</title>
 <meta name="description" content="כלי חינמי לבדיקה עצמית של ביטוחי הבריאות שלכם: כמה אתם משלמים, איפה יש כפל ביטוח, ואיזה כיסויים באמת מגנים עליכם. בעברית פשוטה, בלי הרשמה.">
 <meta name="robots" content="index, follow">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#0E6E6B" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0C1518" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
 <meta property="og:site_name" content="תיק הביטוח שלי">
 <meta property="og:title" content="תיק הביטוח שלי">
-<meta property="og:description" content="כלי חינמי לבדיקה עצמית של ביטוחי הבריאות שלכם: כמה אתם משלמים, איפה יש כפל ביטוח, ואיזה כיסויים באמת מגנים עליכם. בעברית פשוטה, בלי הרשמה.">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:description" content="כלי חינמי לבדיקה עצמית של ביטוחי הבריאות שלכם: כמה אתם משלמים, איפה יש כפל ביטוח, ואיזה כיסויים באמת מגנים עליכם.">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="תיק הביטוח שלי">
-<meta name="twitter:description" content="כלי חינמי לבדיקה עצמית של ביטוחי הבריאות שלכם: כמה אתם משלמים, איפה יש כפל ביטוח, ואיזה כיסויים באמת מגנים עליכם. בעברית פשוטה, בלי הרשמה.">
+<meta name="twitter:description" content="כלי חינמי לבדיקה עצמית של ביטוחי הבריאות שלכם.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E6E6B'/%3E%3Cpath d='M32 12l16 7v13c0 11-6.8 18.6-16 21-9.2-2.4-16-10-16-21V19l16-7z' fill='none' stroke='%23fff' stroke-width='4' stroke-linejoin='round'/%3E%3Cpath d='M24 32.5l6 6 11-12' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E6E6B'/%3E%3Cpath d='M32 12l16 7v13c0 11-6.8 18.6-16 21-9.2-2.4-16-10-16-21V19l16-7z' fill='none' stroke='%23fff' stroke-width='4' stroke-linejoin='round'/%3E%3Cpath d='M24 32.5l6 6 11-12' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<title>תיק הביטוח שלי</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@500;700&family=Heebo:wght@400;500;700&display=swap">
 
 <style>
 :root{
-  --paper:#F4F6F5;
+  --bg:#FFFFFF;
   --surface:#FFFFFF;
-  --surface-2:#EAEEEC;
-  --ink:#0F1D26;
-  --ink-2:#3D5561;
-  --ink-3:#6B8592;
-  --line:#D5DEDA;
-  --line-2:#BFCCC7;
+  --surface-2:#F7F8F8;
+  --surface-3:#F1F3F3;
+  --line:#E7EAE9;
+  --line-2:#D3D8D7;
+  --ink:#16211F;
+  --ink-2:#5A6664;
+  --ink-3:#8B9694;
   --accent:#0E6E6B;
-  --accent-ink:#0A5250;
-  --accent-soft:#DCEDEB;
-  --good:#2F6B4F;
-  --good-soft:#DDEBE2;
-  --warn:#9A6B14;
-  --warn-soft:#F3E8D2;
-  --alarm:#A63A2E;
-  --alarm-soft:#F5DEDA;
-  --shadow:0 1px 2px rgba(15,29,38,.06), 0 8px 24px -12px rgba(15,29,38,.18);
+  --accent-2:#0A5250;
+  --accent-wash:#F0F7F6;
+  --good:#2C6B4C;
+  --warn:#8A6A18;
+  --alarm:#B3402F;
 
-  --f-display:"Frank Ruhl Libre", "Times New Roman", serif;
-  --f-body:"Assistant", "Segoe UI", system-ui, sans-serif;
-  --f-data:"Heebo", "Segoe UI", system-ui, sans-serif;
+  --f-display:"Frank Ruhl Libre","Times New Roman",serif;
+  --f-body:"Assistant","Segoe UI",system-ui,sans-serif;
+  --f-data:"Heebo","Segoe UI",system-ui,sans-serif;
 
-  --w:min(1080px, 100% - 2.5rem);
-  --r:10px;
+  --w:min(940px, 100% - 2.2rem);
+  --r:8px;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#0C1518;
-    --surface:#122024;
-    --surface-2:#18292E;
-    --ink:#E8EFEC;
-    --ink-2:#A9C0BC;
-    --ink-3:#7E9A97;
-    --line:#20353A;
-    --line-2:#2C464C;
-    --accent:#4FBFB5;
-    --accent-ink:#7FD6CD;
-    --accent-soft:#123531;
-    --good:#6FC095;
-    --good-soft:#102C20;
-    --warn:#D9A441;
-    --warn-soft:#2E2413;
-    --alarm:#E0776A;
-    --alarm-soft:#331915;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#0C1518;
-  --surface:#122024;
-  --surface-2:#18292E;
-  --ink:#E8EFEC;
-  --ink-2:#A9C0BC;
-  --ink-3:#7E9A97;
-  --line:#20353A;
-  --line-2:#2C464C;
-  --accent:#4FBFB5;
-  --accent-ink:#7FD6CD;
-  --accent-soft:#123531;
-  --good:#6FC095;
-  --good-soft:#102C20;
-  --warn:#D9A441;
-  --warn-soft:#2E2413;
-  --alarm:#E0776A;
-  --alarm-soft:#331915;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
-}
-
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
 body{
-  direction:rtl;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--f-body);
-  font-size:17px;
-  line-height:1.65;
-  margin:0;
-  -webkit-text-size-adjust:100%;
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--f-body); font-size:17px; line-height:1.62;
 }
-h1,h2,h3,h4{font-family:var(--f-display); text-wrap:balance; margin:0; line-height:1.25}
+h1,h2,h3,h4{margin:0; line-height:1.28; text-wrap:balance; font-weight:700}
 p{margin:0}
-a{color:var(--accent-ink); text-underline-offset:3px; text-decoration-thickness:1px}
-a:hover{text-decoration-thickness:2px}
-:focus-visible{outline:2.5px solid var(--accent); outline-offset:2px; border-radius:4px}
+ol,ul{margin:0}
+a{color:var(--accent-2); text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:4px}
 button{font:inherit; cursor:pointer}
-input{font:inherit}
-
+input,select,textarea{font:inherit; color:var(--ink)}
 .wrap{width:var(--w); margin-inline:auto}
-.stack{display:flex; flex-direction:column}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
 
-/* ---------- masthead ---------- */
-.masthead{
+/* ============ header + tabs ============ */
+header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(12px);
   border-bottom:1px solid var(--line);
-  background:var(--surface);
-  padding-block:2.6rem 2.2rem;
 }
-.eyebrow{
-  font-family:var(--f-data); font-size:.74rem; font-weight:700;
-  letter-spacing:.14em; color:var(--accent); text-transform:none;
-  display:flex; align-items:center; gap:.6rem;
+.brandbar{
+  display:flex; align-items:center; gap:1rem;
+  padding-block:.85rem; min-height:3.4rem;
 }
-.eyebrow::after{content:""; flex:1; height:1px; background:var(--line)}
-.masthead h1{font-size:clamp(2.2rem, 6vw, 3.4rem); font-weight:900; letter-spacing:-.015em; margin-block:.7rem .6rem}
-.dek{font-size:clamp(1.05rem,2.4vw,1.22rem); color:var(--ink-2); max-width:56ch}
-.dek strong{color:var(--ink); font-weight:700}
-.masthead-foot{
-  display:flex; flex-wrap:wrap; gap:.5rem .9rem; align-items:center;
-  margin-top:1.4rem; font-size:.86rem; color:var(--ink-3); font-family:var(--f-data);
+.brand{display:flex; align-items:center; gap:.6rem; text-decoration:none; color:inherit}
+.brand svg{width:1.65rem; height:1.65rem; flex:0 0 auto; display:block}
+.brand b{font-family:var(--f-display); font-size:1.18rem; font-weight:700; letter-spacing:-.01em}
+.brandbar .grow{flex:1}
+.hdr-total{
+  display:none; align-items:baseline; gap:.4rem;
+  font-family:var(--f-data); white-space:nowrap;
 }
-.src-tag{
-  background:var(--surface-2); border:1px solid var(--line);
-  padding:.28rem .7rem; border-radius:100px;
-}
-
-/* ---------- generic section ---------- */
-section{padding-block:3rem}
-section + section{border-top:1px solid var(--line)}
-.sec-head{margin-bottom:1.6rem; max-width:64ch}
-.sec-num{
-  font-family:var(--f-data); font-size:.78rem; font-weight:700; color:var(--accent);
-  letter-spacing:.1em; display:block; margin-bottom:.4rem;
-}
-.sec-head h2{font-size:clamp(1.5rem,3.6vw,2.05rem); font-weight:700; letter-spacing:-.01em}
-.sec-head p{color:var(--ink-2); margin-top:.6rem; font-size:1.02rem}
-
-.card{
-  background:var(--surface); border:1px solid var(--line);
-  border-radius:var(--r); padding:1.4rem 1.5rem;
+.hdr-total.on{display:flex}
+.hdr-total .l{font-size:.74rem; color:var(--ink-3)}
+.hdr-total .v{font-size:1rem; font-weight:700; font-variant-numeric:tabular-nums}
+.hdr-total .f{
+  font-size:.72rem; font-weight:700; color:#fff; background:var(--alarm);
+  border-radius:100px; padding:.1rem .45rem; margin-inline-start:.15rem;
 }
 
-/* ---------- how it works ---------- */
-.steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1rem}
-.step{
+.tabs{
+  display:flex; gap:.15rem; overflow-x:auto; scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{
+  flex:0 0 auto; background:none; border:0; padding:.65rem .8rem;
+  font-size:.95rem; font-weight:600; color:var(--ink-3);
+  border-bottom:2px solid transparent; white-space:nowrap;
+  transition:color .12s ease, border-color .12s ease;
+}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--accent-2); border-bottom-color:var(--accent)}
+
+/* ============ panels ============ */
+main{padding-block:2.2rem 4rem; min-height:60vh}
+[role="tabpanel"][hidden]{display:none}
+.lede{margin-bottom:1.6rem; max-width:62ch}
+.lede h1{font-family:var(--f-display); font-size:clamp(1.6rem,4.4vw,2.15rem); letter-spacing:-.015em}
+.lede h2{font-family:var(--f-display); font-size:clamp(1.45rem,3.8vw,1.85rem); letter-spacing:-.012em}
+.lede p{color:var(--ink-2); margin-top:.5rem; font-size:1.02rem}
+
+.blocks{display:flex; flex-direction:column; gap:.55rem}
+
+/* ============ accordion — the core pattern ============ */
+details.acc{
   background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
-  padding:1.25rem 1.35rem; display:flex; flex-direction:column; gap:.5rem;
 }
-.step-n{
-  font-family:var(--f-data); font-weight:700; font-size:.8rem; color:var(--surface);
-  background:var(--accent); width:1.7rem; height:1.7rem; border-radius:50%;
-  display:grid; place-items:center;
+details.acc > summary{
+  list-style:none; cursor:pointer; padding:.95rem 1.1rem;
+  display:flex; align-items:flex-start; gap:.7rem;
+  font-weight:600; font-size:1rem;
 }
-.step h3{font-size:1.1rem; font-weight:700}
-.step p{font-size:.95rem; color:var(--ink-2)}
+details.acc > summary::-webkit-details-marker{display:none}
+details.acc > summary::after{
+  content:""; flex:0 0 auto; margin-inline-start:auto; margin-top:.42rem;
+  width:.5rem; height:.5rem;
+  border-right:1.8px solid var(--ink-3); border-bottom:1.8px solid var(--ink-3);
+  transform:rotate(45deg); transition:transform .18s ease;
+}
+details.acc[open] > summary::after{transform:rotate(-135deg); margin-top:.6rem}
+details.acc > summary:hover{background:var(--surface-2); border-radius:var(--r)}
+details.acc[open] > summary{border-bottom:1px solid var(--line); border-radius:var(--r) var(--r) 0 0}
+.acc-body{padding:1rem 1.1rem 1.15rem; display:flex; flex-direction:column; gap:.7rem; color:var(--ink-2); font-size:.96rem}
+.acc-body strong{color:var(--ink); font-weight:700}
+.acc-body ol,.acc-body ul{padding-inline-start:1.2rem; display:flex; flex-direction:column; gap:.4rem}
+.sum-t{display:flex; flex-direction:column; gap:.12rem; min-width:0}
+.sum-t .s{font-size:.86rem; font-weight:400; color:var(--ink-3)}
 
-/* ---------- har habituach callout ---------- */
-.har{
-  background:var(--accent-soft); border:1px solid var(--accent);
-  border-radius:var(--r); padding:1.6rem 1.7rem;
+/* ============ steps ============ */
+.steps{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:.55rem; margin-bottom:.55rem}
+.stp{border:1px solid var(--line); border-radius:var(--r); padding:.95rem 1.05rem; background:var(--surface)}
+.stp .n{
+  font-family:var(--f-data); font-size:.7rem; font-weight:700; color:var(--accent);
+  letter-spacing:.1em; display:block; margin-bottom:.3rem;
 }
-.har h3{font-size:1.3rem; font-weight:700; margin-bottom:.5rem}
-.har > p{color:var(--ink-2); max-width:62ch}
-.har ol{margin:1.1rem 0 0; padding-inline-start:1.3rem; display:flex; flex-direction:column; gap:.55rem; color:var(--ink-2); font-size:.97rem}
-.har ol strong{color:var(--ink)}
+.stp h3{font-size:1rem}
+.stp p{font-size:.9rem; color:var(--ink-2); margin-top:.25rem}
+
+/* ============ primary callout ============ */
+.callout{
+  border:1px solid var(--line); border-radius:var(--r);
+  background:var(--accent-wash); padding:1.25rem 1.3rem; margin-bottom:.55rem;
+}
+.callout h3{font-size:1.14rem}
+.callout p{color:var(--ink-2); margin-top:.4rem; font-size:.97rem; max-width:60ch}
 .btn{
-  display:inline-flex; align-items:center; gap:.5rem;
+  display:inline-flex; align-items:center; gap:.45rem; margin-top:.9rem;
   background:var(--accent); color:#fff; border:1px solid var(--accent);
-  padding:.7rem 1.25rem; border-radius:8px; font-weight:700;
-  text-decoration:none; font-size:1rem; margin-top:1.2rem;
-  transition:filter .15s ease;
+  padding:.62rem 1.1rem; border-radius:var(--r);
+  font-weight:700; font-size:.97rem; text-decoration:none;
 }
-.btn:hover{filter:brightness(1.12)}
-:root[data-theme="dark"] .btn, :root:not([data-theme="light"]) .btn{color:#08201F}
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .btn{color:#fff}}
-.btn-ghost{
-  background:transparent; color:var(--accent-ink); border:1px solid var(--line-2);
-  font-weight:600;
+.btn:hover{background:var(--accent-2); border-color:var(--accent-2)}
+.btn.ghost{background:var(--surface); color:var(--accent-2); border-color:var(--line-2)}
+.btn.ghost:hover{background:var(--surface-2)}
+.btn.sm{padding:.45rem .8rem; font-size:.88rem; margin-top:0}
+.note{
+  font-size:.9rem; color:var(--ink-2); margin-top:.9rem;
+  padding-top:.8rem; border-top:1px solid var(--line-2);
 }
-.btn-ghost:hover{background:var(--surface-2); filter:none}
-.warnline{
-  margin-top:1.1rem; font-size:.9rem; color:var(--ink-2);
-  border-top:1px dashed var(--line-2); padding-top:.9rem;
-}
-.warnline strong{color:var(--alarm)}
+.note b{color:var(--alarm)}
+.bar-actions{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.4rem}
 
-/* ---------- rules ---------- */
-.rules{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem}
-.rule{
-  background:var(--surface); border:1px solid var(--line);
-  border-inline-start:3px solid var(--accent);
-  border-radius:var(--r); padding:1.2rem 1.35rem;
+/* ============ form ============ */
+.grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:.9rem; margin-bottom:1.5rem}
+.field{display:flex; flex-direction:column; gap:.35rem}
+.field label{font-weight:600; font-size:.94rem}
+.field .hint{font-size:.83rem; color:var(--ink-3); line-height:1.45}
+select,.txt{
+  background:var(--surface); border:1px solid var(--line-2); border-radius:var(--r);
+  padding:.55rem .65rem; width:100%;
 }
-.rule h3{font-size:1.06rem; font-weight:700; margin-bottom:.45rem}
-.rule p{font-size:.95rem; color:var(--ink-2)}
+select:hover,.txt:hover{border-color:var(--ink-3)}
 
-/* ---------- summary bar ---------- */
-.sumbar{
-  position:sticky; top:0; z-index:30;
-  background:var(--surface); border-bottom:1px solid var(--line);
-  box-shadow:var(--shadow);
-}
-.sumbar-in{
-  width:var(--w); margin-inline:auto;
-  display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1.6rem;
-  padding-block:.7rem;
-}
-.metric{display:flex; align-items:baseline; gap:.45rem}
-.metric .lbl{font-family:var(--f-data); font-size:.76rem; color:var(--ink-3); font-weight:500}
-.metric .val{font-family:var(--f-data); font-size:1.15rem; font-weight:700; font-variant-numeric:tabular-nums}
-.metric .val.alarm{color:var(--alarm)}
-.sumbar .spacer{flex:1}
-.flagcount{
-  font-family:var(--f-data); font-size:.8rem; font-weight:700;
-  padding:.25rem .7rem; border-radius:100px;
-  background:var(--surface-2); color:var(--ink-2); border:1px solid var(--line);
-}
-.flagcount.hot{background:var(--alarm-soft); color:var(--alarm); border-color:var(--alarm)}
-
-/* ---------- ledger ---------- */
-.kupa{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:1.1rem; margin-bottom:1.6rem;
-}
-.field{display:flex; flex-direction:column; gap:.45rem}
-.field > label{font-weight:700; font-size:.97rem}
-.field .help{font-size:.87rem; color:var(--ink-3)}
-select, .num{
-  background:var(--surface); color:var(--ink);
-  border:1px solid var(--line-2); border-radius:8px;
-  padding:.6rem .7rem; font:inherit; width:100%;
-}
-select{font-family:var(--f-body)}
-
-.ledger{display:flex; flex-direction:column; gap:.7rem}
-.grp-label{
-  font-family:var(--f-data); font-size:.78rem; font-weight:700; letter-spacing:.09em;
-  color:var(--ink-3); margin-top:1.5rem; padding-bottom:.4rem;
+.grp{
+  font-family:var(--f-data); font-size:.73rem; font-weight:700; letter-spacing:.08em;
+  color:var(--ink-3); margin:1.5rem 0 .55rem; padding-bottom:.4rem;
   border-bottom:1px solid var(--line);
 }
-.grp-label:first-child{margin-top:0}
+.grp:first-child{margin-top:0}
 
 .row{
-  background:var(--surface); border:1px solid var(--line);
-  border-inline-start:4px solid var(--line-2);
-  border-radius:var(--r); padding:1rem 1.15rem;
-  transition:border-color .15s ease;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+  padding:.95rem 1.1rem;
 }
-.row[data-kind="cat"]{border-inline-start-color:var(--good)}
-.row[data-kind="conv"]{border-inline-start-color:var(--accent)}
-.row[data-kind="comp"]{border-inline-start-color:var(--warn)}
-.row[data-kind="routine"]{border-inline-start-color:var(--line-2)}
-.row.on{background:var(--surface)}
-.row.off{opacity:.72}
-
-.row-head{display:flex; flex-wrap:wrap; gap:.8rem 1rem; align-items:flex-start; justify-content:space-between}
-.row-id{flex:1 1 15rem; min-width:0}
-.row-id h3{font-family:var(--f-body); font-size:1.06rem; font-weight:700; letter-spacing:0}
-.chip{
-  display:inline-block; font-family:var(--f-data); font-size:.72rem; font-weight:700;
-  padding:.15rem .55rem; border-radius:100px; margin-top:.35rem;
-  border:1px solid transparent;
+.row.on{border-color:var(--line-2); background:var(--surface)}
+.rtop{display:flex; flex-wrap:wrap; gap:.7rem .9rem; align-items:flex-start; justify-content:space-between}
+.rname{flex:1 1 14rem; min-width:0}
+.rname h3{font-size:1rem; font-weight:600}
+.tag{
+  display:inline-block; font-family:var(--f-data); font-size:.7rem; font-weight:700;
+  margin-top:.28rem; color:var(--ink-3);
 }
-.chip-cat{background:var(--good-soft); color:var(--good); border-color:var(--good)}
-.chip-conv{background:var(--accent-soft); color:var(--accent-ink); border-color:var(--accent)}
-.chip-comp{background:var(--warn-soft); color:var(--warn); border-color:var(--warn)}
-.chip-routine{background:var(--surface-2); color:var(--ink-3); border-color:var(--line-2)}
-
-.row-controls{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center}
-.seg{display:inline-flex; border:1px solid var(--line-2); border-radius:8px; overflow:hidden; background:var(--surface)}
+.tag.cat{color:var(--good)}
+.tag.conv{color:var(--accent-2)}
+.tag.comp{color:var(--warn)}
+.rctl{display:flex; flex-wrap:wrap; gap:.45rem; align-items:center}
+.seg{display:inline-flex; border:1px solid var(--line-2); border-radius:var(--r); overflow:hidden; background:var(--surface)}
 .seg button{
-  background:transparent; border:0; color:var(--ink-2);
-  padding:.48rem .8rem; font-size:.9rem; font-weight:600;
-  border-inline-start:1px solid var(--line);
+  background:none; border:0; border-inline-start:1px solid var(--line);
+  color:var(--ink-2); padding:.42rem .72rem; font-size:.88rem; font-weight:600;
 }
 .seg button:first-child{border-inline-start:0}
-.seg button[aria-pressed="true"]{background:var(--accent); color:#fff}
-:root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#08201F}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{color:#08201F}}
 .seg button:hover{background:var(--surface-2)}
-.seg button[aria-pressed="true"]:hover{background:var(--accent); filter:brightness(1.1)}
-
+.seg button[aria-pressed="true"]{background:var(--accent); color:#fff}
+.seg button[aria-pressed="true"]:hover{background:var(--accent-2)}
 .money{
-  display:inline-flex; align-items:center; gap:.35rem;
-  border:1px solid var(--line-2); border-radius:8px; padding:.3rem .55rem;
-  background:var(--surface);
+  display:inline-flex; align-items:center; gap:.3rem;
+  border:1px solid var(--line-2); border-radius:var(--r);
+  padding:.22rem .5rem; background:var(--surface);
 }
-.money span{font-family:var(--f-data); color:var(--ink-3); font-size:.9rem}
+.money.hide{display:none}
+.money span{font-family:var(--f-data); font-size:.84rem; color:var(--ink-3)}
 .money input{
-  border:0; background:transparent; color:var(--ink);
-  width:5.2rem; padding:.2rem 0; text-align:start;
+  border:0; background:none; width:5rem; padding:.18rem 0;
   font-family:var(--f-data); font-weight:700; font-variant-numeric:tabular-nums;
 }
 .money input:focus{outline:0}
-.money:focus-within{outline:2.5px solid var(--accent); outline-offset:2px}
-.money.hidden{display:none}
-.money-note{font-family:var(--f-data); font-size:.8rem; color:var(--ink-3)}
-
-details.explain{margin-top:.85rem; border-top:1px dashed var(--line); padding-top:.7rem}
-details.explain summary{
-  cursor:pointer; font-size:.9rem; font-weight:700; color:var(--accent-ink);
-  list-style:none; display:inline-flex; align-items:center; gap:.35rem;
+.money:focus-within{outline:2px solid var(--accent); outline-offset:1px}
+.rexp{margin-top:.75rem; border-top:1px solid var(--line); padding-top:.6rem}
+.rexp summary{
+  list-style:none; cursor:pointer; font-size:.88rem; font-weight:600;
+  color:var(--accent-2); display:inline-flex; align-items:center; gap:.3rem;
 }
-details.explain summary::-webkit-details-marker{display:none}
-details.explain summary::before{content:"›"; display:inline-block; transition:transform .18s ease; font-size:1.1rem; line-height:1}
-details.explain[open] summary::before{transform:rotate(90deg)}
-details.explain .body{margin-top:.6rem; font-size:.95rem; color:var(--ink-2); display:flex; flex-direction:column; gap:.5rem}
-details.explain .body strong{color:var(--ink)}
-.pricehint{
-  font-family:var(--f-data); font-size:.85rem; color:var(--ink-3);
-  background:var(--surface-2); border-radius:6px; padding:.4rem .6rem;
+.rexp summary::-webkit-details-marker{display:none}
+.rexp summary::before{content:"+"; font-size:1rem; line-height:1; width:.8rem}
+.rexp[open] summary::before{content:"–"}
+.rexp .b{margin-top:.6rem; display:flex; flex-direction:column; gap:.55rem; font-size:.93rem; color:var(--ink-2)}
+.rexp .b strong{color:var(--ink)}
+.pill{
+  font-family:var(--f-data); font-size:.82rem; color:var(--ink-2);
+  background:var(--surface-3); border-radius:6px; padding:.35rem .55rem;
 }
 
-/* ---------- findings ---------- */
+/* ============ results ============ */
+.tot{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:.55rem; margin-bottom:1.1rem}
+.tcell{border:1px solid var(--line); border-radius:var(--r); padding:.85rem .95rem; background:var(--surface)}
+.tcell .l{font-family:var(--f-data); font-size:.75rem; color:var(--ink-3)}
+.tcell .v{font-family:var(--f-data); font-size:1.5rem; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:-.02em; margin-top:.1rem}
+.tcell .s{font-size:.8rem; color:var(--ink-3); margin-top:.15rem; line-height:1.4}
+.mix{margin-bottom:1.4rem}
+.mix .cap{font-family:var(--f-data); font-size:.75rem; color:var(--ink-3); margin-bottom:.4rem}
+.mixbar{display:flex; height:.7rem; border-radius:100px; overflow:hidden; background:var(--surface-3)}
+.mixbar i{display:block}
+.mixleg{display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin-top:.55rem; font-family:var(--f-data); font-size:.82rem; color:var(--ink-2)}
+.mixleg span{display:inline-flex; align-items:center; gap:.35rem}
+.sw{width:.6rem; height:.6rem; border-radius:2px}
+
+details.find{border-inline-start-width:3px; border-inline-start-style:solid}
+details.find[data-sev="critical"]{border-inline-start-color:var(--alarm)}
+details.find[data-sev="warn"]{border-inline-start-color:var(--warn)}
+details.find[data-sev="good"]{border-inline-start-color:var(--good)}
+details.find[data-sev="info"]{border-inline-start-color:var(--line-2)}
+.sev{
+  font-family:var(--f-data); font-size:.68rem; font-weight:700; letter-spacing:.07em;
+  display:block; margin-bottom:.15rem;
+}
+details.find[data-sev="critical"] .sev{color:var(--alarm)}
+details.find[data-sev="warn"] .sev{color:var(--warn)}
+details.find[data-sev="good"] .sev{color:var(--good)}
+details.find[data-sev="info"] .sev{color:var(--ink-3)}
+.todo{margin-top:.5rem; padding-top:.65rem; border-top:1px solid var(--line)}
+.todo b{font-family:var(--f-data); font-size:.72rem; letter-spacing:.06em; color:var(--ink-3); display:block; margin-bottom:.35rem}
 .empty{
   border:1px dashed var(--line-2); border-radius:var(--r);
-  padding:2rem 1.5rem; text-align:center; color:var(--ink-3);
+  padding:2.2rem 1.4rem; text-align:center; color:var(--ink-3);
 }
-.totals{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1rem; margin-bottom:1.5rem}
-.tot{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:1.1rem 1.2rem}
-.tot .lbl{font-family:var(--f-data); font-size:.8rem; color:var(--ink-3); font-weight:500}
-.tot .val{font-family:var(--f-data); font-size:1.75rem; font-weight:700; font-variant-numeric:tabular-nums; margin-top:.2rem; letter-spacing:-.02em}
-.tot .sub{font-size:.85rem; color:var(--ink-3); margin-top:.25rem}
+.empty p{margin-bottom:1rem}
 
-.split{margin-bottom:1.5rem}
-.split h3{font-family:var(--f-body); font-size:1rem; font-weight:700; margin-bottom:.7rem}
-.bar{display:flex; height:1.6rem; border-radius:6px; overflow:hidden; border:1px solid var(--line)}
-.bar div{transition:width .3s ease}
-.bar .b-cat{background:var(--good)}
-.bar .b-conv{background:var(--accent)}
-.bar .b-comp{background:var(--warn)}
-.bar .b-routine{background:var(--line-2)}
-.legend{display:flex; flex-wrap:wrap; gap:.5rem 1.2rem; margin-top:.7rem; font-family:var(--f-data); font-size:.85rem; color:var(--ink-2)}
-.legend span{display:inline-flex; align-items:center; gap:.4rem}
-.dot{width:.7rem; height:.7rem; border-radius:3px; display:inline-block}
+/* ============ checklist ============ */
+.chk{display:flex; align-items:flex-start; gap:.6rem; width:100%}
+.chk input{margin:.3rem 0 0; width:1.05rem; height:1.05rem; accent-color:var(--accent); flex:0 0 auto}
+details.acc.q > summary{padding-inline-end:2.2rem}
 
-.findings{display:flex; flex-direction:column; gap:.9rem}
-.find{
-  background:var(--surface); border:1px solid var(--line);
-  border-inline-start:4px solid var(--ink-3); border-radius:var(--r);
-  padding:1.15rem 1.3rem;
-}
-.find[data-sev="critical"]{border-inline-start-color:var(--alarm); background:var(--alarm-soft)}
-.find[data-sev="warn"]{border-inline-start-color:var(--warn); background:var(--warn-soft)}
-.find[data-sev="good"]{border-inline-start-color:var(--good); background:var(--good-soft)}
-.find[data-sev="info"]{border-inline-start-color:var(--accent)}
-.find-sev{
-  font-family:var(--f-data); font-size:.72rem; font-weight:700; letter-spacing:.08em;
-  margin-bottom:.35rem; display:block;
-}
-.find[data-sev="critical"] .find-sev{color:var(--alarm)}
-.find[data-sev="warn"] .find-sev{color:var(--warn)}
-.find[data-sev="good"] .find-sev{color:var(--good)}
-.find[data-sev="info"] .find-sev{color:var(--accent-ink)}
-.find h3{font-family:var(--f-body); font-size:1.12rem; font-weight:700; margin-bottom:.45rem}
-.find p{font-size:.97rem; color:var(--ink-2)}
-.find .todo{
-  margin-top:.8rem; padding-top:.7rem; border-top:1px dashed var(--line-2);
-  font-size:.94rem;
-}
-.find .todo b{font-family:var(--f-data); font-size:.78rem; letter-spacing:.06em; color:var(--ink-3); display:block; margin-bottom:.35rem}
-.find .todo ol{margin:0; padding-inline-start:1.2rem; display:flex; flex-direction:column; gap:.35rem; color:var(--ink-2)}
-
-/* ---------- tools ---------- */
-.qlist{display:flex; flex-direction:column; gap:.55rem; margin-top:.4rem}
-.q{
-  display:flex; gap:.7rem; align-items:flex-start;
-  background:var(--surface); border:1px solid var(--line);
-  border-radius:8px; padding:.8rem .95rem;
-}
-.q input[type=checkbox]{margin-top:.35rem; width:1.05rem; height:1.05rem; accent-color:var(--accent); flex:0 0 auto}
-.q .qt{font-weight:600; font-size:.99rem}
-.q .qw{font-size:.89rem; color:var(--ink-3); margin-top:.15rem}
-
-.lettergrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:.9rem; margin-bottom:1.2rem}
+/* ============ letter ============ */
 textarea{
-  width:100%; min-height:22rem; background:var(--surface); color:var(--ink);
-  border:1px solid var(--line-2); border-radius:8px; padding:1rem;
-  font-family:var(--f-body); font-size:.95rem; line-height:1.7; resize:vertical;
+  width:100%; min-height:21rem; background:var(--surface-2);
+  border:1px solid var(--line-2); border-radius:var(--r); padding:1rem;
+  font-size:.92rem; line-height:1.7; resize:vertical;
 }
-.toolbar{display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.9rem}
-.toolbar .btn{margin-top:0}
+.flag{
+  border:1px solid var(--line); border-inline-start:3px solid var(--line-2);
+  border-radius:var(--r); padding:.9rem 1.05rem; margin-bottom:.55rem; background:var(--surface);
+}
+.flag[data-sev="good"]{border-inline-start-color:var(--good)}
+.flag[data-sev="warn"]{border-inline-start-color:var(--warn)}
+.flag h4{font-size:.99rem}
+.flag p{font-size:.92rem; color:var(--ink-2); margin-top:.25rem}
 
-/* ---------- glossary ---------- */
-.gloss{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:.8rem}
-.gterm{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:1rem 1.15rem}
-.gterm dt{font-weight:700; font-size:1rem; margin-bottom:.3rem}
-.gterm dd{margin:0; font-size:.93rem; color:var(--ink-2)}
-
-/* ---------- footer ---------- */
-footer{
-  border-top:1px solid var(--line); background:var(--surface);
-  padding-block:2.4rem; font-size:.9rem; color:var(--ink-3);
-}
-footer h4{font-family:var(--f-data); font-size:.78rem; letter-spacing:.09em; color:var(--ink-2); margin-bottom:.6rem}
-footer ul{margin:0; padding-inline-start:1.1rem; display:flex; flex-direction:column; gap:.35rem}
-.foot-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.6rem}
-.disclaim{
-  margin-top:1.8rem; padding-top:1.2rem; border-top:1px solid var(--line);
-  max-width:70ch; line-height:1.6;
-}
+/* ============ footer ============ */
+footer{border-top:1px solid var(--line); background:var(--surface-2); padding-block:2rem; margin-top:3rem}
+footer .cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.4rem}
+footer h4{font-family:var(--f-data); font-size:.73rem; letter-spacing:.08em; color:var(--ink-3); margin-bottom:.5rem}
+footer ul{padding-inline-start:1.05rem; display:flex; flex-direction:column; gap:.3rem; font-size:.89rem; color:var(--ink-2)}
+.legal{margin-top:1.5rem; font-size:.85rem; color:var(--ink-3); line-height:1.6; max-width:74ch}
 
 .toast{
   position:fixed; inset-block-end:1.2rem; inset-inline-start:50%;
-  transform:translateX(50%) translateY(150%);
-  background:var(--ink); color:var(--paper);
-  padding:.7rem 1.3rem; border-radius:100px; font-weight:700; font-size:.93rem;
-  z-index:100; transition:transform .28s cubic-bezier(.2,.8,.3,1);
-  box-shadow:var(--shadow); pointer-events:none;
+  transform:translateX(50%) translateY(160%);
+  background:var(--ink); color:#fff; padding:.62rem 1.2rem; border-radius:100px;
+  font-weight:600; font-size:.9rem; z-index:100; pointer-events:none;
+  transition:transform .26s cubic-bezier(.2,.8,.3,1);
 }
 .toast.show{transform:translateX(50%) translateY(0)}
 
-@media (prefers-reduced-motion: reduce){
-  *{animation:none !important; transition:none !important}
-}
-
-@media (max-width:640px){
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+@media (max-width:600px){
   body{font-size:16px}
-  :root{--w:min(1080px, 100% - 1.6rem)}
-  .row-controls{width:100%}
+  :root{--w:min(940px, 100% - 1.5rem)}
+  .rctl{width:100%}
   .seg{flex:1}
-  .seg button{flex:1; text-align:center; padding-inline:.4rem}
-  .sumbar-in{gap:.4rem .9rem; padding-block:.55rem}
-  .metric .val{font-size:1rem}
+  .seg button{flex:1; text-align:center; padding-inline:.35rem}
+  .brand b{font-size:1.05rem}
 }
-
 @media print{
-  .sumbar, .toolbar, .har .btn, .no-print{display:none !important}
-  body{background:#fff; color:#000; font-size:11pt}
-  section{padding-block:1.2rem; break-inside:avoid}
-  .row, .find, .step, .tot{break-inside:avoid}
-  details.explain{display:none}
-  .find[data-sev]{background:#fff !important}
+  header,.tabs,.bar-actions,.btn,.toast{display:none!important}
+  [role="tabpanel"][hidden]{display:block!important}
+  details{open:true}
+  details > summary::after{display:none}
+  .acc-body,.rexp .b{display:block!important}
+  body{font-size:11pt}
+  .row,.tcell,details.acc{break-inside:avoid}
 }
 </style>
 </head>
 <body>
-<div class="masthead">
+
+<header>
   <div class="wrap">
-    <span class="eyebrow">בדיקה עצמית · ביטוחי בריאות בישראל</span>
-    <h1>תיק הביטוח שלי</h1>
-    <p class="dek">משק בית ישראלי ממוצע משלם מאות שקלים בחודש על ביטוחי בריאות — ורוב האנשים לא באמת יודעים על מה. <strong>הכלי הזה הופך את מה שאתם משלמים למספר אחד ולרשימת ממצאים</strong>, בשפה פשוטה, בלי סוכן בחדר.</p>
-    <div class="masthead-foot">
-      <span class="src-tag">הכל נשאר בדפדפן שלכם</span>
-      <span class="src-tag">בלי הרשמה</span>
-      <span class="src-tag">מבוסס על "מתחת לבלטות", כאן 11</span>
+    <div class="brandbar">
+      <a class="brand" href="#start">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0E6E6B"/><path d="M32 12l16 7v13c0 11-6.8 18.6-16 21-9.2-2.4-16-10-16-21V19l16-7z" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/><path d="M24 32.5l6 6 11-12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <b>תיק הביטוח שלי</b>
+      </a>
+      <span class="grow"></span>
+      <div class="hdr-total" id="hdrTotal">
+        <span class="l">בחודש</span><span class="v" id="hdrVal">₪0</span><span class="f" id="hdrFlags" hidden>0</span>
+      </div>
     </div>
+    <div class="tabs" role="tablist" aria-label="ניווט באתר">
+      <button role="tab" id="t-start"  aria-controls="p-start"  aria-selected="true">התחלה</button>
+      <button role="tab" id="t-check"  aria-controls="p-check"  aria-selected="false" tabindex="-1">הבדיקה</button>
+      <button role="tab" id="t-result" aria-controls="p-result" aria-selected="false" tabindex="-1">הממצאים</button>
+      <button role="tab" id="t-agent"  aria-controls="p-agent"  aria-selected="false" tabindex="-1">שאלות לסוכן</button>
+      <button role="tab" id="t-appeal" aria-controls="p-appeal" aria-selected="false" tabindex="-1">ערעור על דחייה</button>
+      <button role="tab" id="t-gloss"  aria-controls="p-gloss"  aria-selected="false" tabindex="-1">מילון</button>
+      <button role="tab" id="t-legal"  aria-controls="p-legal"  aria-selected="false" tabindex="-1">משפטי</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= START ================= -->
+<div role="tabpanel" id="p-start" aria-labelledby="t-start" tabindex="0">
+  <div class="lede">
+    <h1>כמה אתם משלמים על ביטוח, ועל מה בדיוק?</h1>
+    <p>רוב האנשים לא יודעים לענות. הכלי הזה הופך את מה שאתם משלמים למספר אחד ולרשימת ממצאים — בלי סוכן בחדר, בלי הרשמה, והכל נשאר בדפדפן שלכם.</p>
+  </div>
+
+  <div class="steps">
+    <div class="stp"><span class="n">שלב 1</span><h3>לגלות מה יש לכם</h3><p>אתר ממשלתי חינמי שמרכז את כל הפוליסות שלכם במקום אחד.</p></div>
+    <div class="stp"><span class="n">שלב 2</span><h3>למלא את הבדיקה</h3><p>מסמנים מה יש וכמה זה עולה. מותר לסמן "לא יודע".</p></div>
+    <div class="stp"><span class="n">שלב 3</span><h3>לקרוא את הממצאים</h3><p>כפל ביטוח, כיסויים חסרים, ולאן הולך הכסף.</p></div>
+  </div>
+
+  <div class="callout">
+    <h3>הצעד הראשון: הר הביטוח</h3>
+    <p>שירות ממשלתי חינמי של רשות שוק ההון. מציג את כל פוליסות הביטוח שלכם מכל החברות במקום אחד, כולל כמה אתם משלמים על כל אחת.</p>
+    <a class="btn" href="https://harb.cma.gov.il/" target="_blank" rel="noopener noreferrer">כניסה להר הביטוח הרשמי ↗</a>
+    <p class="note"><b>שימו לב:</b> יש אתרים מסחריים שמחקים את הר הביטוח כדי לאסוף פרטים. הכתובת הרשמית היחידה היא harb.cma.gov.il — עם סיומת gov.il.</p>
+  </div>
+
+  <div class="blocks">
+    <details class="acc">
+      <summary><span class="sum-t">איך נכנסים להר הביטוח, שלב אחר שלב<span class="s">מה צריך להביא ומה עושים עם התוצאה</span></span></summary>
+      <div class="acc-body">
+        <ol>
+          <li><strong>מה צריך:</strong> תעודת זהות ואמצעי הזדהות ממשלתי — כרטיס חכם, אפליקציית ההזדהות הממשלתית, או הזדהות בפרטים אישיים.</li>
+          <li><strong>מה תראו:</strong> רשימת כל הפוליסות שלכם לפי סוג — בריאות, חיים, רכב, דירה. לכל אחת מופיעים שם החברה, סוג הכיסוי והפרמיה החודשית.</li>
+          <li><strong>מה לרשום:</strong> לכל שורה בקטגוריית הבריאות — את שם הכיסוי ואת הסכום החודשי.</li>
+          <li><strong>עם הרשימה הזו</strong> חזרו לכאן ועברו לטאב "הבדיקה".</li>
+          <li><strong>אם משהו לא ברור:</strong> מותר לכם לבקש מכל חברת ביטוח עותק של הפוליסה המלאה ודף פירוט כיסויים, בחינם.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary><span class="sum-t">כלל 1 — ביטוח עושים מפני קטסטרופה<span class="s">השאלה הנכונה היא לא "כמה זה עולה"</span></span></summary>
+      <div class="acc-body">
+        <p>ביטוח נועד להגן מפני אירוע שיהרוס אתכם כלכלית — לא לכסות הוצאה שאתם יכולים לספוג בעצמכם.</p>
+        <p>השאלה הנכונה לפני כל כיסוי היא <strong>"כמה זה יעלה לי אם זה יקרה ואין לי את זה"</strong>, ולא "כמה הביטוח עולה". אם התשובה היא סכום שתסתדרו איתו — זה לא מקרה לביטוח.</p>
+        <p>מכאן נובע דבר שנשמע הפוך: <strong>הכיסויים החשובים ביותר הם גם הזולים ביותר</strong>, כי הם מבטחים אירועים נדירים. הכיסויים היקרים מבטחים דווקא את מה שקורה הרבה — ולכן הם עולים.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary><span class="sum-t">כלל 2 — בדקו אם יש לכם כפל ביטוח<span class="s">לשלם פעמיים ולקבל פעם אחת</span></span></summary>
+      <div class="acc-body">
+        <p>כפל ביטוח הוא מצב שבו אתם משלמים על שני כיסויים לאותו אירוע — אבל תקבלו רק פעם אחת.</p>
+        <p>הדוגמה הנפוצה: ביטוח משלים בקופת החולים <em>וגם</em> פוליסת ניתוחים פרטית. הניתוח נעשה פעם אחת, גם אם ביטחתם אותו פעמיים. זה המקום שבו יושב רוב הכסף המיותר בתיק הביטוח הישראלי.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary><span class="sum-t">כלל 3 — אל תוותרו על תביעה שנדחתה<span class="s">חלק מהדחיות מניחות שלא תילחמו</span></span></summary>
+      <div class="acc-body">
+        <p>תביעות נדחות לעיתים בהנחה שרוב האנשים לא יערערו. הערעור עצמו לא עולה כסף, וגם התלונה לרגולטור חינמית.</p>
+        <p>בטאב "ערעור על דחייה" יש מחולל שמייצר מכתב מסודר, כולל ההגנה החוקית שרלוונטית למקרה שלכם.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary><span class="sum-t">על מה הכלי הזה מבוסס<span class="s">מקורות, ומה הוא לא</span></span></summary>
+      <div class="acc-body">
+        <p>המסגרת המקצועית והנתונים המסומנים באתר כ"מהפרק" לקוחים מהתוכנית <strong>"מתחת לבלטות"</strong> (עונה 2, פרק 6 — ביטוחי בריאות) עם שאול אמסטרדמסקי, כאן 11, אוגוסט 2026.</p>
+        <p>הפרטים הרגולטוריים אומתו מול המקורות הרשמיים: <strong>רשות שוק ההון, ביטוח וחיסכון</strong>, הר הביטוח, וחוק חוזה הביטוח.</p>
+        <p><strong>מה זה לא:</strong> לא ייעוץ ביטוחי, לא ייעוץ פנסיוני ולא ייעוץ משפטי. אין מאחורי הכלי בעל רישיון, והוא לא מכיר את מצבכם הרפואי או המשפחתי.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="bar-actions">
+    <button class="btn" type="button" data-go="check">להתחיל את הבדיקה ←</button>
   </div>
 </div>
 
-<div class="sumbar no-print">
-  <div class="sumbar-in">
-    <div class="metric"><span class="lbl">בחודש</span><span class="val" id="bar-month">₪0</span></div>
-    <div class="metric"><span class="lbl">בשנה</span><span class="val" id="bar-year">₪0</span></div>
-    <div class="spacer"></div>
-    <span class="flagcount" id="bar-flags">מלאו את הטבלה למטה</span>
+<!-- ================= CHECK ================= -->
+<div role="tabpanel" id="p-check" aria-labelledby="t-check" tabindex="0" hidden>
+  <div class="lede">
+    <h2>מה יש לכם היום</h2>
+    <p>מלאו רק את מה שאתם יודעים. בכל שורה יש הסבר שנפתח בלחיצה. הנתונים נשמרים בדפדפן שלכם בלבד.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="field">
+      <label for="kupa">קופת החולים</label>
+      <select id="kupa"><option value="">— בחרו —</option><option>כללית</option><option>מכבי</option><option>מאוחדת</option><option>לאומית</option></select>
+      <span class="hint">סל הבריאות הבסיסי זהה בכל הקופות.</span>
+    </div>
+    <div class="field">
+      <label for="shban">ביטוח משלים בקופה (שב"ן)</label>
+      <select id="shban"><option value="">— בחרו —</option><option value="yes">יש לי</option><option value="no">אין לי</option><option value="unknown">לא יודע</option></select>
+      <span class="hint">"מושלם"/"פלטינום" בכללית · "כסף"/"זהב"/"שלי" במכבי · "עדיף"/"שיא" במאוחדת · "כסף"/"זהב" בלאומית.</span>
+    </div>
+    <div class="field">
+      <label for="shbanCost">עלות השב"ן בחודש</label>
+      <div class="money" style="width:100%"><span>₪</span><input type="number" id="shbanCost" min="0" step="1" placeholder="0" style="width:100%"></div>
+      <span class="hint">לכל המשפחה, כפי שמופיע בחיוב מהקופה.</span>
+    </div>
+    <div class="field">
+      <label for="deps">יש מי שתלוי בהכנסה שלכם?</label>
+      <select id="deps"><option value="">— בחרו —</option><option value="yes">כן</option><option value="no">לא</option></select>
+      <span class="hint">בן/בת זוג, ילדים או משכנתה. משנה את התשובה לגבי ביטוח חיים.</span>
+    </div>
+  </div>
+
+  <div id="ledger"></div>
+
+  <div class="bar-actions">
+    <button class="btn" type="button" data-go="result">לראות את הממצאים ←</button>
+    <button class="btn ghost" type="button" id="btnReset">איפוס</button>
   </div>
 </div>
 
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-num">איך זה עובד</span>
-      <h2>שלושה צעדים, בערך עשר דקות</h2>
-      <p>אין צורך בידע מוקדם. כל מונח מקצועי שמופיע כאן מוסבר במקום, ויש מילון מונחים מלא בתחתית הדף.</p>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <span class="step-n">1</span>
-        <h3>לגלות מה יש לכם</h3>
-        <p>רוב האנשים לא יודעים אילו ביטוחים הם קנו. יש אתר ממשלתי רשמי וחינמי שמראה את הכל במקום אחד — הוא הצעד הראשון.</p>
-      </div>
-      <div class="step">
-        <span class="step-n">2</span>
-        <h3>למלא את הטבלה</h3>
-        <p>מסמנים מה יש לכם וכמה זה עולה בחודש. אפשר לסמן "לא יודע" — זה מצב לגיטימי, והכלי יגיד לכם מה לבדוק.</p>
-      </div>
-      <div class="step">
-        <span class="step-n">3</span>
-        <h3>לקרוא את הממצאים</h3>
-        <p>הדף מסמן כפל ביטוח, כיסויים חסרים, וכמה מהכסף שלכם הולך להגנה אמיתית לעומת פיצוי ונוחות.</p>
-      </div>
-    </div>
+<!-- ================= RESULT ================= -->
+<div role="tabpanel" id="p-result" aria-labelledby="t-result" tabindex="0" hidden>
+  <div class="lede">
+    <h2>הממצאים שלכם</h2>
+    <p>כל ממצא נפתח בלחיצה ומסביר מה עושים איתו בפועל.</p>
   </div>
-</section>
+  <div id="results"></div>
+</div>
 
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-num">צעד 1</span>
-      <h2>קודם כל — תגלו מה בכלל יש לכם</h2>
-      <p>אי אפשר להחליט על תיק ביטוח בלי לראות אותו. למדינה יש מאגר שמרכז את כל הפוליסות שלכם מכל חברות הביטוח, כולל כמה אתם משלמים על כל אחת.</p>
-    </div>
-    <div class="har">
-      <h3>הר הביטוח — האתר הרשמי של רשות שוק ההון</h3>
-      <p>שירות ממשלתי חינמי. מציג את כל פוליסות הביטוח וכתבי השירות שלכם מכל החברות במקום אחד, עם הפרמיה שאתם משלמים על כל אחת.</p>
-      <ol>
-        <li><strong>מה צריך כדי להיכנס:</strong> תעודת זהות, ואמצעי הזדהות ממשלתי — כרטיס חכם, אפליקציית ההזדהות הממשלתית, או הזדהות באמצעות פרטים אישיים.</li>
-        <li><strong>מה תראו:</strong> רשימה של כל הפוליסות שלכם, מחולקת לפי סוג — בריאות, חיים, רכב, דירה. לכל פוליסה מופיעים שם החברה, סוג הכיסוי והפרמיה החודשית.</li>
-        <li><strong>מה לעשות עם זה:</strong> רשמו לעצמכם את שם הכיסוי והסכום החודשי של כל שורה בקטגוריית הבריאות. עם הרשימה הזו חזרו לכאן ומלאו את הטבלה בצעד הבא.</li>
-        <li><strong>אם משהו לא ברור:</strong> אתם רשאים לבקש מכל חברת ביטוח עותק של הפוליסה המלאה ודף פירוט כיסויים. זו זכות שלכם, והבקשה לא עולה כסף.</li>
-      </ol>
-      <a class="btn" href="https://harb.cma.gov.il/" target="_blank" rel="noopener noreferrer">מעבר להר הביטוח הרשמי ↗</a>
-      <p class="warnline"><strong>שימו לב:</strong> קיימים אתרים מסחריים שמחקים את הר הביטוח כדי לאסוף פרטים ולהעביר אתכם לסוכן. הכתובת הרשמית היחידה היא <b>harb.cma.gov.il</b> — סיומת gov.il. אל תמסרו פרטים באף אתר אחר שמציג את עצמו כ"הר הביטוח".</p>
-    </div>
+<!-- ================= AGENT ================= -->
+<div role="tabpanel" id="p-agent" aria-labelledby="t-agent" tabindex="0" hidden>
+  <div class="lede">
+    <h2>שאלות לשאול לפני שחותמים</h2>
+    <p>סמנו תוך כדי השיחה. כל שאלה נפתחת ומסבירה למה היא חשובה.</p>
   </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-num">הכלל המנחה</span>
-      <h2>שלושה כללי אצבע לפני שממלאים</h2>
-      <p>אלה שלושת הכללים שהפרק מציג. הם קובעים איך הכלי מסווג ומדרג כל כיסוי בטבלה.</p>
-    </div>
-    <div class="rules">
-      <div class="rule">
-        <h3>ביטוח עושים מפני קטסטרופה</h3>
-        <p>ביטוח נועד להגן מפני אירוע שיהרוס אתכם כלכלית — לא לכסות הוצאה שאתם יכולים לספוג. השאלה הנכונה היא "כמה זה יעלה לי אם אין לי את זה", לא "כמה זה עולה".</p>
+  <div class="blocks" id="questions"></div>
+  <div class="blocks" style="margin-top:.55rem">
+    <details class="acc">
+      <summary><span class="sum-t">הכלל החשוב מכולם: לא חותמים בפגישה<span class="s">המשפט היחיד שמשנה את התוצאה</span></span></summary>
+      <div class="acc-body">
+        <p>בקשו את ההצעה בכתב, קחו אותה הביתה, ותנו לעצמכם לפחות 24 שעות.</p>
+        <p><strong>הצעה טובה תישאר טובה גם מחר.</strong> סוכן שמסרב להעביר בכתב, או שמפעיל לחץ לסגור עכשיו — זו כבר התשובה שלכם.</p>
       </div>
-      <div class="rule">
-        <h3>בדקו אם יש לכם כפל ביטוח</h3>
-        <p>כפל ביטוח הוא מצב שבו אתם משלמים על שני כיסויים לאותו דבר — אבל תקבלו רק פעם אחת. הניתוח נעשה פעם אחת, גם אם ביטחתם אותו פעמיים.</p>
-      </div>
-      <div class="rule">
-        <h3>אל תוותרו על תביעה</h3>
-        <p>חלק מהתביעות נדחות בהנחה שלא תילחמו. יש לכם זכות לערער, ויש רגולטור שאפשר להתלונן אליו בחינם. בהמשך הדף יש מחולל מכתב ערעור.</p>
-      </div>
-    </div>
+    </details>
   </div>
-</section>
+  <div class="bar-actions"><button class="btn ghost" type="button" id="btnPrintQ">הדפסה</button></div>
+</div>
 
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-num">צעד 2</span>
-      <h2>מה יש לכם היום</h2>
-      <p>מלאו רק את מה שאתם יודעים. כל שורה כוללת הסבר "מה זה" בשפה פשוטה — פתחו אותו אם המונח לא מוכר לכם. הנתונים נשמרים בדפדפן שלכם בלבד ולא נשלחים לשום מקום.</p>
-    </div>
-
-    <div class="kupa">
-      <div class="field">
-        <label for="kupa">קופת החולים שלכם</label>
-        <select id="kupa">
-          <option value="">— בחרו —</option>
-          <option>כללית</option>
-          <option>מכבי</option>
-          <option>מאוחדת</option>
-          <option>לאומית</option>
-        </select>
-        <span class="help">כל תושב רשום באחת מארבע הקופות. סל הבריאות הבסיסי זהה בכולן.</span>
-      </div>
-      <div class="field">
-        <label for="shban">הביטוח המשלים של הקופה (שב"ן)</label>
-        <select id="shban">
-          <option value="">— בחרו —</option>
-          <option value="yes">יש לי ביטוח משלים בקופה</option>
-          <option value="no">אין לי</option>
-          <option value="unknown">לא יודע</option>
-        </select>
-        <span class="help">זה "מושלם"/"פלטינום" בכללית, "כסף"/"זהב"/"שלי" במכבי, "עדיף"/"שיא" במאוחדת, "כסף"/"זהב" בלאומית.</span>
-      </div>
-      <div class="field">
-        <label for="shbanCost">כמה עולה השב"ן בחודש</label>
-        <div class="money" style="width:100%">
-          <span>₪</span><input type="number" id="shbanCost" min="0" step="1" placeholder="0" style="width:100%">
-        </div>
-        <span class="help">לכל המשפחה. מופיע בחיוב החודשי מהקופה.</span>
-      </div>
-      <div class="field">
-        <label for="deps">יש מי שתלוי בהכנסה שלכם?</label>
-        <select id="deps">
-          <option value="">— בחרו —</option>
-          <option value="yes">כן — בן/בת זוג, ילדים או משכנתה</option>
-          <option value="no">לא</option>
-        </select>
-        <span class="help">משנה לגמרי את התשובה לגבי ביטוח חיים.</span>
-      </div>
-    </div>
-
-    <div class="ledger" id="ledger"></div>
-
-    <div class="toolbar no-print">
-      <button class="btn btn-ghost" id="btn-reset" type="button">איפוס הטופס</button>
-      <button class="btn btn-ghost" id="btn-print" type="button">הדפסה / שמירה כ־PDF</button>
-    </div>
+<!-- ================= APPEAL ================= -->
+<div role="tabpanel" id="p-appeal" aria-labelledby="t-appeal" tabindex="0" hidden>
+  <div class="lede">
+    <h2>התביעה שלכם נדחתה?</h2>
+    <p>מלאו את הפרטים והמכתב ייבנה אוטומטית, כולל ההגנה החוקית שמתאימה למקרה שלכם.</p>
   </div>
-</section>
 
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-num">צעד 3</span>
-      <h2>הממצאים שלכם</h2>
-      <p>מתעדכן אוטומטית תוך כדי המילוי. כל ממצא כולל הסבר למה הוא עלה ומה עושים איתו בפועל.</p>
-    </div>
-    <div id="results"></div>
+  <div class="grid2">
+    <div class="field"><label for="l-name">שם מלא</label><input class="txt" type="text" id="l-name" placeholder="ישראל ישראלי"></div>
+    <div class="field"><label for="l-id">תעודת זהות</label><input class="txt" type="text" id="l-id" inputmode="numeric" placeholder="000000000"></div>
+    <div class="field"><label for="l-co">חברת הביטוח</label><input class="txt" type="text" id="l-co" placeholder="שם החברה"></div>
+    <div class="field"><label for="l-pol">מספר פוליסה</label><input class="txt" type="text" id="l-pol" placeholder="מופיע בהר הביטוח"></div>
+    <div class="field"><label for="l-start">תאריך תחילת הפוליסה</label><input class="txt" type="date" id="l-start"></div>
+    <div class="field"><label for="l-event">תאריך האירוע הביטוחי</label><input class="txt" type="date" id="l-event"></div>
+    <div class="field"><label for="l-deny">תאריך מכתב הדחייה</label><input class="txt" type="date" id="l-deny"></div>
+    <div class="field"><label for="l-reason">הנימוק שניתן לדחייה</label><input class="txt" type="text" id="l-reason" placeholder="לדוגמה: אי גילוי מידע רפואי"></div>
   </div>
-</section>
 
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-num">כלי 1</span>
-      <h2>שאלות לשאול לפני שחותמים</h2>
-      <p>שיחת מכירה של ביטוח בנויה על רגש ועל לחץ זמן. הדרך היחידה לצאת ממנה עם החלטה שקולה היא להגיע עם רשימת שאלות. סמנו תוך כדי השיחה, או הדפיסו וקחו איתכם.</p>
-    </div>
-    <div class="card">
-      <div class="qlist" id="questions"></div>
-      <p class="warnline" style="margin-top:1.3rem"><strong>הכלל החשוב ביותר:</strong> אל תחתמו בפגישה עצמה. בקשו את ההצעה בכתב, קחו אותה הביתה, ותנו לעצמכם לפחות 24 שעות. הצעה טובה תישאר טובה גם מחר. סוכן שמסרב להעביר בכתב, או שמפעיל לחץ לסגור עכשיו — זו התשובה שלכם.</p>
-    </div>
+  <div id="letterNote"></div>
+  <textarea id="letter" readonly aria-label="נוסח מכתב הערעור"></textarea>
+  <div class="bar-actions">
+    <button class="btn" type="button" id="btnCopyLetter">העתקת המכתב</button>
+    <a class="btn ghost" href="https://pe.cma.gov.il/sp/sp" target="_blank" rel="noopener noreferrer">הגשת תלונה לרשות שוק ההון ↗</a>
   </div>
-</section>
 
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-num">כלי 2</span>
-      <h2>התביעה שלכם נדחתה? מחולל מכתב ערעור</h2>
-      <p>חלק מהדחיות מסתמכות על כך שרוב האנשים לא מערערים. מילוי הפרטים כאן מייצר מכתב ערעור מסודר, כולל ההגנה החוקית שרלוונטית למקרה שלכם.</p>
-    </div>
-    <div class="card">
-      <div class="lettergrid">
-        <div class="field"><label for="l-name">שם מלא</label><input class="num" type="text" id="l-name" placeholder="ישראל ישראלי"></div>
-        <div class="field"><label for="l-id">תעודת זהות</label><input class="num" type="text" id="l-id" placeholder="000000000" inputmode="numeric"></div>
-        <div class="field"><label for="l-co">שם חברת הביטוח</label><input class="num" type="text" id="l-co" placeholder="לדוגמה: הראל"></div>
-        <div class="field"><label for="l-pol">מספר פוליסה</label><input class="num" type="text" id="l-pol" placeholder="מופיע בהר הביטוח"></div>
-        <div class="field"><label for="l-start">תאריך תחילת הפוליסה</label><input class="num" type="date" id="l-start"></div>
-        <div class="field"><label for="l-event">תאריך האירוע הביטוחי</label><input class="num" type="date" id="l-event"></div>
-        <div class="field"><label for="l-deny">תאריך מכתב הדחייה</label><input class="num" type="date" id="l-deny"></div>
-        <div class="field"><label for="l-reason">הנימוק שהחברה נתנה לדחייה</label><input class="num" type="text" id="l-reason" placeholder="לדוגמה: אי גילוי מידע רפואי"></div>
+  <div class="blocks" style="margin-top:1.4rem">
+    <details class="acc">
+      <summary><span class="sum-t">מה עושים עם המכתב<span class="s">סדר הפעולות ולוחות הזמנים</span></span></summary>
+      <div class="acc-body">
+        <ol>
+          <li>שולחים ליחידת פניות הציבור של <strong>חברת הביטוח עצמה</strong>, בדואר רשום או במייל. שומרים אישור מסירה.</li>
+          <li>ממתינים <strong>30 יום</strong> לתשובה מנומקת בכתב.</li>
+          <li>אם אין תשובה או שהיא שלילית — מגישים תלונה ל<strong>רשות שוק ההון</strong>. חינם, בקישור למעלה או בטלפון ‎*3002.</li>
+          <li>בתביעות בסכומים גדולים או במקרים מורכבים — <strong>כדאי עורך דין</strong>. המכתב הזה הוא תבנית לשימוש עצמי, לא ייעוץ משפטי.</li>
+        </ol>
       </div>
-      <div id="letter-note"></div>
-      <textarea id="letter" readonly aria-label="נוסח מכתב הערעור"></textarea>
-      <div class="toolbar">
-        <button class="btn" id="btn-copy-letter" type="button">העתקת המכתב</button>
-        <a class="btn btn-ghost" href="https://pe.cma.gov.il/sp/sp" target="_blank" rel="noopener noreferrer">הגשת תלונה לרשות שוק ההון ↗</a>
+    </details>
+    <details class="acc">
+      <summary><span class="sum-t">מהי ההגנה של שלוש השנים<span class="s">סעיף 43 לחוק חוזה הביטוח</span></span></summary>
+      <div class="acc-body">
+        <p>בחלוף <strong>שלוש שנים</strong> ממועד כריתת חוזה הביטוח, חברת הביטוח אינה רשאית להסתמך על אי־גילוי מידע כדי לא לשלם — <strong>אלא אם תוכיח שהמבוטח פעל בכוונת מרמה</strong>.</p>
+        <p>נטל ההוכחה מוטל על החברה, והוא נטל כבד. לכן במקרים רבים הטענה הזו לא יכולה לעמוד לאחר שלוש שנים.</p>
+        <p>אם טרם חלפו שלוש שנים, ההגנה עדיין לא חלה — אבל עדיין מותר לכם לדרוש פירוט מדויק של מה לא נמסר וכיצד זה קשור לאירוע. המחולל מנסח את המכתב אחרת בהתאם לתאריכים שהזנתם.</p>
       </div>
-      <p class="warnline"><strong>סדר הפעולות:</strong> קודם שולחים את המכתב ליחידת פניות הציבור של חברת הביטוח עצמה, בדואר רשום או במייל, ושומרים אישור מסירה. אם לא התקבלה תשובה תוך 30 יום, או שהתשובה שלילית — מגישים תלונה לרשות שוק ההון (חינם, בקישור למעלה, או בטלפון ‎*3002). לתביעות בסכומים גדולים או במקרים מורכבים — כדאי עורך דין. המכתב הזה הוא תבנית לשימוש עצמי, לא ייעוץ משפטי.</p>
-    </div>
+    </details>
   </div>
-</section>
+</div>
 
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-num">מילון</span>
-      <h2>המונחים, בעברית פשוטה</h2>
-      <p>שוק הביטוח משתמש בשפה שקשה להיכנס אליה, וזה חלק מהבעיה. אלה המונחים שתפגשו בפוליסה ובשיחה עם סוכן.</p>
-    </div>
-    <div class="gloss" id="glossary"></div>
+<!-- ================= GLOSSARY ================= -->
+<div role="tabpanel" id="p-gloss" aria-labelledby="t-gloss" tabindex="0" hidden>
+  <div class="lede">
+    <h2>מילון מונחים</h2>
+    <p>שוק הביטוח משתמש בשפה שקשה להיכנס אליה, וזה חלק מהבעיה.</p>
   </div>
-</section>
+  <div class="blocks" id="glossary"></div>
+</div>
+
+<!-- ================= LEGAL ================= -->
+<div role="tabpanel" id="p-legal" aria-labelledby="t-legal" tabindex="0" hidden>
+  <div class="lede">
+    <h2>תנאי שימוש, פרטיות ונגישות</h2>
+    <p>מפעיל האתר: עמרי ערוסי גור. עודכן לאחרונה: 31 באוגוסט 2026.</p>
+  </div>
+
+  <div class="callout">
+    <h3>הדבר החשוב ביותר בעמוד הזה</h3>
+    <p><strong>האתר אינו מספק ייעוץ ביטוחי, ייעוץ פנסיוני, ייעוץ פיננסי או ייעוץ משפטי, ואין מאחוריו בעל רישיון.</strong> הוא כלי חינוכי בלבד, שנועד לעזור לכם לארגן מידע שכבר קיים אצלכם ולשאול שאלות טובות יותר. כל החלטה על רכישה, שינוי או ביטול של כיסוי ביטוחי היא באחריותכם המלאה, ויש לקבלה מול בעל רישיון.</p>
+  </div>
+
+  <div class="blocks">
+    <details class="acc">
+      <summary><span class="sum-t">תנאי שימוש<span class="s">מהות השירות, אחריות, וסמכות שיפוט</span></span></summary>
+      <div class="acc-body">
+        <p><strong>1. הסכמה לתנאים.</strong> השימוש באתר מהווה הסכמה מלאה לתנאים אלה. מי שאינו מסכים להם מתבקש שלא לעשות שימוש באתר.</p>
+        <p><strong>2. מהות השירות.</strong> האתר הוא כלי עזר חינוכי, המאפשר למשתמש להזין נתונים שברשותו ולקבל סיווג וארגון של אותם נתונים, לצד מידע כללי על שוק ביטוחי הבריאות בישראל. האתר אינו בוחן פוליסות בפועל, אינו מתחבר לאף גורם, ואינו מכיר את מצבו הרפואי, הכלכלי או המשפחתי של המשתמש.</p>
+        <p><strong>3. אין ייעוץ ואין שיווק.</strong> אין באמור באתר משום ייעוץ ביטוחי או פנסיוני כמשמעותו בחוק הפיקוח על שירותים פיננסיים (ייעוץ, שיווק ומערכת סליקה פנסיונית), התשס"ה-2005, ואין בו ייעוץ משפטי, רפואי או פיננסי. מפעיל האתר אינו בעל רישיון ואינו קשור לאף חברת ביטוח, סוכנות או קופת חולים, ואינו מקבל תמורה, עמלה או טובת הנאה מאף גורם בשוק הביטוח.</p>
+        <p><strong>4. העדר אחריות.</strong> השימוש באתר הוא באחריות המשתמש בלבד. מפעיל האתר לא יישא באחריות לכל נזק — ישיר, עקיף, תוצאתי או אחר — שייגרם למשתמש או לצד שלישי כתוצאה מהשימוש באתר, מהסתמכות על תוכנו, או מהחלטה שהתקבלה בעקבותיו, לרבות רכישה, שינוי או ביטול של כיסוי ביטוחי.</p>
+        <p><strong>5. דיוק המידע.</strong> התוכן נמסר "כמות שהוא" (AS IS), בלא אחריות מכל סוג. שוק הביטוח, הרגולציה, סל הבריאות ותוכניות השב"ן משתנים מעת לעת, ותוכן שהיה מדויק במועד הכתיבה עלול שלא להיות מעודכן. כללי האצבע באתר הם הכללות שאינן מתאימות בהכרח לכל אדם. אין להסתמך על האתר כמקור יחיד.</p>
+        <p><strong>6. קישורים לאתרים אחרים.</strong> האתר מפנה לאתרים חיצוניים, ובהם אתרים ממשלתיים. אין למפעיל האתר שליטה על תוכנם או על זמינותם, והוא אינו אחראי להם.</p>
+        <p><strong>7. שימוש מותר.</strong> מותר לעשות באתר שימוש אישי ולא מסחרי, ולהפנות אליו. אין לעשות שימוש מסחרי בתוכן, להציגו כאילו נכתב על ידי גורם אחר, או לעשות בו שימוש באופן שעלול להטעות.</p>
+        <p><strong>8. שינויים.</strong> מפעיל האתר רשאי לשנות את התוכן ואת התנאים בכל עת, וכן להפסיק את פעילות האתר, ללא הודעה מוקדמת.</p>
+        <p><strong>9. דין וסמכות שיפוט.</strong> על תנאים אלה יחולו דיני מדינת ישראל בלבד. סמכות השיפוט הבלעדית נתונה לבתי המשפט המוסמכים במחוז תל אביב.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary><span class="sum-t">מדיניות פרטיות<span class="s">האתר אינו אוסף מידע — וזה מה שכן קורה</span></span></summary>
+      <div class="acc-body">
+        <p><strong>1. לא נאסף מידע אישי.</strong> באתר אין שרת, אין מסד נתונים, אין הרשמה ואין טפסים שנשלחים לאיש. הנתונים שאתם מזינים — כיסויים, סכומים ופרטים במחולל מכתב הערעור — <strong>אינם נשלחים לשום מקום ואינם נצפים על ידי מפעיל האתר או על ידי אף גורם אחר.</strong></p>
+        <p><strong>2. איפה הנתונים נשמרים.</strong> הנתונים נשמרים באחסון המקומי של הדפדפן שלכם (localStorage) על המכשיר שלכם בלבד, כדי שלא תאבדו את מה שמילאתם. הם נשארים שם עד שתמחקו אותם. למחיקה: לחצו "איפוס" בטאב "הבדיקה", או נקו את נתוני האתר בהגדרות הדפדפן.</p>
+        <p><strong>3. אין עוגיות מעקב ואין אנליטיקס.</strong> האתר אינו עושה שימוש בעוגיות (cookies), אינו מפעיל כלי מדידה או פרסום, ואינו מבצע פרופיילינג.</p>
+        <p><strong>4. מה כן מגיע לצדדים שלישיים.</strong> למען השקיפות המלאה, עצם טעינת העמוד כרוכה בשני דברים שאינם בשליטת מפעיל האתר:</p>
+        <ul>
+          <li><strong>אחסון.</strong> האתר מתארח בשירות GitHub Pages. כמו כל שרת אינטרנט, השירות עשוי לתעד את כתובת ה־IP ואת סוג הדפדפן של המבקרים ביומני שרת טכניים.</li>
+          <li><strong>גופנים.</strong> הגופנים נטענים משירות Google Fonts. משמעות הדבר היא שהדפדפן שלכם פונה לשרתי Google, ואלה עשויים לתעד את כתובת ה־IP שלכם.</li>
+        </ul>
+        <p>שני אלה נוגעים לטעינת העמוד בלבד. <strong>הנתונים הביטוחיים שהזנתם אינם מועברים אליהם ואינם מועברים לאף גורם.</strong></p>
+        <p><strong>5. מאגר מידע.</strong> מאחר שלא נאסף ולא נשמר מידע אישי אצל מפעיל האתר, האתר אינו מנהל מאגר מידע כהגדרתו בחוק הגנת הפרטיות, התשמ"א-1981.</p>
+        <p><strong>6. קטינים.</strong> האתר אינו מיועד לילדים ואינו אוסף מהם מידע.</p>
+        <p><strong>7. פניות בנושא פרטיות.</strong> ניתן לפנות בדוא"ל: <a href="mailto:omriarusi2002@gmail.com">omriarusi2002@gmail.com</a></p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary><span class="sum-t">הצהרת נגישות<span class="s">בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות</span></span></summary>
+      <div class="acc-body">
+        <p><strong>המחויבות שלנו.</strong> אנו רואים חשיבות במתן שירות שוויוני לכלל הציבור, ופועלים להנגיש את האתר בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013, ולעקרונות התקן הישראלי ת"י 5568 המבוסס על WCAG 2.0 ברמה AA.</p>
+        <p><strong>מה יושם באתר:</strong></p>
+        <ul>
+          <li>מבנה כותרות היררכי ותקין, וסימון סמנטי של אזורי העמוד</li>
+          <li>ניווט מלא באמצעות מקלדת, כולל מעבר בין הטאבים בחיצי המקלדת</li>
+          <li>סימון ברור וגלוי של הפוקוס בעת ניווט במקלדת</li>
+          <li>תיוג נגיש של כל שדות הטופס ושל הכפתורים, לרבות תגיות ARIA</li>
+          <li>ניגודיות צבעים מוגברת בין הטקסט לרקע</li>
+          <li>התאמה לקריאה במסכים בגדלים שונים ולהגדלת טקסט</li>
+          <li>כיבוד העדפת המערכת להפחתת אנימציות</li>
+          <li>האתר נבנה בטקסט ולא בתמונות, כך שניתן להקריאו בקורא מסך</li>
+        </ul>
+        <p><strong>מגבלות ידועות.</strong> האתר לא עבר ביקורת נגישות מקצועית חיצונית, ולכן איננו יכולים להתחייב שכל רכיב בו עומד במלוא דרישות התקן. ייתכנו רכיבים שטרם הונגשו במלואם. אנו ממשיכים לשפר את הנגישות באופן שוטף.</p>
+        <p><strong>נתקלתם בבעיה?</strong> נשמח לדעת. פנייה בנושא נגישות תטופל בהקדם, וניתן לקבל את המידע שבאתר גם בדרך חלופית.</p>
+        <p><strong>רכז הנגישות:</strong> עמרי ערוסי גור · דוא"ל: <a href="mailto:omriarusi2002@gmail.com">omriarusi2002@gmail.com</a></p>
+        <p>תאריך עדכון ההצהרה: 31 באוגוסט 2026.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary><span class="sum-t">קניין רוחני וזכויות יוצרים<span class="s">מה מותר לעשות עם התוכן</span></span></summary>
+      <div class="acc-body">
+        <p>הטקסטים, העיצוב והקוד באתר הם קניינו של מפעיל האתר, למעט תוכן ששייך לצדדים שלישיים.</p>
+        <p>המסגרת המקצועית והנתונים המסומנים באתר כ"מהפרק" מיוחסים לתוכנית "מתחת לבלטות" של תאגיד השידור הישראלי (כאן 11), ומובאים כאזכור מקור ולשם דיווח ומסירת מידע בלבד. האתר אינו קשור לתאגיד השידור הישראלי, אינו מטעמו ואינו מייצג אותו, ואינו משכפל את תוכן התוכנית.</p>
+        <p>שמות קופות החולים, חברות הביטוח והמוצרים המוזכרים באתר הם סימני מסחר של בעליהם, ומוזכרים לצורכי זיהוי בלבד. אין באזכורם משום המלצה, שיוך או קשר עסקי.</p>
+        <p>מצאתם באתר תוכן שלדעתכם פוגע בזכויותיכם? פנו אלינו ונטפל בכך.</p>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary><span class="sum-t">יצירת קשר<span class="s">תיקונים, טעויות והצעות</span></span></summary>
+      <div class="acc-body">
+        <p>האתר מתוחזק על ידי אדם אחד, ומידע בשוק הביטוח משתנה. אם מצאתם אי־דיוק, נתון שהתיישן או ניסוח מטעה — זו הדרך הטובה ביותר לשפר את האתר.</p>
+        <p><strong>דוא"ל:</strong> <a href="mailto:omriarusi2002@gmail.com">omriarusi2002@gmail.com</a></p>
+        <p>שימו לב: לא נוכל להשיב לפניות המבקשות ייעוץ אישי לגבי תיק ביטוח ספציפי, מכיוון שאיננו בעלי רישיון ואיננו רשאים לייעץ.</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+</main>
 
 <footer>
   <div class="wrap">
-    <div class="foot-grid">
+    <div class="cols">
       <div>
         <h4>כתובות רשמיות בלבד</h4>
         <ul>
-          <li><a href="https://harb.cma.gov.il/" target="_blank" rel="noopener noreferrer">הר הביטוח — איתור כל הפוליסות שלכם</a></li>
-          <li><a href="https://pe.cma.gov.il/sp/sp" target="_blank" rel="noopener noreferrer">הגשת תלונה — רשות שוק ההון, ביטוח וחיסכון</a></li>
-          <li><a href="https://www.gov.il/he/departments/capital_market_authority" target="_blank" rel="noopener noreferrer">רשות שוק ההון, ביטוח וחיסכון</a></li>
-          <li>פניות הציבור ברשות שוק ההון: ‎*3002</li>
+          <li><a href="https://harb.cma.gov.il/" target="_blank" rel="noopener noreferrer">הר הביטוח — איתור הפוליסות שלכם</a></li>
+          <li><a href="https://pe.cma.gov.il/sp/sp" target="_blank" rel="noopener noreferrer">הגשת תלונה — רשות שוק ההון</a></li>
+          <li>פניות הציבור: ‎*3002</li>
         </ul>
       </div>
       <div>
         <h4>המקור</h4>
         <ul>
-          <li>"מתחת לבלטות" עונה 2, פרק 6 — ביטוחי בריאות, עם שאול אמסטרדמסקי. כאן 11, אוגוסט 2026.</li>
-          <li>הנתונים המסומנים בדף כ"מהפרק" מצוטטים מהתוכנית ומיוחסים לה, ואינם מדידה עצמאית.</li>
-          <li>הרפורמה במעבר מפוליסת "מהשקל הראשון" ל"משלים שב"ן" נכנסה לתוקף ב־1 ביוני 2024.</li>
+          <li>"מתחת לבלטות" עונה 2 פרק 6 — ביטוחי בריאות. כאן 11, אוגוסט 2026.</li>
+          <li>נתונים המסומנים "מהפרק" מיוחסים לתוכנית ואינם מדידה עצמאית.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>משפטי</h4>
+        <ul>
+          <li><a href="#legal">תנאי שימוש</a></li>
+          <li><a href="#legal">מדיניות פרטיות</a></li>
+          <li><a href="#legal">הצהרת נגישות</a></li>
+          <li><a href="mailto:omriarusi2002@gmail.com">יצירת קשר</a></li>
         </ul>
       </div>
     </div>
-    <p class="disclaim"><strong>הבהרה חשובה.</strong> הכלי הזה הוא כלי חינוכי לארגון מידע אישי. הוא אינו ייעוץ ביטוחי, אינו ייעוץ פנסיוני ואינו ייעוץ משפטי, ואין מאחוריו בעל רישיון. הוא אינו ממליץ לקנות או לבטל מוצר ספציפי, ואינו מכיר את מצבכם הרפואי, הכלכלי או המשפחתי — כל אלה משנים את התשובה הנכונה עבורכם. לפני ביטול של כיסוי קיים בדקו מה תאבדו: ביטול מבוגר עלול להיות בלתי הפיך, משום שרכישה מחדש בגיל מאוחר יותר או אחרי שינוי במצב הבריאותי עשויה להיות יקרה בהרבה או בלתי אפשרית. להחלטה מחייבת פנו לבעל רישיון — יועץ ביטוח שאינו מקבל עמלה מהמוצרים שהוא ממליץ עליהם, או לרשות שוק ההון.</p>
+    <p class="legal"><strong>הבהרה.</strong> כלי חינוכי לארגון מידע אישי. <strong>אינו ייעוץ ביטוחי, פנסיוני או משפטי, ואין מאחוריו בעל רישיון.</strong> מפעיל האתר אינו קשור לאף חברת ביטוח, סוכנות או קופת חולים ואינו מקבל מהן תמורה. לפני ביטול כיסוי קיים בדקו מה תאבדו — ביטול בגיל מבוגר עלול להיות בלתי הפיך, כי רכישה מחדש מאוחר יותר או אחרי שינוי במצב הבריאותי עשויה להיות יקרה בהרבה או בלתי אפשרית. להחלטה מחייבת פנו לבעל רישיון. השימוש באתר כפוף ל<a href="#legal">תנאי השימוש</a>.</p>
   </div>
 </footer>
 
@@ -698,748 +687,605 @@ footer ul{margin:0; padding-inline-start:1.1rem; display:flex; flex-direction:co
 <script>
 (function(){
 "use strict";
-document.documentElement.lang = "he";
-document.documentElement.dir  = "rtl";
 
 var nf = new Intl.NumberFormat("he-IL", {maximumFractionDigits:0});
 function money(n){ return "₪" + nf.format(Math.round(n||0)); }
+function el(t,c,h){ var n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n; }
 
 /* ---------- storage ---------- */
-var KEY = "tik-habituach-v1";
-function load(){
-  try{ var r = localStorage.getItem(KEY); return r ? JSON.parse(r) : null; }
-  catch(e){ return null; }
-}
-function save(){
-  try{ localStorage.setItem(KEY, JSON.stringify(state)); }
-  catch(e){ /* private mode or blocked storage — the page still works */ }
-}
+var KEY="tik-habituach-v1";
+function load(){ try{ var r=localStorage.getItem(KEY); return r?JSON.parse(r):null; }catch(e){ return null; } }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
 
-/* ---------- content model ---------- */
-var KINDS = {
-  cat:     {chip:"הגנה מקטסטרופה", cls:"chip-cat"},
-  conv:    {chip:"נוחות ומהירות",  cls:"chip-conv"},
-  comp:    {chip:"פיצוי כספי",     cls:"chip-comp"},
-  routine: {chip:"צריכה שוטפת",    cls:"chip-routine"}
-};
+/* ---------- model ---------- */
+var KINDS={cat:{chip:"הגנה מקטסטרופה",cls:"cat"},conv:{chip:"נוחות ומהירות",cls:"conv"},comp:{chip:"פיצוי כספי",cls:"comp"},routine:{chip:"צריכה שוטפת",cls:"routine"}};
 
-var COVERS = [
-  {group:"הכיסויים שמגנים מפני קטסטרופה כלכלית", items:[
-    {id:"drugs", name:"תרופות מחוץ לסל", kind:"cat",
-     hint:"בפרק: סדר גודל של עד כ־100 ₪ בחודש למשפחה",
-     body:[
-       "<strong>מה זה:</strong> סל הבריאות הממלכתי מכסה רשימה סגורה של תרופות. תרופה שאושרה בעולם אבל עדיין לא נכנסה לסל — אתם משלמים עליה מהכיס.",
-       "<strong>למה זה קריטי:</strong> טיפול אונקולוגי או תרופה ביולוגית שאינם בסל יכולים לעלות עשרות ומאות אלפי שקלים בשנה. זה בדיוק סוג ההוצאה שמשפחה לא יכולה לספוג, ולכן זה ביטוח אמיתי.",
-       "<strong>מה לבדוק בפוליסה:</strong> שהכיסוי הוא \"אקסטרא־תקציבי\" — כלומר שהוא לא מוגבל רק לתרופות שכבר בסל — ומה תקרת הכיסוי ומדי כמה זמן היא מתחדשת."
-     ]},
-    {id:"abroad", name:"השתלות וטיפולים מיוחדים בחו\"ל", kind:"cat",
-     hint:"בפרק: סדר גודל של כ־80 ₪ בחודש למשפחה",
-     body:[
-       "<strong>מה זה:</strong> מימון השתלת איבר או טיפול מורכב שלא ניתן לבצע בישראל, כולל הטיסה והשהייה.",
-       "<strong>למה זה קריטי:</strong> העלויות נמדדות במיליוני שקלים. במקביל, הסיכוי שתצטרכו את זה נמוך מאוד — וזה בדיוק מה שהופך אותו לזול. ביטוח נכון הוא הימור על אירוע נדיר והרסני, לא על אירוע שכיח וקטן.",
-       "<strong>מה לבדוק בפוליסה:</strong> תקרת הכיסוי, והאם ההוצאות הנלוות — טיסה, לינה, מלווה — נכללות."
-     ]},
-    {id:"disability", name:"אובדן כושר עבודה", kind:"cat",
-     body:[
-       "<strong>מה זה:</strong> תשלום חודשי שמחליף את המשכורת אם מחלה או פציעה מונעות מכם לעבוד.",
-       "<strong>למה זה קריטי:</strong> עבור רוב האנשים ההכנסה היא הנכס הגדול ביותר שיש להם — גדול מהדירה. אובדן ההכנסה לאורך שנים הוא ההפסד הכספי הגדול ביותר האפשרי.",
-       "<strong>מה לבדוק בפוליסה:</strong> האם ההגדרה היא \"עיסוק ספציפי\" (לא מסוגל לעבוד במקצוע שלכם) או \"כל עיסוק\" (לא מסוגל לעבוד בשום עבודה). ההבדל ביניהן עצום. לשכירים רבים קיים כיסוי כזה כבר דרך הפנסיה — בדקו לפני שאתם קונים בנפרד."
-     ]},
-    {id:"life", name:"ביטוח חיים (ריסק)", kind:"cat", sum:true, sumLabel:"סכום הביטוח",
-     body:[
-       "<strong>מה זה:</strong> תשלום חד־פעמי למשפחה במקרה מוות. \"ריסק\" הוא ביטוח חיים טהור בלי רכיב חיסכון, והוא הזול מביניהם.",
-       "<strong>מתי צריך:</strong> רק כשיש מי שתלוי בהכנסה שלכם — בן או בת זוג, ילדים, או משכנתה שמישהו יישאר איתה. אדם ללא תלויים בדרך כלל לא צריך את זה.",
-       "<strong>איך לקבוע סכום:</strong> כלל אצבע מקובל — יתרת המשכנתה, בתוספת מספר שנות הכנסה שיאפשרו למשפחה להתארגן."
-     ]},
-    {id:"ltc", name:"ביטוח סיעודי", kind:"cat",
-     body:[
-       "<strong>מה זה:</strong> תשלום חודשי כשאדם אינו מסוגל לבצע פעולות יומיומיות בכוחות עצמו וזקוק להשגחה.",
-       "<strong>למה זה קריטי:</strong> מצב סיעודי ממושך הוא ההוצאה הכבדה ביותר שמשפחה עלולה לפגוש, ויכול להימשך שנים.",
-       "<strong>מה לבדוק:</strong> הביטוחים הסיעודיים הקבוצתיים של קופות החולים הופסקו, ורבים נותרו בלי כיסוי בלי לשים לב. בדקו בהר הביטוח האם יש לכם כיסוי סיעודי בפועל, ולכמה שנים הוא משלם — כיסוי לשלוש או חמש שנים אינו כיסוי לכל החיים."
-     ]}
-  ]},
+var COVERS=[
+{group:"מגן מפני קטסטרופה כלכלית",items:[
+ {id:"drugs",name:"תרופות מחוץ לסל",kind:"cat",hint:"בפרק: סדר גודל של עד כ־100 ₪ בחודש למשפחה",body:[
+  "<strong>מה זה:</strong> סל הבריאות מכסה רשימה סגורה של תרופות. תרופה שאושרה בעולם אך טרם נכנסה לסל — אתם משלמים עליה מהכיס.",
+  "<strong>למה זה קריטי:</strong> טיפול אונקולוגי או תרופה ביולוגית שאינם בסל יכולים לעלות עשרות ומאות אלפי שקלים בשנה. זו הוצאה שמשפחה לא יכולה לספוג.",
+  "<strong>מה לבדוק:</strong> שהכיסוי \"אקסטרא־תקציבי\" (לא מוגבל לתרופות שכבר בסל), מה התקרה, ומדי כמה זמן היא מתחדשת."]},
+ {id:"abroad",name:"השתלות וטיפולים מיוחדים בחו\"ל",kind:"cat",hint:"בפרק: סדר גודל של כ־80 ₪ בחודש למשפחה",body:[
+  "<strong>מה זה:</strong> מימון השתלת איבר או טיפול מורכב שלא ניתן לבצע בישראל, כולל טיסה ושהייה.",
+  "<strong>למה זה קריטי:</strong> העלויות נמדדות במיליוני שקלים, והסיכוי להזדקק לזה נמוך מאוד — וזה בדיוק מה שהופך אותו לזול.",
+  "<strong>מה לבדוק:</strong> תקרת הכיסוי, והאם הוצאות נלוות (טיסה, לינה, מלווה) נכללות."]},
+ {id:"disability",name:"אובדן כושר עבודה",kind:"cat",body:[
+  "<strong>מה זה:</strong> תשלום חודשי שמחליף את המשכורת אם מחלה או פציעה מונעות מכם לעבוד.",
+  "<strong>למה זה קריטי:</strong> ההכנסה היא הנכס הגדול ביותר של רוב האנשים — גדול מהדירה.",
+  "<strong>מה לבדוק:</strong> האם ההגדרה היא \"עיסוק ספציפי\" או \"כל עיסוק\" — ההבדל עצום. לשכירים רבים כבר קיים כיסוי כזה דרך הפנסיה."]},
+ {id:"life",name:"ביטוח חיים (ריסק)",kind:"cat",sum:true,sumLabel:"סכום",body:[
+  "<strong>מה זה:</strong> תשלום חד־פעמי למשפחה במקרה מוות. \"ריסק\" הוא ביטוח חיים טהור בלי חיסכון, והזול מביניהם.",
+  "<strong>מתי צריך:</strong> רק כשיש מי שתלוי בהכנסה שלכם. אדם ללא תלויים בדרך כלל לא צריך את זה.",
+  "<strong>איך לקבוע סכום:</strong> יתרת המשכנתה בתוספת כמה שנות הכנסה."]},
+ {id:"ltc",name:"ביטוח סיעודי",kind:"cat",body:[
+  "<strong>מה זה:</strong> תשלום חודשי כשאדם אינו מסוגל לבצע פעולות יומיומיות בכוחות עצמו.",
+  "<strong>למה זה קריטי:</strong> מצב סיעודי ממושך הוא ההוצאה הכבדה ביותר שמשפחה עלולה לפגוש.",
+  "<strong>מה לבדוק:</strong> הביטוחים הסיעודיים הקבוצתיים של הקופות הופסקו ורבים נותרו בלי כיסוי בלי לשים לב. בדקו כמה שנים הכיסוי משלם."]}]},
 
-  {group:"הכיסוי שקונים בשביל מהירות ובחירה", items:[
-    {id:"surgery", name:"ניתוחים בישראל", kind:"conv", special:"surgery",
-     body:[
-       "<strong>מה זה:</strong> ניתוח שמכוסה ממילא בסל הציבורי, אבל הביטוח מאפשר לעשות אותו פרטית — בלי להמתין בתור ותוך בחירת המנתח.",
-       "<strong>למה זה לא \"קטסטרופה\":</strong> הניתוח עצמו יינתן לכם גם בלי הביטוח. מה שאתם קונים הוא זמן ובחירה — ערך אמיתי, אבל לא הצלת חיים.",
-       "<strong>כאן יושב רוב כפל הביטוח:</strong> שני מסלולים נמכרים בשוק. <b>\"מהשקל הראשון\"</b> — הביטוח הפרטי משלם את הכל מהשקל הראשון, ולכן הוא היקר מביניהם. <b>\"משלים שב\"ן\"</b> — קודם ממצים את הזכויות בביטוח המשלים של הקופה, והביטוח הפרטי משלים את היתרה. הוא זול משמעותית.",
-       "<strong>העובדה המכריעה:</strong> לפי הפרק, כשלושה מכל ארבעה מנתחים שמופיעים ברשימות של חברות הביטוח מופיעים גם ברשימות של הביטוח המשלים של הקופות. כלומר ברוב המקרים אותו מנתח עצמו זמין לכם דרך שני המסלולים.",
-       "<strong>הרפורמה:</strong> ב־1 ביוני 2024 העבירה רשות שוק ההון באופן אוטומטי מבוטחי \"מהשקל הראשון\" שיש להם גם שב\"ן אל מסלול \"משלים שב\"ן\" — כ־600 אלף איש. כ־230 אלף ביקשו להישאר במסלול הישן. אם אתם עדיין ב\"שקל ראשון\" וגם משלמים על שב\"ן, סביר שאתם משלמים פעמיים."
-     ]}
-  ]},
+{group:"קונים בשביל מהירות ובחירה",items:[
+ {id:"surgery",name:"ניתוחים בישראל",kind:"conv",special:"surgery",body:[
+  "<strong>מה זה:</strong> ניתוח שמכוסה ממילא בסל, אבל הביטוח מאפשר לעשות אותו פרטית — בלי תור ותוך בחירת מנתח.",
+  "<strong>למה זה לא קטסטרופה:</strong> הניתוח יינתן לכם גם בלי הביטוח. מה שקונים הוא זמן ובחירה.",
+  "<strong>שני מסלולים:</strong> <strong>\"מהשקל הראשון\"</strong> — הביטוח משלם הכל, והוא היקר. <strong>\"משלים שב\"ן\"</strong> — קודם ממצים את הקופה והביטוח משלים, וזול משמעותית.",
+  "<strong>העובדה המכריעה:</strong> לפי הפרק, כשלושה מכל ארבעה מנתחים ברשימות חברות הביטוח מופיעים גם ברשימות הקופות — כלומר אותו מנתח זמין בשני המסלולים.",
+  "<strong>הרפורמה:</strong> ב־1.6.2024 הועברו אוטומטית מבוטחי \"שקל ראשון\" שיש להם גם שב\"ן למסלול \"משלים שב\"ן\" — כ־600 אלף איש. כ־230 אלף ביקשו להישאר. אם אתם עדיין ב\"שקל ראשון\" וגם משלמים שב\"ן, סביר שאתם משלמים פעמיים."]}]},
 
-  {group:"כיסויים שמשלמים כסף, אבל לא מונעים את האירוע", items:[
-    {id:"critical", name:"ביטוח מחלות קשות", kind:"comp", sum:true, sumLabel:"סכום הפיצוי",
-     body:[
-       "<strong>מה זה:</strong> סכום כסף חד־פעמי במזומן שמשולם עם אבחון של אחת המחלות המפורטות בפוליסה. הכסף מגיע לחשבון, ובדרך כלל הפוליסה מסתיימת בכך.",
-       "<strong>מה חשוב להבין:</strong> זה לא מציל אתכם ממחלה ולא מממן את הטיפול — הטיפול עצמו ניתן במערכת הציבורית. זו רשת ביטחון כלכלית שמאפשרת לא לחזור לעבוד מיד ולממן עזרה בבית.",
-       "<strong>המלכודת:</strong> הפרמיה מטפסת חדות עם הגיל. מוצר שעולה מאות שקלים בגיל 40 יכול להגיע למאות רבות בהרבה בגיל מבוגר — ובדיוק בשלב שבו הוא יקר, אנשים מבטלים אותו אחרי ששילמו עליו שנים.",
-       "<strong>העצה מהפרק:</strong> להחזיק אותו כל עוד הוא זול, לא להגזים בסכום — סדר גודל של משכורת שנתית — ולהחליט מראש עד איזה גיל משלמים עליו. מספר המחלות ברשימה הוא טיעון מכירה מועדף בטלמרקטינג; ההבדל בין 40 ל־45 מחלות הוא לרוב שולי."
-     ]},
-    {id:"accident", name:"ביטוח תאונות אישיות", kind:"comp",
-     body:[
-       "<strong>מה זה:</strong> פיצוי כספי על שבר, נכות או מוות — אך ורק כתוצאה מתאונה.",
-       "<strong>מה חשוב להבין:</strong> \"מוות מתאונה\" ו\"מוות מכל סיבה\" הם שני מוצרים שונים לגמרי. אם כבר יש לכם ביטוח חיים שמכסה מוות מכל סיבה, רכיב המוות בתאונות אישיות מוסיף מעט מאוד — אבל עולה כסף.",
-       "<strong>למה זה כאן:</strong> בשיחת המכירה שהפרק מתעד, זה היה הרכיב שהעלה את ההצעה בקפיצה הגדולה ביותר — יותר מהחלקים המהותיים ביחד. שאלו במפורש איזה חלק מההצעה הוא תאונות אישיות, ומה הוא מוסיף מעבר למה שכבר יש לכם."
-     ]}
-  ]},
+{group:"משלם כסף, לא מונע את האירוע",items:[
+ {id:"critical",name:"ביטוח מחלות קשות",kind:"comp",sum:true,sumLabel:"סכום",body:[
+  "<strong>מה זה:</strong> סכום חד־פעמי במזומן עם אבחון של אחת המחלות ברשימה. הכסף מגיע לחשבון, והפוליסה נגמרת.",
+  "<strong>מה להבין:</strong> זה לא מציל ממחלה ולא מממן את הטיפול — הטיפול ניתן במערכת הציבורית. זו רשת ביטחון כלכלית.",
+  "<strong>המלכודת:</strong> הפרמיה מטפסת חדות עם הגיל, ואנשים מבטלים בדיוק כשהיא נעשית יקרה — אחרי ששילמו שנים.",
+  "<strong>העצה מהפרק:</strong> להחזיק כל עוד זול, לא להגזים בסכום (סדר גודל של משכורת שנתית), ולהחליט מראש עד איזה גיל משלמים. מספר המחלות ברשימה הוא טיעון מכירה — ההבדל בין 40 ל־45 שולי."]},
+ {id:"accident",name:"ביטוח תאונות אישיות",kind:"comp",body:[
+  "<strong>מה זה:</strong> פיצוי על שבר, נכות או מוות — כתוצאה מתאונה בלבד.",
+  "<strong>מה להבין:</strong> \"מוות מתאונה\" ו\"מוות מכל סיבה\" הם מוצרים שונים. אם יש לכם ביטוח חיים, רכיב המוות כאן מוסיף מעט מאוד ועולה כסף.",
+  "<strong>למה זה כאן:</strong> בשיחת המכירה שהפרק מתעד, זה היה הרכיב שהקפיץ את ההצעה הכי הרבה. שאלו במפורש כמה מההצעה הוא תאונות אישיות."]}]},
 
-  {group:"החזרים על הוצאות שוטפות", items:[
-    {id:"ambul", name:"אמבולטורי, בדיקות והתייעצויות", kind:"routine",
-     body:[
-       "<strong>מה זה:</strong> החזרים על ביקורי רופא מומחה, בדיקות אבחון והתייעצויות.",
-       "<strong>מה חשוב להבין:</strong> רוב הכיסוי הזה קיים כבר בביטוח המשלים של הקופה. זו ההוצאה שהכי קל לספוג מהכיס, ולכן היא הכי פחות מתאימה להגדרה של ביטוח.",
-       "<strong>בדקו:</strong> כמה החזרים באמת ניצלתם בשנה האחרונה, ומה עלה לכם הכיסוי באותה שנה. אם שילמתם יותר משקיבלתם לאורך כמה שנים — זו לא רשת ביטחון, זו הוצאה."
-     ]},
-    {id:"dental", name:"ביטוח שיניים", kind:"routine",
-     body:[
-       "<strong>מה זה:</strong> החזרים על טיפולי שיניים משמרים ומשקמים.",
-       "<strong>מה חשוב להבין:</strong> ברוב המקרים זו תוכנית צריכה משולמת מראש ולא ביטוח מפני אסון. שווה כשיש טיפול גדול ידוע מראש, פחות שווה כשלא.",
-       "<strong>שימו לב:</strong> קיימת מרפאת שיניים בהסדר בקופות, וטיפולי שיניים לילדים ולקשישים כלולים בסל הציבורי — בדקו מה מגיע לכם לפני שאתם קונים."
-     ]},
-    {id:"preg", name:"הריון ולידה", kind:"routine",
-     body:[
-       "<strong>מה זה:</strong> החזרים על בדיקות הריון ושירותים סביב הלידה.",
-       "<strong>מה חשוב להבין:</strong> חלק גדול מהבדיקות כלול בסל ובביטוח המשלים של הקופה, ולכיסויים האלה יש כמעט תמיד תקופת אכשרה — כלומר הם לא תקפים אם קניתם אותם כשכבר הייתם בהריון."
-     ]}
-  ]}
+{group:"החזרים על הוצאות שוטפות",items:[
+ {id:"ambul",name:"אמבולטורי, בדיקות והתייעצויות",kind:"routine",body:[
+  "<strong>מה זה:</strong> החזרים על ביקורי מומחה, בדיקות והתייעצויות.",
+  "<strong>מה להבין:</strong> רוב הכיסוי כבר קיים בשב\"ן. זו ההוצאה שהכי קל לספוג, ולכן הכי פחות מתאימה לביטוח.",
+  "<strong>בדקו:</strong> כמה החזרים באמת קיבלתם בשנה, מול כמה שילמתם."]},
+ {id:"dental",name:"ביטוח שיניים",kind:"routine",body:[
+  "<strong>מה זה:</strong> החזרים על טיפולי שיניים.",
+  "<strong>מה להבין:</strong> ברוב המקרים זו תוכנית צריכה משולמת מראש, לא ביטוח מפני אסון.",
+  "<strong>שימו לב:</strong> יש מרפאות בהסדר בקופות, וטיפולי שיניים לילדים ולקשישים כלולים בסל."]},
+ {id:"preg",name:"הריון ולידה",kind:"routine",body:[
+  "<strong>מה זה:</strong> החזרים על בדיקות הריון ושירותים סביב הלידה.",
+  "<strong>מה להבין:</strong> חלק גדול כלול בסל ובשב\"ן, ולכיסויים האלה יש כמעט תמיד תקופת אכשרה — הם לא תקפים אם נקנו כשכבר הייתם בהריון."]}]}
 ];
 
-var QUESTIONS = [
-  {q:"מאיזה אירוע קונקרטי הכיסוי הזה מגן עליי?",
-   w:"אם התשובה מעורפלת או מבוססת על סיפור מפחיד ולא על אירוע מוגדר — זו התשובה."},
-  {q:"האם כבר יש לי כיסוי לזה בסל, בשב\"ן, או בפוליסה אחרת שלי?",
-   w:"זו השאלה שמונעת כפל ביטוח. בקשו שיבדוק מול הרשימה שהוצאתם מהר הביטוח."},
-  {q:"כמה זה עולה היום, וכמה זה יעלה בגיל 60 ובגיל 70?",
-   w:"פרמיות בריאות מטפסות עם הגיל. בקשו את טבלת המחירים לאורך החיים, בכתב."},
-  {q:"מה בדיוק לא מכוסה?",
-   w:"בקשו במפורש: החרגות, תקופת אכשרה, ומצבים רפואיים קודמים שלא יכוסו."},
-  {q:"מה תקרת הכיסוי ומה ההשתתפות העצמית שלי?",
-   w:"כיסוי בלי תקרה ברורה הוא לא כיסוי. תדעו כמה תשלמו מהכיס ביום האמת."},
-  {q:"איך מפעילים את זה ביום שצריך — מי משלם למי?",
-   w:"יש הבדל גדול בין ביטוח שמשלם ישירות לבית החולים לבין ביטוח שמחזיר לכם בדיעבד."},
-  {q:"אם אבטל בעוד חמש שנים, מה יישאר לי?",
-   w:"ברוב ביטוחי הבריאות התשובה היא כלום. חשוב לדעת את זה מראש ולא בדיעבד."},
-  {q:"אתה מקבל עמלה על המוצר הזה? כמה, ומה העמלה על החלופה הזולה?",
-   w:"שאלה לגיטימית לחלוטין, ומותר לכם לקבל עליה תשובה. היא מסבירה חלק מההמלצות."},
-  {q:"תשלח לי את ההצעה המלאה בכתב, ואחזור אליך מחר.",
-   w:"לא שאלה — משפט. הוא מוציא אתכם מלחץ הרגע, וזו הפעולה היחידה שמשנה את התוצאה."}
+var QUESTIONS=[
+ ["מאיזה אירוע קונקרטי הכיסוי הזה מגן עליי?","אם התשובה מעורפלת או מבוססת על סיפור מפחיד ולא על אירוע מוגדר — זו התשובה."],
+ ["האם כבר יש לי כיסוי לזה בסל, בשב\"ן, או בפוליסה אחרת?","השאלה שמונעת כפל ביטוח. בקשו שיבדוק מול הרשימה מהר הביטוח."],
+ ["כמה זה עולה היום, וכמה בגיל 60 ובגיל 70?","פרמיות בריאות מטפסות עם הגיל. בקשו את טבלת המחירים בכתב."],
+ ["מה בדיוק לא מכוסה?","בקשו במפורש: החרגות, תקופת אכשרה, ומצבים רפואיים קודמים."],
+ ["מה תקרת הכיסוי ומה ההשתתפות העצמית?","כיסוי בלי תקרה ברורה הוא לא כיסוי. תדעו כמה תשלמו ביום האמת."],
+ ["איך מפעילים את זה ביום שצריך — מי משלם למי?","יש הבדל גדול בין ביטוח שמשלם ישירות לבית החולים לבין החזר בדיעבד."],
+ ["אם אבטל בעוד חמש שנים, מה יישאר לי?","ברוב ביטוחי הבריאות התשובה היא כלום. עדיף לדעת מראש."],
+ ["אתה מקבל עמלה על המוצר הזה? כמה, ומה על החלופה הזולה?","שאלה לגיטימית לחלוטין. היא מסבירה חלק מההמלצות."],
+ ["תשלח לי את ההצעה בכתב, ואחזור אליך מחר.","לא שאלה — משפט. הוא מוציא אתכם מלחץ הרגע, וזו הפעולה היחידה שמשנה את התוצאה."]
 ];
 
-var GLOSSARY = [
-  ["סל הבריאות","רשימת התרופות והטיפולים שכל תושב זכאי להם בביטוח הבריאות הממלכתי, במימון המדינה. זהה בכל ארבע הקופות, ומתעדכן אחת לשנה."],
-  ["שב\"ן / ביטוח משלים","שירותי בריאות נוספים — התוכנית בתשלום של קופת החולים שלכם, מעבר לסל. \"מושלם\"/\"פלטינום\" בכללית, \"כסף\"/\"זהב\"/\"שלי\" במכבי, \"עדיף\"/\"שיא\" במאוחדת, \"כסף\"/\"זהב\" בלאומית. אינה חברת ביטוח — זו הקופה עצמה, ואסור לה לסרב לקבל אתכם בגלל מצב רפואי."],
-  ["ביטוח מסחרי / פרטי","פוליסה שנקנית מחברת ביטוח, לא מהקופה. כאן יש חיתום רפואי, כלומר החברה רשאית לסרב לבטח או להחריג מצב קיים."],
-  ["מהשקל הראשון","מסלול ביטוח ניתוחים שבו חברת הביטוח משלמת את מלוא העלות מהשקל הראשון, בלי קשר לשב\"ן. המסלול היקר, וזה שיוצר כפל ביטוח למי שיש לו גם שב\"ן."],
-  ["משלים שב\"ן","מסלול ביטוח ניתוחים שנכנס לפעולה רק אחרי מיצוי הזכויות בביטוח המשלים של הקופה. זול משמעותית, ומיועד למי שכבר יש לו שב\"ן."],
-  ["כפל ביטוח","מצב שבו אתם משלמים על שני כיסויים לאותו אירוע, אבל תקבלו רק פעם אחת — כי הניתוח או הטיפול נעשים פעם אחת בלבד."],
-  ["פרמיה","התשלום החודשי שאתם משלמים על הפוליסה. בביטוחי בריאות היא כמעט תמיד עולה עם הגיל."],
-  ["תקופת אכשרה","פרק זמן מתחילת הביטוח שבו עדיין אין כיסוי. אם האירוע קרה בתוכו — לא תקבלו תשלום, למרות ששילמתם."],
-  ["השתתפות עצמית","הסכום שאתם משלמים מהכיס בכל אירוע, לפני שהביטוח נכנס לתמונה."],
-  ["החרגה","סעיף שמוציא מצב רפואי מסוים מהכיסוי. אם יש לכם מצב קיים, הוא עלול להיות מוחרג בדיוק במקום שבו תזדקקו לביטוח."],
-  ["חיתום רפואי","בדיקה שחברת הביטוח עורכת לפני שהיא מסכימה לבטח — הצהרת בריאות, ולעיתים מסמכים רפואיים. על בסיסה היא מחליטה אם לקבל אתכם, לייקר, או להחריג."],
-  ["ביטוח קבוצתי","פוליסה דרך מקום עבודה, ארגון או קופה. לרוב זולה יותר, אבל היא נגמרת כשעוזבים את הקבוצה — ואז צריך לרכוש פרטית בגיל מבוגר יותר."],
-  ["תרופה מחוץ לסל","תרופה שאינה כלולה בסל הבריאות הממלכתי. המימון שלה חל עליכם, אלא אם יש לכם כיסוי ביטוחי ייעודי."],
-  ["סעיף 43 לחוק חוזה הביטוח","הגנה משמעותית על מבוטחים: בחלוף שלוש שנים ממועד כריתת חוזה הביטוח, חברת הביטוח אינה רשאית להסתמך על אי־גילוי מידע כדי לא לשלם — אלא אם תוכיח שהמבוטח פעל בכוונת מרמה. נטל ההוכחה מוטל עליה."],
-  ["שיטת המצליח","ביטוי לתופעה שבה תביעות נדחות באופן גורף בהנחה שרוב האנשים לא יערערו. התשובה לה היא פשוט לערער."],
-  ["הר הביטוח","המאגר הממשלתי הרשמי שמרכז את כל פוליסות הביטוח של אדם מכל החברות במקום אחד, כולל הפרמיה. חינם, בכתובת harb.cma.gov.il בלבד."]
+var GLOSSARY=[
+ ["סל הבריאות","רשימת התרופות והטיפולים שכל תושב זכאי להם במימון המדינה. זהה בכל ארבע הקופות ומתעדכן אחת לשנה."],
+ ["שב\"ן / ביטוח משלים","שירותי בריאות נוספים — התוכנית בתשלום של קופת החולים, מעבר לסל. אינה חברת ביטוח, ואסור לה לסרב לקבל אתכם בגלל מצב רפואי."],
+ ["ביטוח מסחרי / פרטי","פוליסה מחברת ביטוח ולא מהקופה. כאן יש חיתום רפואי — החברה רשאית לסרב או להחריג מצב קיים."],
+ ["מהשקל הראשון","מסלול ניתוחים שבו חברת הביטוח משלמת הכל מהשקל הראשון. היקר, וזה שיוצר כפל למי שיש לו גם שב\"ן."],
+ ["משלים שב\"ן","מסלול ניתוחים שנכנס לפעולה רק אחרי מיצוי הזכויות בקופה. זול משמעותית."],
+ ["כפל ביטוח","תשלום על שני כיסויים לאותו אירוע, כשתקבלו רק פעם אחת."],
+ ["פרמיה","התשלום החודשי על הפוליסה. בביטוחי בריאות כמעט תמיד עולה עם הגיל."],
+ ["תקופת אכשרה","פרק זמן מתחילת הביטוח שבו עדיין אין כיסוי. אירוע שקרה בתוכו לא ישולם."],
+ ["השתתפות עצמית","הסכום שאתם משלמים מהכיס בכל אירוע, לפני שהביטוח נכנס."],
+ ["החרגה","סעיף שמוציא מצב רפואי מסוים מהכיסוי — לעיתים בדיוק במקום שבו תזדקקו לו."],
+ ["חיתום רפואי","בדיקה שהחברה עורכת לפני שהיא מסכימה לבטח. על בסיסה היא מחליטה אם לקבל, לייקר, או להחריג."],
+ ["ביטוח קבוצתי","פוליסה דרך מקום עבודה או ארגון. זולה יותר, אבל נגמרת כשעוזבים — ואז רוכשים פרטית בגיל מבוגר יותר."],
+ ["תרופה מחוץ לסל","תרופה שאינה בסל הממלכתי. המימון עליכם, אלא אם יש כיסוי ייעודי."],
+ ["סעיף 43 לחוק חוזה הביטוח","בחלוף שלוש שנים מכריתת החוזה, החברה אינה רשאית להסתמך על אי־גילוי מידע כדי לא לשלם — אלא אם תוכיח כוונת מרמה. נטל ההוכחה עליה."],
+ ["שיטת המצליח","דחייה גורפת של תביעות בהנחה שרוב האנשים לא יערערו. התשובה לה היא פשוט לערער."],
+ ["הר הביטוח","המאגר הממשלתי שמרכז את כל פוליסות הביטוח שלכם. חינם, בכתובת harb.cma.gov.il בלבד."]
 ];
 
 /* ---------- state ---------- */
-var defaults = {kupa:"", shban:"", shbanCost:"", deps:"", covers:{}, checked:{}, letter:{}};
-COVERS.forEach(function(g){ g.items.forEach(function(c){
-  defaults.covers[c.id] = {have:"", amount:"", sum:"", mode:""};
-});});
+var defaults={kupa:"",shban:"",shbanCost:"",deps:"",covers:{},checked:{},letter:{}};
+COVERS.forEach(function(g){g.items.forEach(function(c){defaults.covers[c.id]={have:"",amount:"",sum:"",mode:""};});});
+var state=load()||JSON.parse(JSON.stringify(defaults));
+COVERS.forEach(function(g){g.items.forEach(function(c){ if(!state.covers[c.id]) state.covers[c.id]={have:"",amount:"",sum:"",mode:""}; });});
+if(!state.checked) state.checked={};
+if(!state.letter)  state.letter={};
 
-var state = load() || JSON.parse(JSON.stringify(defaults));
-/* forward-compatibility: fill in any cover added after a save */
-COVERS.forEach(function(g){ g.items.forEach(function(c){
-  if(!state.covers[c.id]) state.covers[c.id] = {have:"", amount:"", sum:"", mode:""};
-});});
-if(!state.checked) state.checked = {};
-if(!state.letter)  state.letter  = {};
-
-/* ---------- build ledger ---------- */
-function el(tag, cls, html){
-  var n = document.createElement(tag);
-  if(cls) n.className = cls;
-  if(html != null) n.innerHTML = html;
-  return n;
+/* ---------- tabs ---------- */
+var TABS=["start","check","result","agent","appeal","gloss","legal"];
+function showTab(key, push){
+  if(TABS.indexOf(key)<0) key="start";
+  TABS.forEach(function(k){
+    var t=document.getElementById("t-"+k), p=document.getElementById("p-"+k);
+    var on=(k===key);
+    t.setAttribute("aria-selected", on?"true":"false");
+    t.tabIndex = on?0:-1;
+    p.hidden=!on;
+  });
+  if(push && location.hash!=="#"+key){ history.replaceState(null,"","#"+key); }
+  window.scrollTo({top:0, behavior:"auto"});
 }
+TABS.forEach(function(k){
+  document.getElementById("t-"+k).addEventListener("click",function(){ showTab(k,true); });
+});
+document.querySelector(".tabs").addEventListener("keydown",function(e){
+  var i=TABS.indexOf(TABS.filter(function(k){return document.getElementById("t-"+k).getAttribute("aria-selected")==="true";})[0]);
+  var n=null;
+  if(e.key==="ArrowLeft") n=(i+1)%TABS.length;        /* RTL: left = next */
+  if(e.key==="ArrowRight") n=(i-1+TABS.length)%TABS.length;
+  if(e.key==="Home") n=0;
+  if(e.key==="End") n=TABS.length-1;
+  if(n!==null){ e.preventDefault(); showTab(TABS[n],true); document.getElementById("t-"+TABS[n]).focus(); }
+});
+document.querySelectorAll("[data-go]").forEach(function(b){
+  b.addEventListener("click",function(){ showTab(b.getAttribute("data-go"),true); });
+});
+window.addEventListener("hashchange",function(){ showTab(location.hash.replace("#",""),false); });
 
-var SURGERY_MODES = [
-  {v:"none",    t:"אין לי"},
-  {v:"first",   t:"מהשקל הראשון"},
-  {v:"suppl",   t:"משלים שב\"ן"},
-  {v:"unknown", t:"לא יודע"}
-];
-var HAVE_MODES = [
-  {v:"yes",     t:"יש לי"},
-  {v:"no",      t:"אין לי"},
-  {v:"unknown", t:"לא יודע"}
-];
+/* ---------- ledger ---------- */
+var SURG=[{v:"none",t:"אין לי"},{v:"first",t:"מהשקל הראשון"},{v:"suppl",t:"משלים שב\"ן"},{v:"unknown",t:"לא יודע"}];
+var HAVE=[{v:"yes",t:"יש לי"},{v:"no",t:"אין לי"},{v:"unknown",t:"לא יודע"}];
 
 function buildLedger(){
-  var host = document.getElementById("ledger");
-  host.innerHTML = "";
-
+  var host=document.getElementById("ledger");
+  host.innerHTML="";
   COVERS.forEach(function(grp){
-    host.appendChild(el("div","grp-label", grp.group));
-
+    host.appendChild(el("div","grp",grp.group));
+    var box=el("div","blocks");
     grp.items.forEach(function(c){
-      var st  = state.covers[c.id];
-      var row = el("article","row");
-      row.dataset.kind = c.kind;
-      row.id = "row-" + c.id;
+      var st=state.covers[c.id];
+      var row=el("article","row"+(st.have==="yes"?" on":""));
+      var top=el("div","rtop");
 
-      var head = el("div","row-head");
+      var nm=el("div","rname");
+      nm.appendChild(el("h3",null,c.name));
+      nm.appendChild(el("span","tag "+KINDS[c.kind].cls,KINDS[c.kind].chip));
+      top.appendChild(nm);
 
-      var idBox = el("div","row-id");
-      idBox.appendChild(el("h3", null, c.name));
-      idBox.appendChild(el("span","chip " + KINDS[c.kind].cls, KINDS[c.kind].chip));
-      head.appendChild(idBox);
-
-      var ctrl = el("div","row-controls");
-      var modes = (c.special === "surgery") ? SURGERY_MODES : HAVE_MODES;
-      var seg = el("div","seg");
-      seg.setAttribute("role","group");
-      seg.setAttribute("aria-label", c.name);
-
+      var ctl=el("div","rctl");
+      var modes=(c.special==="surgery")?SURG:HAVE;
+      var seg=el("div","seg"); seg.setAttribute("role","group"); seg.setAttribute("aria-label",c.name);
       modes.forEach(function(m){
-        var b = el("button", null, m.t);
-        b.type = "button";
-        var cur = (c.special === "surgery") ? st.mode : st.have;
-        b.setAttribute("aria-pressed", cur === m.v ? "true" : "false");
-        b.addEventListener("click", function(){
-          if(c.special === "surgery"){
-            st.mode = (st.mode === m.v) ? "" : m.v;
-            st.have = (st.mode === "first" || st.mode === "suppl") ? "yes"
-                    : (st.mode === "unknown" ? "unknown" : "no");
+        var b=el("button",null,m.t); b.type="button";
+        var cur=(c.special==="surgery")?st.mode:st.have;
+        b.setAttribute("aria-pressed",cur===m.v?"true":"false");
+        b.addEventListener("click",function(){
+          if(c.special==="surgery"){
+            st.mode=(st.mode===m.v)?"":m.v;
+            st.have=(st.mode==="first"||st.mode==="suppl")?"yes":(st.mode==="unknown"?"unknown":"no");
           } else {
-            st.have = (st.have === m.v) ? "" : m.v;
+            st.have=(st.have===m.v)?"":m.v;
           }
-          if(st.have !== "yes"){ st.amount = ""; st.sum = ""; }
+          if(st.have!=="yes"){ st.amount=""; st.sum=""; }
           save(); buildLedger(); render();
         });
         seg.appendChild(b);
       });
-      ctrl.appendChild(seg);
+      ctl.appendChild(seg);
 
-      var mw = el("label","money" + (st.have === "yes" ? "" : " hidden"));
-      mw.appendChild(el("span", null, "₪"));
-      var mi = document.createElement("input");
-      mi.type = "number"; mi.min = "0"; mi.step = "1";
-      mi.placeholder = "לחודש";
-      mi.value = st.amount;
-      mi.setAttribute("aria-label","עלות חודשית של " + c.name);
-      mi.addEventListener("input", function(){ st.amount = mi.value; save(); render(); });
-      mw.appendChild(mi);
-      ctrl.appendChild(mw);
+      var mw=el("label","money"+(st.have==="yes"?"":" hide"));
+      mw.appendChild(el("span",null,"₪"));
+      var mi=document.createElement("input");
+      mi.type="number"; mi.min="0"; mi.step="1"; mi.placeholder="לחודש"; mi.value=st.amount;
+      mi.setAttribute("aria-label","עלות חודשית — "+c.name);
+      mi.addEventListener("input",function(){ st.amount=mi.value; save(); render(); });
+      mw.appendChild(mi); ctl.appendChild(mw);
 
       if(c.sum){
-        var sw = el("label","money" + (st.have === "yes" ? "" : " hidden"));
-        sw.appendChild(el("span", null, c.sumLabel + " ₪"));
-        var si = document.createElement("input");
-        si.type = "number"; si.min = "0"; si.step = "1000";
-        si.placeholder = "0";
-        si.value = st.sum;
-        si.setAttribute("aria-label", c.sumLabel + " של " + c.name);
-        si.addEventListener("input", function(){ st.sum = si.value; save(); render(); });
-        sw.appendChild(si);
-        ctrl.appendChild(sw);
+        var sw=el("label","money"+(st.have==="yes"?"":" hide"));
+        sw.appendChild(el("span",null,c.sumLabel+" ₪"));
+        var si=document.createElement("input");
+        si.type="number"; si.min="0"; si.step="1000"; si.placeholder="0"; si.value=st.sum;
+        si.setAttribute("aria-label",c.sumLabel+" — "+c.name);
+        si.addEventListener("input",function(){ st.sum=si.value; save(); render(); });
+        sw.appendChild(si); ctl.appendChild(sw);
       }
+      top.appendChild(ctl);
+      row.appendChild(top);
 
-      head.appendChild(ctrl);
-      row.appendChild(head);
-
-      var det = el("details","explain");
-      var sum = document.createElement("summary");
-      sum.textContent = "מה זה ולמה זה חשוב";
-      det.appendChild(sum);
-      var bodyBox = el("div","body");
-      c.body.forEach(function(p){ bodyBox.appendChild(el("p", null, p)); });
-      if(c.hint) bodyBox.appendChild(el("div","pricehint", c.hint));
-      det.appendChild(bodyBox);
-      row.appendChild(det);
-
-      row.classList.add(st.have === "yes" ? "on" : "off");
-      host.appendChild(row);
+      var d=el("details","rexp");
+      var s=document.createElement("summary"); s.textContent="מה זה ולמה זה חשוב";
+      d.appendChild(s);
+      var bd=el("div","b");
+      c.body.forEach(function(p){ bd.appendChild(el("p",null,p)); });
+      if(c.hint) bd.appendChild(el("div","pill",c.hint));
+      d.appendChild(bd);
+      row.appendChild(d);
+      box.appendChild(row);
     });
+    host.appendChild(box);
   });
 }
 
-/* ---------- questions ---------- */
 function buildQuestions(){
-  var host = document.getElementById("questions");
-  host.innerHTML = "";
-  QUESTIONS.forEach(function(o, i){
-    var wrap = el("label","q");
-    var cb = document.createElement("input");
-    cb.type = "checkbox";
-    cb.checked = !!state.checked["q"+i];
-    cb.addEventListener("change", function(){ state.checked["q"+i] = cb.checked; save(); });
-    wrap.appendChild(cb);
-    var t = el("div");
-    t.appendChild(el("div","qt", o.q));
-    t.appendChild(el("div","qw", o.w));
-    wrap.appendChild(t);
-    host.appendChild(wrap);
+  var host=document.getElementById("questions");
+  host.innerHTML="";
+  QUESTIONS.forEach(function(o,i){
+    var d=el("details","acc q");
+    var s=document.createElement("summary");
+    var lab=el("label","chk");
+    var cb=document.createElement("input"); cb.type="checkbox"; cb.checked=!!state.checked["q"+i];
+    cb.addEventListener("click",function(e){ e.stopPropagation(); });
+    cb.addEventListener("change",function(){ state.checked["q"+i]=cb.checked; save(); });
+    lab.appendChild(cb);
+    lab.appendChild(el("span",null,o[0]));
+    s.appendChild(lab);
+    d.appendChild(s);
+    var b=el("div","acc-body"); b.appendChild(el("p",null,o[1]));
+    d.appendChild(b);
+    host.appendChild(d);
   });
 }
 
 function buildGlossary(){
-  var host = document.getElementById("glossary");
-  host.innerHTML = "";
-  GLOSSARY.forEach(function(pair){
-    var d = el("dl","gterm");
-    d.appendChild(el("dt", null, pair[0]));
-    d.appendChild(el("dd", null, pair[1]));
+  var host=document.getElementById("glossary");
+  host.innerHTML="";
+  GLOSSARY.forEach(function(p){
+    var d=el("details","acc");
+    var s=document.createElement("summary"); s.appendChild(el("span","sum-t",p[0]));
+    d.appendChild(s);
+    var b=el("div","acc-body"); b.appendChild(el("p",null,p[1]));
+    d.appendChild(b);
     host.appendChild(d);
   });
 }
 
 /* ---------- analysis ---------- */
-function num(v){ var n = parseFloat(v); return isFinite(n) && n > 0 ? n : 0; }
+function num(v){ var n=parseFloat(v); return isFinite(n)&&n>0?n:0; }
 
 function analyse(){
-  var byKind = {cat:0, conv:0, comp:0, routine:0};
-  var held = {}, unknown = [], total = 0;
+  var byKind={cat:0,conv:0,comp:0,routine:0};
+  var held={}, unknown=[], total=0;
 
-  COVERS.forEach(function(g){ g.items.forEach(function(c){
-    var st = state.covers[c.id];
-    if(st.have === "yes"){
-      held[c.id] = true;
-      var a = num(st.amount);
-      total += a; byKind[c.kind] += a;
-    } else if(st.have === "unknown"){
-      unknown.push(c.name);
-    }
+  COVERS.forEach(function(g){g.items.forEach(function(c){
+    var st=state.covers[c.id];
+    if(st.have==="yes"){ held[c.id]=true; var a=num(st.amount); total+=a; byKind[c.kind]+=a; }
+    else if(st.have==="unknown"){ unknown.push(c.name); }
   });});
 
-  var answered = 0;
-  COVERS.forEach(function(g){ g.items.forEach(function(c){
-    if(state.covers[c.id].have) answered++;
-  });});
-  var engaged = total > 0 || answered >= 2 || (state.shban !== "" && state.shban !== "unknown");
+  var answered=0;
+  COVERS.forEach(function(g){g.items.forEach(function(c){ if(state.covers[c.id].have) answered++; });});
+  var engaged = total>0 || answered>=2 || (state.shban!==""&&state.shban!=="unknown");
 
-  var shbanCost = num(state.shbanCost);
-  if(state.shban === "yes"){ total += shbanCost; byKind.conv += shbanCost; }
-  if(state.shban === "unknown") unknown.push("הביטוח המשלים של הקופה");
+  var shbanCost=num(state.shbanCost);
+  if(state.shban==="yes"){ total+=shbanCost; byKind.conv+=shbanCost; }
+  if(state.shban==="unknown") unknown.push("הביטוח המשלים של הקופה");
 
-  var f = [];
-  var mode = state.covers.surgery.mode;
+  var f=[], mode=state.covers.surgery.mode;
 
-  /* --- duplication --- */
-  if(state.shban === "yes" && mode === "first"){
-    f.push({sev:"critical", tag:"כפל ביטוח", h:"אתם כנראה משלמים פעמיים על אותו ניתוח",
-      p:"יש לכם גם ביטוח משלים בקופה וגם פוליסת ניתוחים פרטית במסלול \"מהשקל הראשון\". שני הכיסויים מכסים את אותו ניתוח — אבל הניתוח נעשה פעם אחת, ותקבלו רק פעם אחת. לפי הפרק, כשלושה מכל ארבעה מנתחים ברשימות חברות הביטוח מופיעים גם ברשימות הקופות, כך שברוב המקרים אותו רופא זמין לכם דרך שני המסלולים.",
-      todo:["פנו לחברת הביטוח ובקשו לעבור למסלול \"משלים שב\"ן\" — הוא מכסה את אותם ניתוחים אחרי מיצוי הזכויות בקופה, ועולה פחות.",
-            "בקשו בכתב את הפרמיה בשני המסלולים, כדי לראות את ההפרש במספרים.",
-            "אם אתם שוקלים דווקא לוותר על השב\"ן ולהישאר בפרטי — בדקו קודם מה עוד השב\"ן נותן לכם מעבר לניתוחים (התייעצויות, בדיקות, רפואה משלימה). לרוב זה לא כדאי.",
-            "אל תבטלו שום כיסוי לפני שהמעבר אושר בכתב, כדי לא להישאר בלי כיסוי באמצע."]});
+  if(state.shban==="yes" && mode==="first"){
+    f.push({sev:"critical",tag:"כפל ביטוח",h:"אתם כנראה משלמים פעמיים על אותו ניתוח",
+      p:"יש לכם גם ביטוח משלים בקופה וגם פוליסת ניתוחים פרטית במסלול \"מהשקל הראשון\". שניהם מכסים את אותו ניתוח — אבל הניתוח נעשה פעם אחת, ותקבלו רק פעם אחת. לפי הפרק, כשלושה מכל ארבעה מנתחים ברשימות חברות הביטוח מופיעים גם ברשימות הקופות.",
+      todo:["פנו לחברת הביטוח ובקשו לעבור למסלול \"משלים שב\"ן\" — מכסה את אותם ניתוחים, ועולה פחות.",
+            "בקשו בכתב את הפרמיה בשני המסלולים כדי לראות את ההפרש.",
+            "אם אתם שוקלים לוותר דווקא על השב\"ן — בדקו קודם מה עוד הוא נותן מעבר לניתוחים. לרוב זה לא כדאי.",
+            "אל תבטלו כיסוי לפני שהמעבר אושר בכתב."]});
   }
-  if(state.shban === "yes" && mode === "suppl"){
-    f.push({sev:"good", tag:"מבנה תקין", h:"מבנה הניתוחים שלכם בנוי נכון",
-      p:"יש לכם ביטוח משלים בקופה ופוליסה פרטית במסלול \"משלים שב\"ן\". זה בדיוק המבנה שנועד למנוע כפל: הקופה משלמת ראשונה, והפוליסה הפרטית משלימה את היתרה. אין כאן תשלום כפול.",
+  if(state.shban==="yes" && mode==="suppl"){
+    f.push({sev:"good",tag:"מבנה תקין",h:"מבנה הניתוחים שלכם בנוי נכון",
+      p:"הקופה משלמת ראשונה והפוליסה הפרטית משלימה את היתרה. זה בדיוק המבנה שנועד למנוע כפל, ואין כאן תשלום כפול.",
       todo:["אין פעולה נדרשת. שווה לוודא אחת לשנה שהמסלול לא שונה."]});
   }
-  if(state.shban === "no" && mode === "first"){
-    f.push({sev:"info", tag:"עקבי", h:"\"מהשקל הראשון\" מתאים למי שאין לו שב\"ן",
-      p:"אין לכם ביטוח משלים בקופה, ולכן מסלול \"מהשקל הראשון\" הוא המסלול ההגיוני — אין למי להשלים. בדקו בכל זאת את החלופה: לעיתים שב\"ן בתוספת פוליסת \"משלים שב\"ן\" יוצא זול יותר מהמסלול הנוכחי ומעניק גם התייעצויות ובדיקות.",
-      todo:["בקשו הצעת מחיר לשב\"ן בקופה שלכם, והשוו לעלות הנוכחית."]});
+  if(state.shban==="no" && mode==="first"){
+    f.push({sev:"info",tag:"עקבי",h:"המסלול מתאים למי שאין לו שב\"ן",
+      p:"אין לכם ביטוח משלים, ולכן \"מהשקל הראשון\" הגיוני — אין למי להשלים. בדקו בכל זאת: לעיתים שב\"ן יחד עם \"משלים שב\"ן\" יוצא זול יותר ומעניק גם התייעצויות ובדיקות.",
+      todo:["בקשו הצעת מחיר לשב\"ן בקופה שלכם והשוו לעלות הנוכחית."]});
   }
-  if(mode === "unknown" || (state.shban === "unknown" && mode)){
-    f.push({sev:"warn", tag:"חסר מידע", h:"אתם לא יודעים באיזה מסלול ניתוחים אתם נמצאים",
-      p:"זה הפרט היחיד שקובע אם יש לכם כפל ביטוח או לא, והוא מופיע בפוליסה שלכם. בלעדיו אי אפשר לדעת אם אתם משלמים פעמיים.",
-      todo:["היכנסו להר הביטוח וחפשו בשורת הניתוחים את שם המסלול.",
-            "לחלופין התקשרו לחברת הביטוח ושאלו במפורש: \"האם פוליסת הניתוחים שלי היא מהשקל הראשון או משלים שב\"ן?\"",
-            "בקשו את התשובה גם בכתב, במייל."]});
-  }
-
-  /* --- missing catastrophe cover --- */
-  if(engaged && state.covers.drugs.have !== "yes" && state.covers.drugs.have !== "unknown"){
-    f.push({sev:"critical", tag:"כיסוי חסר", h:"אין לכם כיסוי לתרופות מחוץ לסל",
-      p:"זה הכיסוי שהפרק מציג כחשוב ביותר, והוא גם מהזולים. תרופה שאינה בסל — למשל טיפול אונקולוגי מתקדם — יכולה לעלות עשרות ומאות אלפי שקלים בשנה, והמימון חל עליכם. זו בדיוק ההוצאה שמשפחה לא יכולה לספוג.",
-      todo:["בקשו הצעת מחיר לכיסוי תרופות מחוץ לסל בלבד, כמוצר עצמאי — לא כחלק מחבילה.",
-            "ודאו שהכיסוי הוא \"אקסטרא־תקציבי\", כלומר לא מוגבל לתרופות שכבר בסל.",
-            "בדקו מה תקרת הכיסוי ומדי כמה זמן היא מתחדשת.",
-            "השוו בין שתי חברות לפחות לפני שאתם סוגרים."]});
-  }
-  if(engaged && state.covers.abroad.have !== "yes" && state.covers.abroad.have !== "unknown"){
-    f.push({sev:"critical", tag:"כיסוי חסר", h:"אין לכם כיסוי להשתלות וטיפולים בחו\"ל",
-      p:"השתלה או טיפול מורכב בחו\"ל נמדדים במיליוני שקלים. הסיכוי להזדקק לזה נמוך מאוד — ובגלל זה הכיסוי זול. זהו המקרה הקלאסי של ביטוח נכון: הימור על אירוע נדיר והרסני.",
-      todo:["בקשו הצעת מחיר לכיסוי השתלות וטיפולים מיוחדים בחו\"ל בלבד.",
-            "בדקו האם ההוצאות הנלוות — טיסה, לינה, מלווה — כלולות.",
-            "בדקו מה תקרת הכיסוי."]});
+  if(mode==="unknown" || (state.shban==="unknown" && mode)){
+    f.push({sev:"warn",tag:"חסר מידע",h:"לא ידוע באיזה מסלול ניתוחים אתם",
+      p:"זה הפרט היחיד שקובע אם יש כפל ביטוח, והוא מופיע בפוליסה. בלעדיו אי אפשר לדעת אם אתם משלמים פעמיים.",
+      todo:["חפשו בהר הביטוח בשורת הניתוחים את שם המסלול.",
+            "או התקשרו לחברה ושאלו: \"הפוליסה שלי היא מהשקל הראשון או משלים שב\"ן?\"",
+            "בקשו את התשובה גם במייל."]});
   }
 
-  /* --- balance --- */
-  var soft = byKind.comp + byKind.conv + byKind.routine;
-  if(total > 0 && soft > byKind.cat){
-    f.push({sev:"warn", tag:"תמהיל", h:"רוב הכסף שלכם לא הולך למה שביטוח נועד לו",
-      p:"מתוך " + money(total) + " בחודש, " + money(byKind.cat) + " מופנים להגנה מפני קטסטרופה כלכלית, ו־" + money(soft) + " לנוחות, לפיצוי כספי ולהחזרים שוטפים. זה לא אומר שהכיסויים האחרים מיותרים — אבל זה בדיוק ההיפוך שהפרק מצביע עליו: הכיסויים החשובים הם גם הזולים, ולכן הם נדחקים.",
-      todo:["עברו על הכיסויים המסומנים כ\"פיצוי כספי\" ו\"צריכה שוטפת\" ושאלו על כל אחד: מה יקרה לי כלכלית אם לא יהיה לי את זה?",
-            "אם התשובה היא \"אסתדר\" — זה מועמד לצמצום.",
-            "העבירו קודם את הכסף לשני הכיסויים החסרים ורק אחר כך שקלו לבטל משהו."]});
+  if(engaged && state.covers.drugs.have!=="yes" && state.covers.drugs.have!=="unknown"){
+    f.push({sev:"critical",tag:"כיסוי חסר",h:"אין כיסוי לתרופות מחוץ לסל",
+      p:"הכיסוי שהפרק מציג כחשוב ביותר, והוא גם מהזולים. תרופה שאינה בסל יכולה לעלות עשרות ומאות אלפי שקלים בשנה, והמימון חל עליכם.",
+      todo:["בקשו הצעה לכיסוי תרופות מחוץ לסל בלבד, כמוצר עצמאי ולא כחלק מחבילה.",
+            "ודאו שהכיסוי \"אקסטרא־תקציבי\".",
+            "בדקו את התקרה ומדי כמה זמן היא מתחדשת.",
+            "השוו בין שתי חברות לפחות."]});
   }
-  if(total > 0 && byKind.cat > 0 && soft <= byKind.cat){
-    f.push({sev:"good", tag:"תמהיל", h:"התמהיל שלכם מוטה לכיוון הנכון",
-      p:"רוב ההוצאה שלכם מופנית לכיסויים שמגנים מפני אירוע שהורס כלכלית, ולא לפיצויים ולהחזרים שוטפים. זה בדיוק הסדר שהפרק ממליץ עליו.",
-      todo:["שווה לבדוק אחת לשנה שהפרמיות לא זחלו למעלה בלי ששמתם לב."]});
+  if(engaged && state.covers.abroad.have!=="yes" && state.covers.abroad.have!=="unknown"){
+    f.push({sev:"critical",tag:"כיסוי חסר",h:"אין כיסוי להשתלות וטיפולים בחו\"ל",
+      p:"השתלה או טיפול מורכב בחו\"ל נמדדים במיליוני שקלים. הסיכוי להזדקק נמוך מאוד ולכן זה זול — המקרה הקלאסי של ביטוח נכון.",
+      todo:["בקשו הצעה לכיסוי השתלות וטיפולים מיוחדים בחו\"ל בלבד.",
+            "בדקו אם טיסה, לינה ומלווה כלולים.",
+            "בדקו את תקרת הכיסוי."]});
   }
 
-  /* --- product-specific --- */
+  var soft=byKind.comp+byKind.conv+byKind.routine;
+  if(total>0 && soft>byKind.cat){
+    f.push({sev:"warn",tag:"תמהיל",h:"רוב הכסף לא הולך למה שביטוח נועד לו",
+      p:"מתוך "+money(total)+" בחודש, "+money(byKind.cat)+" מופנים להגנה מפני קטסטרופה ו־"+money(soft)+" לנוחות, לפיצוי ולהחזרים. זה לא אומר שהשאר מיותר — אבל זה ההיפוך שהפרק מצביע עליו: הכיסויים החשובים הם הזולים, ולכן הם נדחקים.",
+      todo:["עברו על הכיסויים בקטגוריות \"פיצוי כספי\" ו\"צריכה שוטפת\" ושאלו על כל אחד: מה יקרה לי כלכלית בלעדיו?",
+            "אם התשובה \"אסתדר\" — זה מועמד לצמצום.",
+            "העבירו קודם כסף לכיסויים החסרים, ורק אחר כך שקלו לבטל."]});
+  }
+  if(total>0 && byKind.cat>0 && soft<=byKind.cat){
+    f.push({sev:"good",tag:"תמהיל",h:"התמהיל מוטה לכיוון הנכון",
+      p:"רוב ההוצאה מופנית לכיסויים שמגנים מפני אירוע הרסני, ולא לפיצויים ולהחזרים שוטפים.",
+      todo:["בדקו אחת לשנה שהפרמיות לא זחלו למעלה בלי ששמתם לב."]});
+  }
+
   if(held.critical){
-    var s = num(state.covers.critical.sum);
-    var extra = s > 0 ? " הסכום שרשמתם הוא " + money(s) + "." : "";
-    f.push({sev:"info", tag:"לבדוק", h:"ביטוח מחלות קשות — שימו לו תאריך תפוגה",
-      p:"המוצר הזה משלם סכום חד־פעמי במזומן ביום האבחון, והפוליסה נגמרת. הוא לא מממן את הטיפול עצמו — הטיפול ניתן במערכת הציבורית." + extra + " הבעיה שלו היא שהפרמיה מטפסת חדות עם הגיל, ורבים מבטלים אותו בדיוק כשהוא נעשה יקר, אחרי ששילמו עליו שנים.",
-      todo:["בקשו מחברת הביטוח את טבלת הפרמיות הצפויות עד גיל 70, בכתב.",
-            "בדקו שהסכום סביר — סדר גודל של משכורת שנתית, לא יותר.",
-            "החליטו מראש עד איזה גיל אתם מתכוונים לשלם, ורשמו את זה ליד הפוליסה."]});
+    var s=num(state.covers.critical.sum);
+    f.push({sev:"info",tag:"לבדוק",h:"מחלות קשות — שימו לו תאריך תפוגה",
+      p:"משלם סכום חד־פעמי ביום האבחון והפוליסה נגמרת. לא מממן את הטיפול עצמו."+(s>0?" הסכום שרשמתם: "+money(s)+".":"")+" הבעיה היא שהפרמיה מטפסת חדות עם הגיל, ורבים מבטלים בדיוק כשהיא נעשית יקרה — אחרי ששילמו שנים.",
+      todo:["בקשו את טבלת הפרמיות עד גיל 70, בכתב.",
+            "בדקו שהסכום סביר — סדר גודל של משכורת שנתית.",
+            "החליטו מראש עד איזה גיל משלמים."]});
   }
   if(held.accident){
-    var accCost = num(state.covers.accident.amount);
-    var lifeToo = held.life ? " יש לכם גם ביטוח חיים, שמכסה מוות מכל סיבה — ולכן רכיב המוות בתאונות אישיות מוסיף מעט מאוד." : "";
-    f.push({sev:"warn", tag:"לבחון", h:"ביטוח תאונות אישיות — בדקו כמה הוא באמת מוסיף",
-      p:"הכיסוי הזה משלם רק כשהאירוע נגרם מתאונה." + lifeToo + " בשיחת המכירה שהפרק מתעד, זה היה הרכיב שקפץ הכי גבוה בהצעה — יותר מהחלקים המהותיים ביחד" + (accCost ? ", ואתם משלמים עליו " + money(accCost) + " בחודש" : "") + ".",
-      todo:["בקשו פירוט של הרכיבים בפוליסה ומחיר לכל רכיב בנפרד.",
-            "שאלו במפורש: מה הכיסוי הזה מוסיף מעבר לביטוח החיים ולאובדן כושר העבודה שכבר יש לי?",
-            "אם התשובה היא \"בעיקר פיצוי על שברים\" — שאלו את עצמכם אם זה שווה את המחיר החודשי."]});
+    var ac=num(state.covers.accident.amount);
+    f.push({sev:"warn",tag:"לבחון",h:"תאונות אישיות — בדקו כמה זה באמת מוסיף",
+      p:"משלם רק כשהאירוע נגרם מתאונה."+(held.life?" יש לכם גם ביטוח חיים שמכסה מוות מכל סיבה, ולכן רכיב המוות כאן מוסיף מעט מאוד.":"")+" בשיחת המכירה שהפרק מתעד זה היה הרכיב שקפץ הכי גבוה"+(ac?", ואתם משלמים עליו "+money(ac)+" בחודש":"")+".",
+      todo:["בקשו פירוט רכיבים ומחיר לכל רכיב בנפרד.",
+            "שאלו: מה זה מוסיף מעבר לביטוח החיים ולאובדן כושר העבודה שכבר יש לי?",
+            "אם התשובה היא בעיקר פיצוי על שברים — שקלו אם זה שווה את המחיר."]});
   }
-  if(state.deps === "yes" && state.covers.life.have !== "yes" && state.covers.life.have !== "unknown"){
-    f.push({sev:"warn", tag:"כיסוי חסר", h:"יש מי שתלוי בכם, ואין ביטוח חיים",
-      p:"סימנתם שיש מי שתלוי בהכנסה שלכם. ביטוח חיים מסוג \"ריסק\" הוא מהמוצרים הזולים בשוק בגיל צעיר, והוא הכיסוי שמונע מהמשפחה קריסה כלכלית.",
-      todo:["בדקו קודם מה כבר קיים לכם בקרן הפנסיה — לרוב יש שם כיסוי מוות ואובדן כושר עבודה.",
-            "רק אם יש פער, בקשו הצעה לביטוח ריסק טהור, בלי רכיב חיסכון.",
+  if(state.deps==="yes" && state.covers.life.have!=="yes" && state.covers.life.have!=="unknown"){
+    f.push({sev:"warn",tag:"כיסוי חסר",h:"יש מי שתלוי בכם, ואין ביטוח חיים",
+      p:"ביטוח ריסק הוא מהמוצרים הזולים בגיל צעיר, והוא מה שמונע מהמשפחה קריסה כלכלית.",
+      todo:["בדקו קודם מה כבר קיים בקרן הפנסיה — לרוב יש שם כיסוי מוות ואכ\"ע.",
+            "רק אם יש פער, בקשו הצעה לריסק טהור בלי חיסכון.",
             "סכום מקובל: יתרת המשכנתה בתוספת כמה שנות הכנסה."]});
   }
-  if(state.deps === "no" && held.life){
-    f.push({sev:"info", tag:"לבחון", h:"יש לכם ביטוח חיים בלי תלויים",
-      p:"סימנתם שאין מי שתלוי בהכנסה שלכם. ביטוח חיים משלם למוטבים אחרי מותכם — אם אין מי שתלוי בכם כלכלית, שווה לבדוק אם הכיסוי בהיקפו הנוכחי עדיין נחוץ.",
-      todo:["בדקו אם הפוליסה משועבדת למשכנתה — במקרה כזה היא נדרשת ואי אפשר לבטלה.",
-            "אם לא, שקלו להקטין את סכום הביטוח במקום לבטל לגמרי."]});
+  if(state.deps==="no" && held.life){
+    f.push({sev:"info",tag:"לבחון",h:"ביטוח חיים בלי תלויים",
+      p:"סימנתם שאין מי שתלוי בהכנסה שלכם. שווה לבדוק אם הכיסוי בהיקפו הנוכחי עדיין נחוץ.",
+      todo:["בדקו אם הפוליסה משועבדת למשכנתה — אז היא נדרשת ואי אפשר לבטלה.",
+            "אם לא, שקלו להקטין את הסכום במקום לבטל."]});
   }
-  if(engaged && state.covers.disability.have !== "yes" && state.covers.disability.have !== "unknown"){
-    f.push({sev:"info", tag:"לבדוק", h:"בדקו מה יש לכם באובדן כושר עבודה",
-      p:"סימנתם שאין לכם כיסוי לאובדן כושר עבודה. שימו לב שלשכירים רבים קיים כיסוי כזה בתוך קרן הפנסיה, בלי שהם יודעים. ההכנסה היא הנכס הגדול ביותר של רוב האנשים, ולכן זה כיסוי שחשוב לוודא שקיים — במקום כלשהו.",
-      todo:["היכנסו למסלקה הפנסיונית או לדוח השנתי מקרן הפנסיה ובדקו אם יש כיסוי אכ\"ע וכמה הוא משלם.",
-            "בדקו אם ההגדרה היא \"עיסוק ספציפי\" או \"כל עיסוק\" — ההבדל מהותי."]});
+  if(engaged && state.covers.disability.have!=="yes" && state.covers.disability.have!=="unknown"){
+    f.push({sev:"info",tag:"לבדוק",h:"בדקו מה יש לכם באובדן כושר עבודה",
+      p:"לשכירים רבים קיים כיסוי כזה בתוך קרן הפנסיה בלי שהם יודעים. ההכנסה היא הנכס הגדול ביותר, ולכן חשוב לוודא שהכיסוי קיים במקום כלשהו.",
+      todo:["בדקו במסלקה הפנסיונית או בדוח השנתי אם יש כיסוי אכ\"ע וכמה הוא משלם.",
+            "בדקו אם ההגדרה היא \"עיסוק ספציפי\" או \"כל עיסוק\"."]});
   }
-
-  var routineShare = total > 0 ? byKind.routine / total : 0;
-  if(routineShare > 0.25){
-    f.push({sev:"warn", tag:"תמהיל", h:"חלק גדול מהכסף הולך להחזרים שוטפים",
-      p:"כרבע ומעלה מההוצאה שלכם — " + money(byKind.routine) + " בחודש — מופנה לשיניים, הריון והחזרים אמבולטוריים. אלה תוכניות צריכה משולמות מראש יותר מאשר ביטוח, ורוב הכיסוי הזה קיים כבר בשב\"ן.",
-      todo:["חשבו כמה החזרים באמת קיבלתם בשנה האחרונה מכל אחד מהכיסויים האלה.",
-            "אם שילמתם יותר משקיבלתם לאורך כמה שנים ברציפות — זו הוצאה, לא רשת ביטחון."]});
+  if(total>0 && byKind.routine/total>0.25){
+    f.push({sev:"warn",tag:"תמהיל",h:"חלק גדול מהכסף הולך להחזרים שוטפים",
+      p:money(byKind.routine)+" בחודש מופנים לשיניים, הריון והחזרים אמבולטוריים. אלה תוכניות צריכה משולמות מראש יותר מאשר ביטוח, ורוב הכיסוי כבר קיים בשב\"ן.",
+      todo:["חשבו כמה החזרים באמת קיבלתם בשנה האחרונה מכל אחד.",
+            "אם שילמתם יותר משקיבלתם לאורך כמה שנים — זו הוצאה, לא רשת ביטחון."]});
   }
-
-  if(unknown.length >= 2){
-    f.push({sev:"warn", tag:"חסר מידע", h:"יש " + unknown.length + " סעיפים שאתם לא יודעים",
-      p:"סימנתם \"לא יודע\" ב: " + unknown.join(", ") + ". זה המצב הנפוץ ביותר, ולא צריך להתבייש בו — אבל בלי המידע הזה אי אפשר לדעת אם יש כפל או חוסר. כל הפרטים האלה מופיעים במקום אחד.",
-      todo:["היכנסו להר הביטוח בכתובת harb.cma.gov.il והוציאו את רשימת הפוליסות שלכם.",
-            "רשמו לכל שורה בקטגוריית הבריאות את שם הכיסוי והפרמיה החודשית.",
-            "חזרו לכאן והשלימו את הטבלה — הממצאים יתעדכנו מיד."]});
+  if(unknown.length>=2){
+    f.push({sev:"warn",tag:"חסר מידע",h:"יש "+unknown.length+" סעיפים שאינכם יודעים",
+      p:"סימנתם \"לא יודע\" ב: "+unknown.join(", ")+". זה המצב הנפוץ ביותר ולא צריך להתבייש בו — אבל בלי המידע אי אפשר לדעת אם יש כפל או חוסר.",
+      todo:["היכנסו להר הביטוח בכתובת harb.cma.gov.il והוציאו את רשימת הפוליסות.",
+            "רשמו לכל שורה בקטגוריית הבריאות את שם הכיסוי והפרמיה.",
+            "חזרו לטאב \"הבדיקה\" והשלימו — הממצאים יתעדכנו מיד."]});
   }
-
-  if(total > 700){
-    f.push({sev:"info", tag:"השוואה", h:"אתם מעל הממוצע שמוצג בפרק",
-      p:"אתם משלמים " + money(total) + " בחודש. הנתון שהוצג בפרק הוא שמשק בית ישראלי ממוצע מוציא כ־700 ₪ בחודש על ביטוחי בריאות וסיעוד, מתוכם כ־500 ₪ על בריאות בלבד. ממוצע אינו יעד — משפחה גדולה או מבוגרת תשלם באופן טבעי יותר — אבל פער גדול כלפי מעלה מצדיק בדיקה של שורה־שורה.",
-      todo:["עברו על הטבלה למעלה ומיינו: מה מגן מקטסטרופה, ומה לא.",
-            "התחילו את הבדיקה מהשורות היקרות ביותר."]});
+  if(total>700){
+    f.push({sev:"info",tag:"השוואה",h:"אתם מעל הממוצע שמוצג בפרק",
+      p:"אתם משלמים "+money(total)+" בחודש. בפרק הוצג שמשק בית ישראלי ממוצע מוציא כ־700 ₪ בחודש על ביטוחי בריאות וסיעוד, מתוכם כ־500 ₪ על בריאות. ממוצע אינו יעד — משפחה גדולה או מבוגרת תשלם יותר — אבל פער גדול מצדיק בדיקה שורה־שורה.",
+      todo:["מיינו את הטבלה: מה מגן מקטסטרופה ומה לא.",
+            "התחילו מהשורות היקרות ביותר."]});
   }
 
-  return {total:total, byKind:byKind, flags:f, unknown:unknown, shbanCost:shbanCost};
+  return {total:total, byKind:byKind, flags:f, unknown:unknown};
 }
 
 /* ---------- render ---------- */
 function render(){
-  var a = analyse();
-  var year = a.total * 12;
+  var a=analyse(), year=a.total*12;
+  var hot=a.flags.filter(function(x){return x.sev==="critical";}).length;
 
-  document.getElementById("bar-month").textContent = money(a.total);
-  document.getElementById("bar-year").textContent  = money(year);
+  var ht=document.getElementById("hdrTotal");
+  if(a.total>0||a.flags.length){ ht.classList.add("on"); } else { ht.classList.remove("on"); }
+  document.getElementById("hdrVal").textContent=money(a.total);
+  var hf=document.getElementById("hdrFlags");
+  if(hot>0){ hf.hidden=false; hf.textContent=hot; } else { hf.hidden=true; }
 
-  var hot = a.flags.filter(function(x){ return x.sev === "critical"; }).length;
-  var bar = document.getElementById("bar-flags");
-  if(a.total === 0 && a.flags.length === 0){
-    bar.textContent = "מלאו את הטבלה למטה";
-    bar.className = "flagcount";
-  } else if(hot > 0){
-    bar.textContent = hot + " ממצאים דחופים";
-    bar.className = "flagcount hot";
-  } else {
-    bar.textContent = a.flags.length + " ממצאים";
-    bar.className = "flagcount";
-  }
+  var host=document.getElementById("results");
+  host.innerHTML="";
 
-  var host = document.getElementById("results");
-  host.innerHTML = "";
-
-  if(a.total === 0 && a.flags.length === 0){
-    host.appendChild(el("div","empty","<p>עדיין אין מספיק נתונים.<br>מלאו את הטבלה בצעד 2 והממצאים יופיעו כאן אוטומטית.</p>"));
+  if(a.total===0 && a.flags.length===0){
+    var e=el("div","empty","<p>עדיין אין נתונים.<br>מלאו את הבדיקה והממצאים יופיעו כאן.</p>");
+    var b=el("button","btn","למעבר לבדיקה ←"); b.type="button";
+    b.addEventListener("click",function(){ showTab("check",true); });
+    e.appendChild(b);
+    host.appendChild(e);
     return;
   }
 
-  /* totals */
-  var tot = el("div","totals");
-  function addTot(lbl, val, sub){
-    var t = el("div","tot");
-    t.appendChild(el("div","lbl", lbl));
-    t.appendChild(el("div","val", val));
-    if(sub) t.appendChild(el("div","sub", sub));
-    tot.appendChild(t);
-  }
-  addTot("בחודש", money(a.total), "כולל השב\"ן");
-  addTot("בשנה", money(year), null);
-  addTot("ב־10 שנים", money(year * 10), "במחיר של היום — בפועל יותר, כי פרמיות עולות עם הגיל");
-  addTot("מזה להגנה מקטסטרופה", money(a.byKind.cat),
-    a.total > 0 ? Math.round(a.byKind.cat / a.total * 100) + "% מההוצאה" : null);
+  var tot=el("div","tot");
+  function cell(l,v,s){ var t=el("div","tcell"); t.appendChild(el("div","l",l)); t.appendChild(el("div","v",v)); if(s)t.appendChild(el("div","s",s)); tot.appendChild(t); }
+  cell("בחודש",money(a.total),"כולל השב\"ן");
+  cell("בשנה",money(year));
+  cell("ב־10 שנים",money(year*10),"במחיר של היום — בפועל יותר, כי פרמיות עולות עם הגיל");
+  cell("להגנה מקטסטרופה",money(a.byKind.cat), a.total>0?Math.round(a.byKind.cat/a.total*100)+"% מההוצאה":null);
   host.appendChild(tot);
 
-  /* split bar */
-  if(a.total > 0){
-    var sp = el("div","split");
-    sp.appendChild(el("h3", null, "לאן הולך הכסף"));
-    var bar2 = el("div","bar");
-    var order = [["cat","b-cat"],["conv","b-conv"],["comp","b-comp"],["routine","b-routine"]];
-    order.forEach(function(o){
-      var pct = a.byKind[o[0]] / a.total * 100;
-      if(pct <= 0) return;
-      var d = el("div", o[1]);
-      d.style.width = pct + "%";
-      d.title = KINDS[o[0]].chip + " — " + Math.round(pct) + "%";
-      bar2.appendChild(d);
+  if(a.total>0){
+    var colors={cat:"#2C6B4C",conv:"#0E6E6B",comp:"#8A6A18",routine:"#D3D8D7"};
+    var mix=el("div","mix");
+    mix.appendChild(el("div","cap","לאן הולך הכסף"));
+    var mb=el("div","mixbar");
+    ["cat","conv","comp","routine"].forEach(function(k){
+      var pct=a.byKind[k]/a.total*100; if(pct<=0) return;
+      var i=document.createElement("i"); i.style.width=pct+"%"; i.style.background=colors[k];
+      i.title=KINDS[k].chip+" — "+Math.round(pct)+"%";
+      mb.appendChild(i);
     });
-    sp.appendChild(bar2);
-    var lg = el("div","legend");
-    order.forEach(function(o){
-      var v = a.byKind[o[0]];
-      if(v <= 0) return;
-      var s = el("span", null,
-        '<i class="dot" style="background:' +
-        (o[0]==="cat"?"var(--good)":o[0]==="conv"?"var(--accent)":o[0]==="comp"?"var(--warn)":"var(--line-2)") +
-        '"></i>' + KINDS[o[0]].chip + " · " + money(v));
-      lg.appendChild(s);
+    mix.appendChild(mb);
+    var lg=el("div","mixleg");
+    ["cat","conv","comp","routine"].forEach(function(k){
+      if(a.byKind[k]<=0) return;
+      lg.appendChild(el("span",null,'<i class="sw" style="background:'+colors[k]+'"></i>'+KINDS[k].chip+" · "+money(a.byKind[k])));
     });
-    sp.appendChild(lg);
-    host.appendChild(sp);
+    mix.appendChild(lg);
+    host.appendChild(mix);
   }
 
-  /* findings */
-  var order = {critical:0, warn:1, info:2, good:3};
-  var sorted = a.flags.slice().sort(function(x,y){ return order[x.sev] - order[y.sev]; });
-
-  var fw = el("div","findings");
-  sorted.forEach(function(fl){
-    var d = el("div","find");
-    d.dataset.sev = fl.sev;
-    d.appendChild(el("span","find-sev", fl.tag));
-    d.appendChild(el("h3", null, fl.h));
-    d.appendChild(el("p", null, fl.p));
-    if(fl.todo && fl.todo.length){
-      var td = el("div","todo");
-      td.appendChild(el("b", null, "מה עושים"));
-      var ol = document.createElement("ol");
-      fl.todo.forEach(function(t){ ol.appendChild(el("li", null, t)); });
-      td.appendChild(ol);
-      d.appendChild(td);
+  var ord={critical:0,warn:1,info:2,good:3};
+  var box=el("div","blocks");
+  a.flags.slice().sort(function(x,y){return ord[x.sev]-ord[y.sev];}).forEach(function(fl){
+    var d=el("details","acc find"); d.dataset.sev=fl.sev;
+    if(fl.sev==="critical") d.open=true;
+    var s=document.createElement("summary");
+    var t=el("span","sum-t");
+    t.appendChild(el("span","sev",fl.tag));
+    t.appendChild(el("span",null,fl.h));
+    s.appendChild(t);
+    d.appendChild(s);
+    var b=el("div","acc-body");
+    b.appendChild(el("p",null,fl.p));
+    if(fl.todo&&fl.todo.length){
+      var td=el("div","todo");
+      td.appendChild(el("b",null,"מה עושים"));
+      var ol=document.createElement("ol");
+      fl.todo.forEach(function(x){ ol.appendChild(el("li",null,x)); });
+      td.appendChild(ol); b.appendChild(td);
     }
-    fw.appendChild(d);
+    d.appendChild(b);
+    box.appendChild(d);
   });
-  host.appendChild(fw);
+  host.appendChild(box);
 
-  /* copy summary */
-  var tb = el("div","toolbar no-print");
-  var cp = el("button","btn","העתקת סיכום לוואטסאפ");
-  cp.type = "button";
-  cp.addEventListener("click", function(){ copyText(summaryText(a), "הסיכום הועתק"); });
-  tb.appendChild(cp);
-  host.appendChild(tb);
+  var acts=el("div","bar-actions");
+  var cp=el("button","btn","העתקת סיכום"); cp.type="button";
+  cp.addEventListener("click",function(){ copyText(summaryText(a),"הסיכום הועתק"); });
+  var pr=el("button","btn ghost","הדפסה"); pr.type="button";
+  pr.addEventListener("click",function(){ window.print(); });
+  acts.appendChild(cp); acts.appendChild(pr);
+  host.appendChild(acts);
 }
 
 function summaryText(a){
-  var L = [];
-  L.push("תיק הביטוח שלי — סיכום");
-  L.push("");
-  L.push("סה\"כ חודשי: " + money(a.total));
-  L.push("סה\"כ שנתי: " + money(a.total * 12));
-  L.push("מזה להגנה מקטסטרופה: " + money(a.byKind.cat));
-  L.push("");
-  L.push("ממצאים:");
-  var order = {critical:0, warn:1, info:2, good:3};
-  a.flags.slice().sort(function(x,y){ return order[x.sev]-order[y.sev]; }).forEach(function(f, i){
-    L.push((i+1) + ". [" + f.tag + "] " + f.h);
+  var L=["תיק הביטוח שלי — סיכום","",
+    "סה\"כ חודשי: "+money(a.total),
+    "סה\"כ שנתי: "+money(a.total*12),
+    "מזה להגנה מקטסטרופה: "+money(a.byKind.cat),"","ממצאים:"];
+  var ord={critical:0,warn:1,info:2,good:3};
+  a.flags.slice().sort(function(x,y){return ord[x.sev]-ord[y.sev];}).forEach(function(f,i){
+    L.push((i+1)+". ["+f.tag+"] "+f.h);
   });
-  L.push("");
-  L.push("נוצר בכלי \"תיק הביטוח שלי\". אינו ייעוץ ביטוחי.");
+  L.push("","נוצר בכלי \"תיק הביטוח שלי\". אינו ייעוץ ביטוחי.");
   return L.join("\n");
 }
 
 /* ---------- letter ---------- */
-function letterFields(){
-  return {
-    name:   document.getElementById("l-name").value.trim(),
-    id:     document.getElementById("l-id").value.trim(),
-    co:     document.getElementById("l-co").value.trim(),
-    pol:    document.getElementById("l-pol").value.trim(),
-    start:  document.getElementById("l-start").value,
-    event:  document.getElementById("l-event").value,
-    deny:   document.getElementById("l-deny").value,
-    reason: document.getElementById("l-reason").value.trim()
-  };
-}
-function heDate(iso){
-  if(!iso) return "____________";
-  var p = iso.split("-");
-  return p[2] + "." + p[1] + "." + p[0];
-}
-function yearsBetween(a, b){
-  if(!a || !b) return null;
-  var d1 = new Date(a), d2 = new Date(b);
-  if(isNaN(d1) || isNaN(d2)) return null;
-  return (d2 - d1) / (1000 * 60 * 60 * 24 * 365.25);
-}
+function heDate(iso){ if(!iso) return "____________"; var p=iso.split("-"); return p[2]+"."+p[1]+"."+p[0]; }
+function yearsBetween(a,b){ if(!a||!b) return null; var d1=new Date(a),d2=new Date(b); if(isNaN(d1)||isNaN(d2)) return null; return (d2-d1)/(1000*60*60*24*365.25); }
 
 function buildLetter(){
-  var v = letterFields();
-  state.letter = v; save();
+  var v={};
+  ["name","id","co","pol","start","event","deny","reason"].forEach(function(k){
+    v[k]=document.getElementById("l-"+k).value.trim();
+  });
+  state.letter=v; save();
 
-  var gap  = yearsBetween(v.start, v.event);
-  var note = document.getElementById("letter-note");
-  note.innerHTML = "";
+  var gap=yearsBetween(v.start,v.event);
+  var note=document.getElementById("letterNote");
+  note.innerHTML="";
+  var clause="";
 
-  var clause = "";
-  if(gap !== null && gap >= 3){
-    clause =
-      "\n4. הפוליסה נכרתה ביום " + heDate(v.start) + ", והאירוע הביטוחי אירע ביום " + heDate(v.event) +
-      " — כלומר בחלוף למעלה משלוש שנים ממועד כריתת החוזה.\n\n" +
-      "5. בהתאם לסעיף 43 לחוק חוזה הביטוח, התשמ\"א-1981, בחלוף שלוש שנים ממועד כריתת החוזה אין המבטח רשאי להסתמך על התרופות הקבועות בסעיף 7 לחוק בשל אי-גילוי או מתן תשובה שאינה מלאה, אלא אם יוכיח כי המבוטח פעל בכוונת מרמה. נטל ההוכחה בעניין זה מוטל על המבטח, והוא נטל כבד.\n\n" +
-      "6. ככל שדחיית התביעה נסמכת על טענת אי-גילוי מידע — הריני לדרוש כי תבהירו במפורש האם אתם טוענים לכוונת מרמה מצדי, ואם כן, שתפרטו את התשתית הראייתית לכך. בהיעדר טענה מפורשת ומבוססת לכוונת מרמה, אין בסיס לדחיית התביעה או להפחתת תגמולי הביטוח.\n";
-    var ok = el("div","find");
-    ok.dataset.sev = "good";
-    ok.style.marginBottom = "1rem";
-    ok.innerHTML = '<span class="find-sev">הגנה רלוונטית</span><h3>חלפו יותר משלוש שנים — סעיף 43 עומד לצדכם</h3>' +
-      '<p>הפוליסה נכרתה למעלה משלוש שנים לפני האירוע. במצב כזה חברת הביטוח אינה רשאית להסתמך על אי־גילוי מידע כדי לדחות את התביעה, אלא אם תוכיח כוונת מרמה — והנטל עליה. הסעיף שולב במכתב.</p>';
-    note.appendChild(ok);
-  } else if(gap !== null && gap < 3){
-    clause =
-      "\n4. ככל שדחיית התביעה נסמכת על טענת אי-גילוי, הריני לדרוש כי תפרטו במדויק איזה מידע לא נמסר, כיצד הוא קשור לאירוע הביטוחי נשוא התביעה, והאם מבטח סביר היה נמנע מלבטח אותי כליל לו היה המידע בידיו.\n\n" +
+  if(gap!==null && gap>=3){
+    clause="\n4. הפוליסה נכרתה ביום "+heDate(v.start)+", והאירוע הביטוחי אירע ביום "+heDate(v.event)+" — בחלוף למעלה משלוש שנים ממועד כריתת החוזה.\n\n"+
+      "5. בהתאם לסעיף 43 לחוק חוזה הביטוח, התשמ\"א-1981, בחלוף שלוש שנים ממועד כריתת החוזה אין המבטח רשאי להסתמך על התרופות הקבועות בסעיף 7 לחוק בשל אי-גילוי או מתן תשובה שאינה מלאה, אלא אם יוכיח כי המבוטח פעל בכוונת מרמה. נטל ההוכחה מוטל על המבטח.\n\n"+
+      "6. ככל שהדחייה נסמכת על טענת אי-גילוי — אבקש להבהיר במפורש האם אתם טוענים לכוונת מרמה מצדי, ואם כן לפרט את התשתית הראייתית לכך. בהיעדר טענה מפורשת ומבוססת לכוונת מרמה, אין בסיס לדחיית התביעה או להפחתת תגמולי הביטוח.\n";
+    var g=el("div","flag"); g.dataset.sev="good";
+    g.innerHTML="<h4>חלפו יותר משלוש שנים — סעיף 43 עומד לצדכם</h4><p>הפוליסה נכרתה למעלה משלוש שנים לפני האירוע. במצב כזה החברה אינה רשאית להסתמך על אי־גילוי כדי לדחות, אלא אם תוכיח כוונת מרמה — והנטל עליה. הסעיף שולב במכתב.</p>";
+    note.appendChild(g);
+  } else if(gap!==null && gap<3){
+    clause="\n4. ככל שהדחייה נסמכת על טענת אי-גילוי, אבקש לפרט במדויק איזה מידע לא נמסר, כיצד הוא קשור לאירוע הביטוחי נשוא התביעה, והאם מבטח סביר היה נמנע מלבטח אותי כליל לו היה המידע בידיו.\n\n"+
       "5. אבקש להזכיר כי מקום שבו העובדה שלא גולתה אינה רלוונטית לאירוע הביטוחי, או שהמבטח ידע או היה עליו לדעת את המצב לאשורו, אין בכך כדי לשלול את תגמולי הביטוח.\n";
-    var wn = el("div","find");
-    wn.dataset.sev = "warn";
-    wn.style.marginBottom = "1rem";
-    wn.innerHTML = '<span class="find-sev">שימו לב</span><h3>טרם חלפו שלוש שנים ממועד תחילת הפוליסה</h3>' +
-      '<p>ההגנה של סעיף 43 עדיין לא חלה עליכם, ולכן המכתב מנוסח אחרת: הוא דורש מהחברה לפרט מה בדיוק לא נמסר וכיצד זה קשור לאירוע. זו עדיין דרישה לגיטימית לחלוטין, ובמקרים רבים היא מספיקה. בתביעה בסכום משמעותי — שקלו עורך דין.</p>';
-    note.appendChild(wn);
+    var w=el("div","flag"); w.dataset.sev="warn";
+    w.innerHTML="<h4>טרם חלפו שלוש שנים ממועד תחילת הפוליסה</h4><p>ההגנה של סעיף 43 עדיין לא חלה, ולכן המכתב מנוסח אחרת: הוא דורש מהחברה לפרט מה בדיוק לא נמסר וכיצד זה קשור לאירוע. זו עדיין דרישה לגיטימית. בתביעה בסכום משמעותי — שקלו עורך דין.</p>";
+    note.appendChild(w);
   }
 
-  var t = [];
+  var t=[];
   t.push("לכבוד");
-  t.push((v.co || "____________") + " — יחידת פניות הציבור");
+  t.push((v.co||"____________")+" — יחידת פניות הציבור");
   t.push("");
-  t.push("תאריך: " + heDate(new Date().toISOString().slice(0,10)));
+  t.push("תאריך: "+heDate(new Date().toISOString().slice(0,10)));
   t.push("");
-  t.push("הנדון: ערעור על דחיית תביעה — פוליסה מס' " + (v.pol || "____________"));
+  t.push("הנדון: ערעור על דחיית תביעה — פוליסה מס' "+(v.pol||"____________"));
   t.push("");
-  t.push("שם המבוטח: " + (v.name || "____________"));
-  t.push("תעודת זהות: " + (v.id || "____________"));
+  t.push("שם המבוטח: "+(v.name||"____________"));
+  t.push("תעודת זהות: "+(v.id||"____________"));
   t.push("");
-  t.push("1. ביום " + heDate(v.event) + " אירע האירוע הביטוחי נשוא התביעה שהוגשה על ידי במסגרת הפוליסה שבנדון.");
+  t.push("1. ביום "+heDate(v.event)+" אירע האירוע הביטוחי נשוא התביעה שהוגשה על ידי במסגרת הפוליסה שבנדון.");
   t.push("");
-  t.push("2. ביום " + heDate(v.deny) + " התקבלה אצלי הודעתכם בדבר דחיית התביעה, בנימוק: \"" + (v.reason || "____________") + "\".");
+  t.push("2. ביום "+heDate(v.deny)+" התקבלה הודעתכם בדבר דחיית התביעה, בנימוק: \""+(v.reason||"____________")+"\".");
   t.push("");
-  t.push("3. הריני לערער על ההחלטה ולדרוש את בחינתה מחדש, מהטעמים המפורטים להלן.");
+  t.push("3. הריני לערער על ההחלטה ולדרוש את בחינתה מחדש, מהטעמים שלהלן.");
   if(clause) t.push(clause.trim());
   t.push("");
   t.push("7. בהתאם להוראות הדין ולהנחיות הממונה על שוק ההון, ביטוח וחיסכון, אבקש לקבל לידי:");
   t.push("   א. את מלוא המסמכים שעמדו בבסיס ההחלטה לדחות את התביעה.");
   t.push("   ב. פירוט מלא ומנומק של כל נימוקי הדחייה. מובהר כי מבטח אינו רשאי להעלות בשלב מאוחר יותר נימוק שלא נכלל במכתב הדחייה המקורי.");
-  t.push("   ג. עותק מלא של הפוליסה ושל תנאיה כפי שהיו במועד הצירוף.");
+  t.push("   ג. עותק מלא של הפוליסה ותנאיה כפי שהיו במועד הצירוף.");
   t.push("   ד. עותק מהצהרת הבריאות ומטופסי החיתום עליהם אני חתום.");
   t.push("");
   t.push("8. אבקש את תשובתכם המנומקת בכתב תוך 30 יום ממועד קבלת מכתב זה.");
   t.push("");
-  t.push("9. ככל שלא תתקבל תשובה מניחה את הדעת במסגרת המועד האמור, בכוונתי לפנות ליחידה לפניות הציבור ברשות שוק ההון, ביטוח וחיסכון, וכן לשקול נקיטת הליכים משפטיים, על כל הכרוך בכך.");
+  t.push("9. ככל שלא תתקבל תשובה מניחה את הדעת במועד האמור, בכוונתי לפנות ליחידה לפניות הציבור ברשות שוק ההון, ביטוח וחיסכון, ולשקול נקיטת הליכים משפטיים.");
   t.push("");
-  t.push("אין באמור לעיל כדי לגרוע מכל טענה או זכות העומדת לי על פי דין או על פי הפוליסה.");
+  t.push("אין באמור כדי לגרוע מכל טענה או זכות העומדת לי על פי דין או על פי הפוליסה.");
   t.push("");
   t.push("בכבוד רב,");
   t.push("");
-  t.push(v.name || "____________");
-  t.push("ת.ז. " + (v.id || "____________"));
+  t.push(v.name||"____________");
+  t.push("ת.ז. "+(v.id||"____________"));
 
-  document.getElementById("letter").value = t.join("\n");
-}
-
-/* ---------- helpers ---------- */
-var toastTimer;
-function toast(msg){
-  var t = document.getElementById("toast");
-  t.textContent = msg;
-  t.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2200);
-}
-function copyText(txt, msg){
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(txt).then(function(){ toast(msg); },
-      function(){ fallbackCopy(txt, msg); });
-  } else { fallbackCopy(txt, msg); }
-}
-function fallbackCopy(txt, msg){
-  var ta = document.createElement("textarea");
-  ta.value = txt;
-  ta.style.position = "fixed";
-  ta.style.opacity = "0";
-  document.body.appendChild(ta);
-  ta.select();
-  try{ document.execCommand("copy"); toast(msg); }
-  catch(e){ toast("ההעתקה נכשלה — סמנו את הטקסט והעתיקו ידנית"); }
-  document.body.removeChild(ta);
+  document.getElementById("letter").value=t.join("\n");
 }
 
-/* ---------- wire up ---------- */
+/* ---------- misc ---------- */
+var tt;
+function toast(m){
+  var t=document.getElementById("toast");
+  t.textContent=m; t.classList.add("show");
+  clearTimeout(tt); tt=setTimeout(function(){ t.classList.remove("show"); },2200);
+}
+function copyText(txt,msg){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(function(){toast(msg);},function(){fb(txt,msg);});
+  } else fb(txt,msg);
+  function fb(x,m){
+    var ta=document.createElement("textarea");
+    ta.value=x; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); toast(m); }
+    catch(e){ toast("ההעתקה נכשלה — סמנו והעתיקו ידנית"); }
+    document.body.removeChild(ta);
+  }
+}
+
 ["kupa","shban","shbanCost","deps"].forEach(function(id){
-  var n = document.getElementById(id);
-  n.value = state[id] || "";
-  n.addEventListener("input", function(){ state[id] = n.value; save(); render(); });
-  n.addEventListener("change", function(){ state[id] = n.value; save(); render(); });
+  var n=document.getElementById(id);
+  n.value=state[id]||"";
+  n.addEventListener("input",function(){ state[id]=n.value; save(); render(); });
+  n.addEventListener("change",function(){ state[id]=n.value; save(); render(); });
+});
+["name","id","co","pol","start","event","deny","reason"].forEach(function(k){
+  var n=document.getElementById("l-"+k);
+  if(state.letter&&state.letter[k]) n.value=state.letter[k];
+  n.addEventListener("input",buildLetter);
+  n.addEventListener("change",buildLetter);
+});
+document.getElementById("btnCopyLetter").addEventListener("click",function(){
+  copyText(document.getElementById("letter").value,"המכתב הועתק");
+});
+document.getElementById("btnPrintQ").addEventListener("click",function(){ window.print(); });
+document.getElementById("btnReset").addEventListener("click",function(){
+  if(!confirm("לאפס את כל הנתונים? הפעולה אינה הפיכה.")) return;
+  state=JSON.parse(JSON.stringify(defaults)); save();
+  ["kupa","shban","shbanCost","deps"].forEach(function(id){ document.getElementById(id).value=""; });
+  ["name","id","co","pol","start","event","deny","reason"].forEach(function(k){ document.getElementById("l-"+k).value=""; });
+  buildLedger(); buildQuestions(); buildLetter(); render(); toast("הטופס אופס");
 });
 
-["l-name","l-id","l-co","l-pol","l-start","l-event","l-deny","l-reason"].forEach(function(id){
-  var n = document.getElementById(id);
-  var k = id.slice(2);
-  var map = {name:"name", id:"id", co:"co", pol:"pol", start:"start", event:"event", deny:"deny", reason:"reason"};
-  if(state.letter && state.letter[map[k]]) n.value = state.letter[map[k]];
-  n.addEventListener("input", buildLetter);
-  n.addEventListener("change", buildLetter);
-});
-
-document.getElementById("btn-copy-letter").addEventListener("click", function(){
-  copyText(document.getElementById("letter").value, "המכתב הועתק");
-});
-document.getElementById("btn-print").addEventListener("click", function(){ window.print(); });
-document.getElementById("btn-reset").addEventListener("click", function(){
-  if(!confirm("לאפס את כל הנתונים שהוזנו? הפעולה אינה הפיכה.")) return;
-  state = JSON.parse(JSON.stringify(defaults));
-  save();
-  ["kupa","shban","shbanCost","deps"].forEach(function(id){ document.getElementById(id).value = ""; });
-  ["l-name","l-id","l-co","l-pol","l-start","l-event","l-deny","l-reason"].forEach(function(id){
-    document.getElementById(id).value = "";
-  });
-  buildLedger(); buildQuestions(); buildLetter(); render();
-  toast("הטופס אופס");
-});
-
-buildLedger();
-buildQuestions();
-buildGlossary();
-buildLetter();
-render();
+buildLedger(); buildQuestions(); buildGlossary(); buildLetter(); render();
+showTab((location.hash||"#start").replace("#",""), false);
 })();
 </script>
 </body>

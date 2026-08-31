@@ -1018,6 +1018,12 @@ function analyse(){
     }
   });});
 
+  var answered = 0;
+  COVERS.forEach(function(g){ g.items.forEach(function(c){
+    if(state.covers[c.id].have) answered++;
+  });});
+  var engaged = total > 0 || answered >= 2 || (state.shban !== "" && state.shban !== "unknown");
+
   var shbanCost = num(state.shbanCost);
   if(state.shban === "yes"){ total += shbanCost; byKind.conv += shbanCost; }
   if(state.shban === "unknown") unknown.push("הביטוח המשלים של הקופה");
@@ -1053,7 +1059,7 @@ function analyse(){
   }
 
   /* --- missing catastrophe cover --- */
-  if(held.drugs !== true && state.covers.drugs.have !== "unknown"){
+  if(engaged && state.covers.drugs.have !== "yes" && state.covers.drugs.have !== "unknown"){
     f.push({sev:"critical", tag:"כיסוי חסר", h:"אין לכם כיסוי לתרופות מחוץ לסל",
       p:"זה הכיסוי שהפרק מציג כחשוב ביותר, והוא גם מהזולים. תרופה שאינה בסל — למשל טיפול אונקולוגי מתקדם — יכולה לעלות עשרות ומאות אלפי שקלים בשנה, והמימון חל עליכם. זו בדיוק ההוצאה שמשפחה לא יכולה לספוג.",
       todo:["בקשו הצעת מחיר לכיסוי תרופות מחוץ לסל בלבד, כמוצר עצמאי — לא כחלק מחבילה.",
@@ -1061,7 +1067,7 @@ function analyse(){
             "בדקו מה תקרת הכיסוי ומדי כמה זמן היא מתחדשת.",
             "השוו בין שתי חברות לפחות לפני שאתם סוגרים."]});
   }
-  if(held.abroad !== true && state.covers.abroad.have !== "unknown"){
+  if(engaged && state.covers.abroad.have !== "yes" && state.covers.abroad.have !== "unknown"){
     f.push({sev:"critical", tag:"כיסוי חסר", h:"אין לכם כיסוי להשתלות וטיפולים בחו\"ל",
       p:"השתלה או טיפול מורכב בחו\"ל נמדדים במיליוני שקלים. הסיכוי להזדקק לזה נמוך מאוד — ובגלל זה הכיסוי זול. זהו המקרה הקלאסי של ביטוח נכון: הימור על אירוע נדיר והרסני.",
       todo:["בקשו הצעת מחיר לכיסוי השתלות וטיפולים מיוחדים בחו\"ל בלבד.",
@@ -1103,7 +1109,7 @@ function analyse(){
             "שאלו במפורש: מה הכיסוי הזה מוסיף מעבר לביטוח החיים ולאובדן כושר העבודה שכבר יש לי?",
             "אם התשובה היא \"בעיקר פיצוי על שברים\" — שאלו את עצמכם אם זה שווה את המחיר החודשי."]});
   }
-  if(state.deps === "yes" && !held.life && state.covers.life.have !== "unknown"){
+  if(state.deps === "yes" && state.covers.life.have !== "yes" && state.covers.life.have !== "unknown"){
     f.push({sev:"warn", tag:"כיסוי חסר", h:"יש מי שתלוי בכם, ואין ביטוח חיים",
       p:"סימנתם שיש מי שתלוי בהכנסה שלכם. ביטוח חיים מסוג \"ריסק\" הוא מהמוצרים הזולים בשוק בגיל צעיר, והוא הכיסוי שמונע מהמשפחה קריסה כלכלית.",
       todo:["בדקו קודם מה כבר קיים לכם בקרן הפנסיה — לרוב יש שם כיסוי מוות ואובדן כושר עבודה.",
@@ -1116,7 +1122,7 @@ function analyse(){
       todo:["בדקו אם הפוליסה משועבדת למשכנתה — במקרה כזה היא נדרשת ואי אפשר לבטלה.",
             "אם לא, שקלו להקטין את סכום הביטוח במקום לבטל לגמרי."]});
   }
-  if(!held.disability && state.covers.disability.have !== "unknown"){
+  if(engaged && state.covers.disability.have !== "yes" && state.covers.disability.have !== "unknown"){
     f.push({sev:"info", tag:"לבדוק", h:"בדקו מה יש לכם באובדן כושר עבודה",
       p:"סימנתם שאין לכם כיסוי לאובדן כושר עבודה. שימו לב שלשכירים רבים קיים כיסוי כזה בתוך קרן הפנסיה, בלי שהם יודעים. ההכנסה היא הנכס הגדול ביותר של רוב האנשים, ולכן זה כיסוי שחשוב לוודא שקיים — במקום כלשהו.",
       todo:["היכנסו למסלקה הפנסיונית או לדוח השנתי מקרן הפנסיה ובדקו אם יש כיסוי אכ\"ע וכמה הוא משלם.",
